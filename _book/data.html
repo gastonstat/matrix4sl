@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>A Matrix Algebra Companion for Statistical Learning</title>
+  <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="A Matrix Algebra Companion for Statistical Learning" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://gastonsanchez.com/matrix4sl/" />
+  
+  <meta property="og:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
+  <meta name="github-repo" content="gastonstat/matrix4sl" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Matrix Algebra Companion for Statistical Learning" />
+  
+  <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
+  
+
+<meta name="author" content="Gaston Sanchez">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="intro.html">
+<link rel="next" href="datamatrix.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">matrix4sl</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#how-this-book-is-organized"><i class="fa fa-check"></i><b>1.1</b> How this book is organized?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#prerequisites"><i class="fa fa-check"></i><b>1.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#why-this-book"><i class="fa fa-check"></i><b>1.3</b> Why this book?</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#acknowledgements"><i class="fa fa-check"></i><b>1.4</b> Acknowledgements</a></li>
+</ul></li>
+<li class="part"><span><b>I Data Essentials</b></span></li>
+<li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data Tables</a><ul>
+<li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html#data-individuals-and-variables"><i class="fa fa-check"></i><b>2.1</b> Data: Individuals and Variables</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data.html"><a href="data.html#representing-data"><i class="fa fa-check"></i><b>2.1.1</b> Representing Data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data.html"><a href="data.html#tabular-data"><i class="fa fa-check"></i><b>2.1.2</b> Tabular Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#types-of-tables"><i class="fa fa-check"></i><b>2.2</b> Types of Tables</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data.html"><a href="data.html#heterogeneous-table"><i class="fa fa-check"></i><b>2.2.1</b> Heterogeneous Table</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data.html"><a href="data.html#binary-table"><i class="fa fa-check"></i><b>2.2.2</b> Binary table</a></li>
+<li class="chapter" data-level="2.2.3" data-path="data.html"><a href="data.html#modalities-table"><i class="fa fa-check"></i><b>2.2.3</b> Modalities table</a></li>
+<li class="chapter" data-level="2.2.4" data-path="data.html"><a href="data.html#preference-table"><i class="fa fa-check"></i><b>2.2.4</b> Preference table</a></li>
+<li class="chapter" data-level="2.2.5" data-path="data.html"><a href="data.html#frequency-table"><i class="fa fa-check"></i><b>2.2.5</b> Frequency table</a></li>
+<li class="chapter" data-level="2.2.6" data-path="data.html"><a href="data.html#distance-table"><i class="fa fa-check"></i><b>2.2.6</b> Distance table</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data.html"><a href="data.html#summary"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="datamatrix.html"><a href="datamatrix.html"><i class="fa fa-check"></i><b>3</b> Data Matrix</a><ul>
+<li class="chapter" data-level="3.1" data-path="datamatrix.html"><a href="datamatrix.html#about-matrices"><i class="fa fa-check"></i><b>3.1</b> About Matrices</a></li>
+<li class="chapter" data-level="3.2" data-path="datamatrix.html"><a href="datamatrix.html#data-matrix"><i class="fa fa-check"></i><b>3.2</b> Data Matrix</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="datamatrix.html"><a href="datamatrix.html#why-a-data-matrix"><i class="fa fa-check"></i><b>3.2.1</b> Why a data matrix?</a></li>
+<li class="chapter" data-level="3.2.2" data-path="datamatrix.html"><a href="datamatrix.html#matrix-representations"><i class="fa fa-check"></i><b>3.2.2</b> Matrix Representations</a></li>
+<li class="chapter" data-level="3.2.3" data-path="datamatrix.html"><a href="datamatrix.html#a-block-of-variables"><i class="fa fa-check"></i><b>3.2.3</b> A Block of Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="datamatrix.html"><a href="datamatrix.html#types-of-matrices"><i class="fa fa-check"></i><b>3.3</b> Types of Matrices</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="datamatrix.html"><a href="datamatrix.html#general-rectangular-matrix"><i class="fa fa-check"></i><b>3.3.1</b> General Rectangular Matrix</a></li>
+<li class="chapter" data-level="3.3.2" data-path="datamatrix.html"><a href="datamatrix.html#square-matrix"><i class="fa fa-check"></i><b>3.3.2</b> Square Matrix</a></li>
+<li class="chapter" data-level="3.3.3" data-path="datamatrix.html"><a href="datamatrix.html#symmetric-matrix"><i class="fa fa-check"></i><b>3.3.3</b> Symmetric Matrix</a></li>
+<li class="chapter" data-level="3.3.4" data-path="datamatrix.html"><a href="datamatrix.html#diagonal-matrix"><i class="fa fa-check"></i><b>3.3.4</b> Diagonal Matrix</a></li>
+<li class="chapter" data-level="3.3.5" data-path="datamatrix.html"><a href="datamatrix.html#scalar-matrix"><i class="fa fa-check"></i><b>3.3.5</b> Scalar Matrix</a></li>
+<li class="chapter" data-level="3.3.6" data-path="datamatrix.html"><a href="datamatrix.html#identity-matrix"><i class="fa fa-check"></i><b>3.3.6</b> Identity Matrix</a></li>
+<li class="chapter" data-level="3.3.7" data-path="datamatrix.html"><a href="datamatrix.html#triangular-matrix"><i class="fa fa-check"></i><b>3.3.7</b> Triangular Matrix</a></li>
+<li class="chapter" data-level="3.3.8" data-path="datamatrix.html"><a href="datamatrix.html#shapes-of-matrices"><i class="fa fa-check"></i><b>3.3.8</b> Shapes of Matrices</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i><b>4</b> Variables</a><ul>
+<li class="chapter" data-level="4.1" data-path="variables.html"><a href="variables.html#types-of-variables"><i class="fa fa-check"></i><b>4.1</b> Types of Variables</a></li>
+<li class="chapter" data-level="4.2" data-path="variables.html"><a href="variables.html#variable-flavors"><i class="fa fa-check"></i><b>4.2</b> Variable Flavors</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="variables.html"><a href="variables.html#nominal-variable"><i class="fa fa-check"></i><b>4.2.1</b> Nominal Variable</a></li>
+<li class="chapter" data-level="4.2.2" data-path="variables.html"><a href="variables.html#ordinal-variable"><i class="fa fa-check"></i><b>4.2.2</b> Ordinal Variable</a></li>
+<li class="chapter" data-level="4.2.3" data-path="variables.html"><a href="variables.html#discrete-variable"><i class="fa fa-check"></i><b>4.2.3</b> Discrete Variable</a></li>
+<li class="chapter" data-level="4.2.4" data-path="variables.html"><a href="variables.html#continuous-variable"><i class="fa fa-check"></i><b>4.2.4</b> Continuous Variable</a></li>
+<li class="chapter" data-level="4.2.5" data-path="variables.html"><a href="variables.html#caveat"><i class="fa fa-check"></i><b>4.2.5</b> Caveat</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="variables.html"><a href="variables.html#coding-values"><i class="fa fa-check"></i><b>4.3</b> Coding Values</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="variables.html"><a href="variables.html#more-on-coding"><i class="fa fa-check"></i><b>4.3.1</b> More on coding</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="transformations.html"><a href="transformations.html"><i class="fa fa-check"></i><b>5</b> Transformations</a><ul>
+<li class="chapter" data-level="5.1" data-path="transformations.html"><a href="transformations.html#dummy-variables"><i class="fa fa-check"></i><b>5.1</b> Dummy Variables</a></li>
+<li class="chapter" data-level="5.2" data-path="transformations.html"><a href="transformations.html#standardization"><i class="fa fa-check"></i><b>5.2</b> Standardization</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="transformations.html"><a href="transformations.html#by-standard-units"><i class="fa fa-check"></i><b>5.2.1</b> By Standard Units</a></li>
+<li class="chapter" data-level="5.2.2" data-path="transformations.html"><a href="transformations.html#by-the-overall-range"><i class="fa fa-check"></i><b>5.2.2</b> By the Overall Range</a></li>
+<li class="chapter" data-level="5.2.3" data-path="transformations.html"><a href="transformations.html#by-chosen-percentiles"><i class="fa fa-check"></i><b>5.2.3</b> By Chosen Percentiles</a></li>
+<li class="chapter" data-level="5.2.4" data-path="transformations.html"><a href="transformations.html#by-the-mean"><i class="fa fa-check"></i><b>5.2.4</b> By the Mean</a></li>
+<li class="chapter" data-level="5.2.5" data-path="transformations.html"><a href="transformations.html#about-standardization"><i class="fa fa-check"></i><b>5.2.5</b> About standardization</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="transformations.html"><a href="transformations.html#logarithmic-transformations"><i class="fa fa-check"></i><b>5.3</b> Logarithmic Transformations</a></li>
+<li class="chapter" data-level="5.4" data-path="transformations.html"><a href="transformations.html#power-transformations"><i class="fa fa-check"></i><b>5.4</b> Power Transformations</a></li>
+</ul></li>
+<li class="part"><span><b>II Geometric Mindset</b></span></li>
+<li class="chapter" data-level="6" data-path="duality.html"><a href="duality.html"><i class="fa fa-check"></i><b>6</b> Geometric Duality</a><ul>
+<li class="chapter" data-level="6.1" data-path="duality.html"><a href="duality.html#matrix-perspectives"><i class="fa fa-check"></i><b>6.1</b> Matrix Perspectives</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="duality.html"><a href="duality.html#rows-space"><i class="fa fa-check"></i><b>6.1.1</b> Rows Space</a></li>
+<li class="chapter" data-level="6.1.2" data-path="duality.html"><a href="duality.html#columns-space"><i class="fa fa-check"></i><b>6.1.2</b> Columns Space</a></li>
+<li class="chapter" data-level="6.1.3" data-path="duality.html"><a href="duality.html#toy-example"><i class="fa fa-check"></i><b>6.1.3</b> Toy Example</a></li>
+<li class="chapter" data-level="6.1.4" data-path="duality.html"><a href="duality.html#dual-space"><i class="fa fa-check"></i><b>6.1.4</b> Dual Space</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="vector-basics.html"><a href="vector-basics.html"><i class="fa fa-check"></i><b>7</b> Vector Basics</a><ul>
+<li class="chapter" data-level="7.1" data-path="vector-basics.html"><a href="vector-basics.html#inner-product"><i class="fa fa-check"></i><b>7.1</b> Inner Product</a></li>
+<li class="chapter" data-level="7.2" data-path="vector-basics.html"><a href="vector-basics.html#length"><i class="fa fa-check"></i><b>7.2</b> Length</a></li>
+<li class="chapter" data-level="7.3" data-path="vector-basics.html"><a href="vector-basics.html#angle"><i class="fa fa-check"></i><b>7.3</b> Angle</a></li>
+<li class="chapter" data-level="7.4" data-path="vector-basics.html"><a href="vector-basics.html#orthogonality"><i class="fa fa-check"></i><b>7.4</b> Orthogonality</a></li>
+<li class="chapter" data-level="7.5" data-path="vector-basics.html"><a href="vector-basics.html#projection"><i class="fa fa-check"></i><b>7.5</b> Projection</a></li>
+</ul></li>
+<li class="part"><span><b>III Statistical Measures</b></span></li>
+<li class="chapter" data-level="8" data-path="mean.html"><a href="mean.html"><i class="fa fa-check"></i><b>8</b> Mean</a><ul>
+<li class="chapter" data-level="8.1" data-path="mean.html"><a href="mean.html#mean-of-a-variable"><i class="fa fa-check"></i><b>8.1</b> Mean of a variable</a></li>
+<li class="chapter" data-level="8.2" data-path="mean.html"><a href="mean.html#mean-as-a-balancing-point"><i class="fa fa-check"></i><b>8.2</b> Mean as a Balancing Point</a></li>
+<li class="chapter" data-level="8.3" data-path="mean.html"><a href="mean.html#mean-with-vector-notation"><i class="fa fa-check"></i><b>8.3</b> Mean with Vector Notation</a></li>
+<li class="chapter" data-level="8.4" data-path="mean.html"><a href="mean.html#mean-as-a-projection"><i class="fa fa-check"></i><b>8.4</b> Mean as a Projection</a></li>
+<li class="chapter" data-level="8.5" data-path="mean.html"><a href="mean.html#centroid"><i class="fa fa-check"></i><b>8.5</b> Centroid</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="variance.html"><a href="variance.html"><i class="fa fa-check"></i><b>9</b> Variance</a><ul>
+<li class="chapter" data-level="9.1" data-path="variance.html"><a href="variance.html#about-the-variance"><i class="fa fa-check"></i><b>9.1</b> About the variance</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="variance.html"><a href="variance.html#sample-variance"><i class="fa fa-check"></i><b>9.1.1</b> Sample Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="variance.html"><a href="variance.html#variance-with-vector-notation"><i class="fa fa-check"></i><b>9.2</b> Variance with Vector Notation</a></li>
+<li class="chapter" data-level="9.3" data-path="variance.html"><a href="variance.html#standard-deviation-as-a-norm"><i class="fa fa-check"></i><b>9.3</b> Standard Deviation as a Norm</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="covar.html"><a href="covar.html"><i class="fa fa-check"></i><b>10</b> Covariance and Correlation</a><ul>
+<li class="chapter" data-level="10.1" data-path="covar.html"><a href="covar.html#two-variables"><i class="fa fa-check"></i><b>10.1</b> Two Variables</a></li>
+<li class="chapter" data-level="10.2" data-path="covar.html"><a href="covar.html#covariance"><i class="fa fa-check"></i><b>10.2</b> Covariance</a></li>
+<li class="chapter" data-level="10.3" data-path="covar.html"><a href="covar.html#correlation"><i class="fa fa-check"></i><b>10.3</b> Correlation</a></li>
+<li class="chapter" data-level="10.4" data-path="covar.html"><a href="covar.html#relation-as-linear-approximation"><i class="fa fa-check"></i><b>10.4</b> Relation as Linear Approximation</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="crossprods.html"><a href="crossprods.html"><i class="fa fa-check"></i><b>11</b> Matrix Cross-Products</a><ul>
+<li class="chapter" data-level="11.1" data-path="crossprods.html"><a href="crossprods.html#common-data-matrices"><i class="fa fa-check"></i><b>11.1</b> Common Data Matrices</a></li>
+<li class="chapter" data-level="11.2" data-path="crossprods.html"><a href="crossprods.html#cross-products"><i class="fa fa-check"></i><b>11.2</b> Cross-Products</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Thanks to bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Matrix Algebra Companion for Statistical Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data" class="section level1">
+<h1><span class="header-section-number">2</span> Data Tables</h1>
+<p>Pretty much all statistical learning methods require data in a table format with multiple columns and rows. However, data comes in many different forms. In fact, data can come in many different presentations, and in a wide range of sizes, shapes, colors, textures, and flavors. It can come from one single source, or it may be the result of a variety of sources. It can have a very well defined structure, or it can simply be unstructured. In this chapter, we review some of the common types of data tables that you can typically encounter in practice while applying a statistical learning procedure.</p>
+<div id="data-individuals-and-variables" class="section level2">
+<h2><span class="header-section-number">2.1</span> Data: Individuals and Variables</h2>
+<p>To illustrate some of the ideas presented in this chapter I’m going to use a toy example with data of three individuals from a galaxy far, far away: Leia Organa, Luke Skywalker, and Han Solo.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="images/tables/sw-leia-luke-han.png" alt="Three individuals" width="60%" />
+<p class="caption">
+Figure 2.1: Three individuals
+</p>
+</div>
+<p>In particular, let’s consider the following information about these subjects:</p>
+<ul>
+<li>Leia is a woman, 150 centimeters tall, and weighs 49 kilograms.</li>
+<li>Luke is a man, 172 centimeters tall, and weighs 77 kilograms.</li>
+<li>Han is a man, 180 centimeters tall, and weighs 80 kilograms.</li>
+</ul>
+<p>We can say that the above information lists characteristics of three individuals. Or put in an equivalent way, that three subjects are described based on some of their characteristics: Name, Sex, Height, and Weight. Using statistical terminology, we formally say that we have data consisting of three <em>individuals</em> described by some <em>variables</em>.</p>
+<p>Statistical terminology is abundant and you’ll find that individuals are also known as observations, cases, objects, samples or items. Example of individuals can be people, animals, plants, planets, spaceships, countries, or any other kind of object.</p>
+<p>A variable is any characteristic of an individual. Sometimes we refer to variables as features, aspects, indicators, descriptors, or properties that we measure or observe on individuals.</p>
+<p>This combo of <strong>individuals and variables</strong> is perhaps the most common conceptualization of the term “data” within Statistical Learning methods. But it’s not the only one. Bear in mind that there are other ways in which analysts and researchers think about data.</p>
+<div id="representing-data" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Representing Data</h3>
+<p>Assuming that our data consists of Name, Sex, Height and Weight for three individuals, we can present this information in various forms. One option is to organize the information in some sort of rectangular or tabular layout, like the one below:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="images/tables/table-conceptual.png" alt="Conceptual table" width="40%" />
+<p class="caption">
+Figure 2.2: Conceptual table
+</p>
+</div>
+<p>We can say that this data set is in tabular form, with four columns and three rows (four if you include the row of column names).</p>
+<p>The same data could be represented in a non-tabular form. An example of a non-tabular format is XML (eXtensible Markup Language). In this case, we can organize the information in a hierarchical way with embeded elements also known as <em>nodes</em>, like in the following example:</p>
+<pre><code>&lt;character&gt;
+  &lt;name&gt;Leia&lt;/name&gt;
+  &lt;sex&gt;female&lt;/sex&gt;
+  &lt;weight&gt;150 cm&lt;/weight&gt;
+  &lt;height&gt;49 kg&lt;/height&gt;
+&lt;/character&gt;
+&lt;character&gt;
+  &lt;name&gt;Luke&lt;/name&gt;
+  &lt;sex&gt;male&lt;/sex&gt;
+  &lt;weight&gt;172 cm&lt;/weight&gt;
+  &lt;height&gt;77 kg&lt;/height&gt;
+&lt;/character&gt;
+&lt;character&gt;
+  &lt;name&gt;Han&lt;/name&gt;
+  &lt;sex&gt;male&lt;/sex&gt;
+  &lt;weight&gt;180 cm&lt;/weight&gt;
+  &lt;height&gt;80 kg&lt;/height&gt;
+&lt;/character&gt;</code></pre>
+<p>In the above example there are three <code>&lt;character&gt;</code> nodes, each one containing four nodes: <code>&lt;name&gt;</code>, <code>&lt;sex&gt;</code>, <code>&lt;weight&gt;</code>, and <code>&lt;height&gt;</code>. This is an example of what I call <strong>raw data</strong>. Don’t worry if you are not familiar with XML. I just want to give you an example of the various ways in which data can be organized.</p>
+<p>From a computational point of view, you could actually find a plethora of formats and conventions used to store information, and data sets in particular. Some formats have been designed to store data in a way that mimics the structure of a rectangular table. But you can find other formats that use a non-tabular structure, like XML.</p>
+<p>When data is stored in a format that is supposed to represent a table, it is common to find visual displays with some grid of rows and columns.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="images/tables/table-tabular.png" alt="Data in tabular format" width="40%" />
+<p class="caption">
+Figure 2.3: Data in tabular format
+</p>
+</div>
+<p>This is another example of raw data, in particular a <em>raw data table</em>. The data is visually organized and displayed in a rectangular grid of cells. However, this table is not ready yet to be manipulated statistically, much less algebraically. Obviously, this table needs some processing and reshaping in order to obtain a table with numerical information that becomes useful for matrix algebra operations.</p>
+<p>More often than not, raw data will be far from being in tabular format, or at least it will require extra reshaping steps so that it can be ready for the analysis. Although this is a very common issue in practice, in this book I will assume that you’ve already struggled to get the data in the <em>right</em> rectangular shape.</p>
+</div>
+<div id="tabular-data" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Tabular Data</h3>
+<p>Eventually, to be analyzed with statistical learning tools and other multivariate techniques, your data will typically be required to have a certain specific structure, usually in the form of some sort of table or spreadsheet format (e.g. rows and columns).</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="images/tables/table-abstract.png" alt="Data Table Format" width="50%" />
+<p class="caption">
+Figure 2.4: Data Table Format
+</p>
+</div>
+<p>Depending on the nature of the data, and the way it is organized, rows and columns will have a particular meaning. The most common data table setting is the one of individuals-and-variables. Although somewhat arbitrary, the standard convention is that we use the columns to represent <strong>variables</strong>, and the rows to represent <strong>individuals</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="images/tables/table-inds-vars.png" alt="Conceptual table of individuals and variables" width="50%" />
+<p class="caption">
+Figure 2.5: Conceptual table of individuals and variables
+</p>
+</div>
+</div>
+</div>
+<div id="types-of-tables" class="section level2">
+<h2><span class="header-section-number">2.2</span> Types of Tables</h2>
+<p>The most typical table format is that of individuals (rows) and variables (columns). However, the individuals-variables layout is not the only type of setting; there are other types of tables like contingency tables, crosstabulations, distance tables, as well as similarity and proximity tables. So let’s review some examples of various kinds of rectangular formats.</p>
+<div id="heterogeneous-table" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Heterogeneous Table</h3>
+<p>Perhaps the most ubiquitous type of table is that of inidividuals and variables in which the variables represent mixed or heterogeneous information. The toy data introduced so far is an example of a heterogeneous table involving distinct flavors of variables such as Name, Sex, Hieght and Weight. In other words, Name and Sex have strings values or categories, while Height and Weight have numeric values (representing quantities).</p>
+<!--
+| Name   |  Sex    | Height   | Weight  |
+|:-------|:--------|:---------|:--------|
+| Leia   | female  | 150      | 49      |
+| Luke   | male    | 172      | 77      |
+| Han    | male    | 180      | 80      |
+-->
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="images/tables/table-mixed.png" alt="Mixed or heterogeneous variables" width="55%" />
+<p class="caption">
+Figure 2.6: Mixed or heterogeneous variables
+</p>
+</div>
+<p>As you can tell, Height and Weight are already expressed in numeric values, and you can actually do some math on them (i.e. apply arithmetic and algebraic operations). In contrast, Name and Sex are not codified numerically, so the type of mathematical operations that you can perform on them is very limited. In or der to exploit their information in a deeper sense, you would have to transform the categories <em>male</em> and <em>female</em> with some numeric coding.</p>
+</div>
+<div id="binary-table" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Binary table</h3>
+<p>Another common type of table is a binary table. As its name indicates, this type of table contains variables that can only take two values. For example presence-absence, female-male, yes-no, success-failure, case-control, etc. In the table below, the variables represent drinks consumed: Beer, Wine, Juice, Coffee, and Tea. Each variable takes two possible values, <em>yes</em> and <em>no</em>, indicating whether an individual consumes a specific type of drink.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="images/tables/table-binary-raw.png" alt="Binary table (raw values)" width="58%" />
+<p class="caption">
+Figure 2.7: Binary table (raw values)
+</p>
+</div>
+<p>Although the values <em>yes</em> and <em>no</em> are very descriptive, you will need to codify them numerically to be able to perform statitical or algebraic operations with them. Perhaps the most natural way to codify binary values is with zeros and ones: “yes” = 1, and “no” = 0.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
+<img src="images/tables/table-binary.png" alt="Binary table (numeric values)" width="58%" />
+<p class="caption">
+Figure 2.8: Binary table (numeric values)
+</p>
+</div>
+<p>Another possible codification could be “yes” = 1, and “no” = -1. Or also with logical values: “yes” = TRUE, and “no” = FALSE.</p>
+</div>
+<div id="modalities-table" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> Modalities table</h3>
+<p>Another type of table consists of so-called <em>modalities</em>. These can come from variables or questions in a survey about how frequent you use/consume a specific product.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="images/tables/table-modalities-raw.png" alt="Table of modalities (raw values)" width="58%" />
+<p class="caption">
+Figure 2.9: Table of modalities (raw values)
+</p>
+</div>
+<p>In order to statistically treat a modalities table, you will very likely have to transform the values of the categories (i.e. the modalities) to some numeric coding. For instance, you can assign values 1 = “never”, 2 = “sometimes”, and 3 = “always.”</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
+<img src="images/tables/table-modalities.png" alt="Table of modalities (numeric values)" width="58%" />
+<p class="caption">
+Figure 2.10: Table of modalities (numeric values)
+</p>
+</div>
+</div>
+<div id="preference-table" class="section level3">
+<h3><span class="header-section-number">2.2.4</span> Preference table</h3>
+<p>A preference table is a special case of individuals-variables table in which the variables are measured in some kind of preference scale. For example, we can measure the preference level for various types of fruit juices on an ordinal scale ranging from 1 = “don’t like at all” to 5 = “like it very much.”</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-14"></span>
+<img src="images/tables/table-preference.png" alt="Table of frequencies" width="55%" />
+<p class="caption">
+Figure 2.11: Table of frequencies
+</p>
+</div>
+</div>
+<div id="frequency-table" class="section level3">
+<h3><span class="header-section-number">2.2.5</span> Frequency table</h3>
+<p>As its name suggests, this type of table contains the frequencies (i.e. counts) resulting from <em>crossing</em> two categorical variables. This is the reason why you also find the name cross-tables for this type of tabular data. Another common name for this type of tables is <em>contingency table</em>.</p>
+<p>The example below shows a frequency table of the number of dialogues of each character, per episode (in the original trilogy of Star Wars). The rows correspond to the categories of the variable Name, while the columns corresponds to the categories of the variable Episode.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="images/tables/table-frequency.png" alt="Table of frequencies" width="50%" />
+<p class="caption">
+Figure 2.12: Table of frequencies
+</p>
+</div>
+<p>The value in the <em>ij</em>-th cell (<em>i</em>-th row, <em>j</em>-th column) tells you the number of occurrences that share Name’s category <em>i</em> and Episode’s category <em>j</em>. If you add all the entries, you get the total number of individuals in each variable.</p>
+<p>This tabular format is not really an individuals-variables table. Even though the example above has rows with names of the three individuals, the way you get a table like this is with two categorical variables.</p>
+</div>
+<div id="distance-table" class="section level3">
+<h3><span class="header-section-number">2.2.6</span> Distance table</h3>
+<p>Another interesting type of table is a distance table. Depending on who you talk to, the term “distance” may be used with slightly different meanings. Some authors refer to the word distance conveying a metric distance meaning. Other authors instead use the word distance to convey a general idea of dissimilarity.</p>
+<p>In general, you can find <em>distance</em> tables under two opposite perspectives: similarities and disimilarities. The table below is an example of a similarity table.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
+<img src="images/tables/table-distance.png" alt="Table of proximities" width="45%" />
+<p class="caption">
+Figure 2.13: Table of proximities
+</p>
+</div>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2><span class="header-section-number">2.3</span> Summary</h2>
+<ul>
+<li><p>Most statistical learning methods require data in a table format with multiple columns and rows.</p></li>
+<li><p>It’s important to be aware of the difference between a <em>raw</em> data table, and a <em>clean</em> table numerically codified.</p></li>
+<li><p>Unless otherwise specified, in this book we’ll assume that all the variables in a data matrix have numerical variables.</p></li>
+<li><p>For most of this book, we’ll consider a data set to be integrated by a group of <em>individuals</em> or objects on which we observe or measure one or more characteristics called <em>variables</em>.</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="datamatrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["matrix4sl.pdf", "matrix4sl.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
