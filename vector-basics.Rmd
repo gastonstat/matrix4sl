@@ -1,0 +1,140 @@
+# Vector Basics
+
+Because variables can be treated as vectors in a geometric sense, I would like to briefly revisit a couple of key concepts for operating with vectors: __the inner product__ and derived operations.
+
+
+```{r}
+# data matrix
+X <- matrix(c(150, 172, 180, 49, 77, 80), nrow = 3, ncol = 2)
+rownames(X) <- c("Leia", "Luke", "Han")
+colnames(X) <- c("weight", "height")
+
+X
+```
+
+
+## Inner Product
+
+The concept of an inner product is one of the most important matrix algebra concepts, also referred to as the _dot product_. The inner product is a special operation defined on two vectors $\mathbf{x}$ and $\mathbf{y}$ that, as its name indicates, allows us to multiply $\mathbf{x}$ and $\mathbf{y}$ in a certain way.
+
+The inner product of two vectors $\mathbf{x}$ and $\mathbf{y}$---of the same size--- is defined as:
+
+$$
+\mathbf{x \cdot y} = \sum_{i = 1}^{n} x_i y_i 
+$$
+
+basically the inner product consists of the element-by-element product of $\mathbf{x}$ and $\mathbf{y}$, and then adding everything up. The result is not another vector but a single number, a scalar. We can also write the inner product $\mathbf{x \cdot y}$ in vector notation as $\mathbf{x^\mathsf{T} y}$ since
+
+$$
+\mathbf{x^\mathsf{T} y} = (x_1 \dots x_n) 
+\begin{pmatrix} 
+y_1 \\
+\vdots \\
+y_n
+\end{pmatrix}
+= \sum_{i = 1}^{n} x_i y_i
+$$
+
+Consider the data about Leia and Luke used in the last chapter:
+
+```{r echo = FALSE}
+# toy matrix
+X <- matrix(c(150, 172, 49, 77), nrow = 2, ncol = 2)
+rownames(X) <- c("Leia", "Luke")
+colnames(X) <- c("weight", "height")
+
+X
+```
+
+For example, the inner product of `weight` and `height` in $\mathbf{M}$ is
+
+$$
+\texttt{weight}^\mathsf{T} \hspace{1mm} \texttt{height} = (150 \times 49) + (172 \times 77) = 20594
+$$
+
+What does this value mean? To answer this question we need to discuss three other concepts that are directly derived from having an inner product:
+
+1. Length of a vector
+
+2. Angle between vectors
+
+3. Projection of vectors
+
+All these aspects play a very important role for multivariate methods. But not only that, we'll see in a moment how many statistical summaries can be obtained through inner products.
+
+
+## Length
+
+Another important usage of the inner product is that it allows us to define the __length__ of a vector $\mathbf{x}$, denoted by \| \mathbf{x} \|, as the square root of the inner product with itself::
+
+$$
+\| \mathbf{x} \| = \sqrt{\mathbf{x^\mathsf{T} x}}
+$$
+
+which is typically known as the __norm__ of a vector. We can calculate the length of the vector `weight`:
+
+$$
+\| \texttt{weight} \| = \sqrt{(150 \times 150) + (172 \times 172)} = 228.2192
+$$
+
+Likewise, the length of the vector `height`:
+
+$$
+\| \texttt{height} \| = \sqrt{(49 \times 49) + (77 \times 77)} = 91.2688
+$$
+
+Note that the inner product of a vector with itself is equal to its squared norm: $\mathbf{x^\mathsf{T} x} = \| \mathbf{x} \|^2$
+
+
+## Angle
+
+In addition to the length of a vector, the __angle__ between two nonzero vectors $\mathbf{x, y}$ can also be expressed using inner products. The angle $\theta$ is such that:
+
+$$
+cos(\theta) = \frac{\mathbf{x^\mathsf{T} y}}{\sqrt{\mathbf{x^\mathsf{T} x}} \hspace{1mm} \sqrt{\mathbf{y^\mathsf{T} y}}}
+$$
+
+or
+
+$$
+cos(\theta) = \frac{\mathbf{x^\mathsf{T} y}}{\| \mathbf{x} \| \hspace{1mm} \| \mathbf{y} \|}
+$$
+
+Equivalently, we can reexpress the formula of the inner product using 
+
+$$
+\mathbf{x^\mathsf{T} y} = \| \mathbf{x} \| \hspace{1mm} \| \mathbf{y} \| \hspace{1mm} cos(\theta)
+$$
+
+The angle between `weight` and `height` in $\mathbf{M}$ is such that:
+
+$$
+cos(\theta) = \frac{20594}{228.2192 \times 91.2688} = 0.9887
+$$
+
+
+## Orthogonality
+
+Besides calculating lengths of vectors and angles between vectors, an inner product allows us to know whether two vectors are orthogonal. In a two dimensional space, orthogonality is equivalent to perpendicularity; so if two vectors are perpendicular to each other---the angle between them is a 90 degree angle---they are orthogonal. Two vectors vectors $\mathbf{x}$ and $\mathbf{y}$ are orthogonal if their inner product is zero:
+
+$$
+\mathbf{x^\mathsf{T} y} = 0 \iff \mathbf{x} \hspace{1mm} \bot \hspace{1mm} \mathbf{y} 
+$$
+
+
+## Projection
+
+The last aspect I want to touch related with the inner product is the so-called projections. The idea we need to consider is the orthogonal projection of a vector $\mathbf{y}$ onto another vector $\mathbf{x}$. 
+
+The basic notion of projection requires two ingredients: two vectors $\mathbf{x}$ and $\mathbf{y}$. To obtain the projection of $\mathbf{y}$ onto $\mathbf{x}$, we need to express $\mathbf{x}$ in unit norm. The obtained projection $\hat{\mathbf{y}}$ is expressed as $a \mathbf{x}$. This means that a projection implies multiplying $\mathbf{x}$ by some number $a$, such that $\hat{\mathbf{y}} = a \mathbf{x}$ is a stretched version of $\mathbf{x}$. This is better appreciated in the following figure.
+
+Having two nonzero vectors $\mathbf{x}$ and $\mathbf{y}$, we can project $\mathbf{y}$ on $\mathbf{x}$
+
+$$
+projection = \mathbf{x} \left( \frac{\mathbf{y^\mathsf{T} x}}{\mathbf{x^\mathsf{T} x}} \right)
+$$
+
+$$
+= \mathbf{x} \left( \frac{\mathbf{y^\mathsf{T} x}}{\| \mathbf{x} \|^2} \right)
+$$
+

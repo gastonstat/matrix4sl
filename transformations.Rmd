@@ -1,0 +1,237 @@
+# Transformations {#transformations}
+
+In many situations you will need to transform and modify the raw values of your data.
+
+Transformations are useful for many reasons, for example:
+
+- to change the scale of a variable from continuous to discrete
+- to linearize a variable that has a non-linear distribution
+- to make distributions more symmetric
+- to re-center the data (mean-center, or center by other reference value)
+- to stretch or compress the values (by standard deviation, by range, by eigenvalues)
+- to binarize or dummify a categorical variable
+
+In this chapter, I will cover common transformations:
+
+- dummyfication
+- mean-center
+- standardization
+- logarithmic transformation
+- power transformation
+
+
+## Dummy Variables
+
+As we saw in the previous chapter, categorical variables are characteristics or qualities observed on individuals. An example of a categorical variable is Sex with possible values _male_ and _female_. Most of the time, categorical variables will be codified in a non-numeric way, usually as strings or character values. However, it is not unusual to find numeric codes such as "female" = 1, and "male" = 2.
+
+More often than not, it is convenient to code categorical variables as __dummy variables__, that is, decompose a categorical variable into one or more indicator variables that take on the values 0 or 1. For example, suppose that Sex has two values _male_ and _female_. This variable can be coded as two dummy variables which have values [1 0 0] for _female_, [0 1 1] for _male_:
+
+\[ 
+\left[\begin{array}{c}
+female \\
+male \\
+male \\
+\end{array}\right]
+= 
+\left[\begin{array}{cc}
+1 & 0 \\
+0 & 1 \\
+0 & 1 \\
+\end{array}\right]
+\]
+
+For some statistical learning methods such as regression analysis---due to a technical reason---only one of these two dummies can be used. This means that you would drop one of the dummy columns:
+
+\[ 
+\left[\begin{array}{c}
+female \\
+male \\
+male \\
+\end{array}\right]
+= 
+\left[\begin{array}{c}
+1 \\
+0 \\
+0 \\
+\end{array}\right]
+\]
+
+The resulting one dummy variable is interpreted as the difference of _female_ and _male_, keeping _female_ as the reference value.
+
+
+
+## Standardization
+
+When variables are quantitative, they can be measured in the same scale. But they can also be measured in different scales. For example, consider four variables: 1) Weight measured in kilograms, 2) Height measured in centimeters, 3) Income measured in dollars, and 4) Temperature measured in Celsius degrees. When you use a method in which comparisons or calculations are made taking into account the variance of the variables, you will face an interesting phenomenon: the variable that has the largest magnitude will dominate the variability in the data. And this could be a (serious) problem.
+
+To compensate for the differences in scales, something must be done. The question is then: how to balance the contributions of the variables in a way that you can have a fair comparison among them? The key is to put them all under a common scale. Let's review four options to standardize a variable:
+
+- by standard deviations from the mean (i.e. standard units)
+- by the overall range
+- by chosen percentiles
+- by the mean
+
+As a working example, let's use the same data from chapter [Data Matrix](#data-matrix). 
+
+```{r echo = FALSE}
+sw <- read.csv('data/starwars.csv')
+```
+
+```{r echo = FALSE, comment = ''}
+dat <- sw[1:6 ,c('gender', 'height', 'weight', 'jedi')]
+rownames(dat) <- sw$name[1:6]
+dat
+```
+
+We will use variable `height` and denoted with $X$:
+
+```{r}
+x <- dat$height
+x
+```
+
+
+### By Standard Units
+
+One way to obtain a common scale is to standardize the variables by number of standard deviations from the mean. The goal is to convert a variable $X$ into a variable $Z$ in standard units. You do this by subtracting the mean $\bar{x}$ from every value $x_i$, and then divide by the standard deviation $s$. The conversion formula is:
+
+$$
+z_i = \frac{x_i - \bar{x}}{s}
+$$
+
+where $\bar{x}$ is the mean of $X$, and $s$ is the standard deviation of $X$. A value that is expressed in standard units measures how far that value is from the mean, in terms of standard deviations.
+
+In vector notation, the standardized vector $\mathbf{z}$ of $\mathbf{x}$ is:
+
+$$
+\mathbf{z} = \frac{1}{s} (\mathbf{x} - \mathbf{\bar{x}})
+$$
+
+Here's some code in R that shows step-by-step the operations to obtain a variable in standard units:
+
+```{r}
+# mean
+x_mean <- mean(x)
+x_mean
+
+# standard deviation
+x_sd <- sd(x)
+x_sd
+
+# height in stadard units
+std_units <- (x - x_mean) / x_sd
+std_units
+```
+
+The standardized vector `std_units` now has a mean of 0 and standard deviation 0:
+
+```{r}
+mean(std_units)
+sd(std_units)
+```
+
+
+### By the Overall Range
+
+Another kind of standardization is to subtract the minimum value from every value $x_i$, and then divide by the overall range: $max(x) - min(x)$.
+
+$$
+z_i = \frac{x_i - min(x)}{max(x) - min(x)}
+$$
+
+Notice that this type of standardization will produce a variable $Z$ that is linearly transformed ranging from 0 to 1, where 0 is its minimum and 1 its maximum value.
+
+```{r}
+# maximum
+x_max <- max(x)
+x_max
+
+# minumum
+x_min <- min(x)
+x_min
+
+# height standardized by overall range
+std_range <- (x - x_min) / (x_max - x_min)
+std_range
+```
+
+The standardized vector `std_range` now ranges from 0 to 1:
+
+```{r}
+min(std_range)
+max(std_range)
+```
+
+
+### By Chosen Percentiles
+
+A general type of range-based standardization is to divide by a different type of range, not just the overall range. This is done by using any range given from a pair of symmetric percentiles. For example, you can choose the 25-th and the 75-th percentiles, also known as the first quartile $Q_1$ and third quartile $Q_3$, respectively. In other words, standardized by the __interquartile range__ or IQR:
+
+$$
+z_i = \frac{x_i}{Q_3 - Q_1} = \frac{x_i}{\text{IQR}(x)}
+$$
+
+Why to standardize by chosen percentiles other than the maximum and the minimum? Because the overall range is sensitive to outliers; so to have a less sensitive scale, we divide by a more _robust_ range. As another example of this type of standardization, you can divide by the range between the 5-th and the 95-th percentiles.
+
+```{r}
+# inter-quartile range
+x_iqr <- IQR(x)
+
+# height standardized by IQR
+std_iqr <- x / x_iqr
+std_iqr
+```
+
+The standardized vector `std_iqr` now has an IQR of 1:
+
+```{r}
+IQR(std_iqr)
+```
+
+
+### By the Mean
+
+A less common but equally interesting type of standardization is to divide the values $x_i$ by their mean $\bar{x}$ which causes transformed values $z_i$ to have standard deviations equal to their coefficient of variation:
+
+$$
+z_i = \frac{x_i}{\bar{x}}
+$$
+
+
+### About standardization
+
+All the previous standardizations can be put in terms of a form of weighting given by the following formula:
+
+$$
+z_i = w \times x_i
+$$
+
+where $w$ represents a weight or scaling factor that can be:
+
+- the standard deviation: $w = s$
+- the overall range: $w = max(x) - min(x)$
+- the IQR: $w = \text{IQR}$
+- the mean: $w = \bar{x}$
+
+
+
+## Logarithmic Transformations
+
+It is not uncommon to find ratio variables with distributions that are skew. While this is not necessarily an issue, certain statistical learning methods assume that variables have fairly symmetric bell-shaped distributions. One transformation typically used by analysts to obtain more symmetric distributions from skewed ones is the logarithmic one.
+
+When a variable has positive values, we can log-transform it. This will shrink or compact the long tails, making them more symmetrical. In addition, it will also convert multiplicative relationships to additive ones. Why? Because of the properties of logarithm: $log(xy) = log(x) + log(y)$ and $log(x/y) = log(x) - log(y)$.
+
+
+## Power Transformations
+
+A transformation that is similar to the logarithmic one is the __Box-Cox__ transformation.
+
+$$
+z = \frac{1}{\lambda} (x^\lambda - 1)
+$$
+
+where $\lambda$ is a positive real number that plays the role of a power parameter.
+
+Interestingly, the Box-Cox transformation approximates to the log-transformation as the power parameter $\lambda$ tends to 0. The division by $\lambda$ has a reason: it keeps the scale of the original variable from collapsing. For instance, if you take the 10th roots $x^{0.1}$ of a variable, you should see that all the values are close to 1, so dividing by 1/10 multiplies the values by 10, which is almost a logarithmic scale.
+In summary, Box-Cox transformations provide a way of making data more symmetric, which could be very helpful in regression analysis tools.
+

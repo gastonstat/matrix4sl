@@ -1,0 +1,266 @@
+# Covariance and Correlation {#covar}
+
+
+One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables $X$ and $Y$, what is the relationship between them? The answer to this question largely depends on two major factors. 
+
+One factor is the way in which the notion of "relationship" is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc). 
+
+
+## Two Variables
+
+Let us start by considering the most simple scenario when we have two variables $X$ and $Y$, represented by vectors $\mathbf{x}$ and $\mathbf{y}$, respectively. 
+
+Different types of relations between $\mathbf{x}$ and $\mathbf{y}$ are possible, 
+as shown in the figure below containing several scatter-plots. There are linear 
+relations of both type positive and negative. There are also two types of 
+nonlinear relations, one monotone and the other one non-montone. In addition, 
+the last two plots show absence of relations.
+
+```{r fig.cap='Different relations between two variables', echo = FALSE}
+knitr::include_graphics("images/covar/bivariate-relations.png")
+```
+
+<br>
+
+- __Positive linear relation__: $\mathbf{x}$ and $\mathbf{y}$ vary 
+simultaneously in the same direction; an increase in $\mathbf{x}$ is 
+accompanied by an increase in $\mathbf{y}$ in constant proportion.
+
+- __Negative linear relation__: $\mathbf{x}$ and $\mathbf{y}$ vary in opposite 
+directions; an increase in $\mathbf{x}$ is accompanied by a decrease in 
+$\mathbf{y}$.
+
+- __Nonlinear monotone relation__: $\mathbf{x}$ and $\mathbf{y}$ vary in the 
+same direction but the slope is not constant; changes in $\mathbf{y}$ are 
+different dependening on the values of $\mathbf{x}$.
+
+- __Nonlinear non-monotone relation__: although there is a functional relation 
+between $\mathbf{x}$ and $\mathbf{y}$, the relation is not monotone; 
+$\mathbf{y}$ increases and decrases accordingly to $\mathbf{x}$.
+
+- __No relation__: regardless of the values of $\mathbf{x}$, two things may 
+happen. One is that knowing $\mathbf{x}$,  nothing can be said about $\mathbf{y}$; the other is that $\mathbf{y}$ remains constant.
+
+For convenience sake most multivariate techniques focus on linear relations.
+Even though two variables $\mathbf{x}$ and $\mathbf{y}$ may show a nonlinear 
+relation, it is often possible to apply some transformation to one of the them 
+in order to have a more linear association.
+
+
+The general approach to determine if $\mathbf{x}$ and $\mathbf{y}$ are related 
+is to assess whether there is _simultaneous variation_ between them. The idea 
+is to define a measure for _quantifying_ the strength of the relation. When 
+$\mathbf{x}$ and $\mathbf{y}$ are in a quantitative scale, the most common way 
+to quantify and assess the relationship between them is with the covariance and 
+correlation.
+
+
+## Covariance
+
+The covariance generalizes the concept of variance for two variables. Recall that the formula for the covariance between $\mathbf{x}$ and $\mathbf{y}$ is:
+
+$$
+cov(\mathbf{x, y}) = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x}) (y_i - \bar{y})
+$$
+
+where $\bar{x}$ is the mean value of $\mathbf{x}$ obtained as:
+
+$$
+\bar{x} = \frac{1}{n} (x_1 + x_2 + \dots + x_n) = \frac{1}{n} \sum_{i = 1}^{n} x_i
+$$
+
+and $\bar{y}$ is the mean value of $\mathbf{y}$:
+
+$$
+\bar{y} = \frac{1}{n} (y_1 + y_2 + \dots + y_n) = \frac{1}{n} \sum_{i = 1}^{n} y_i
+$$
+
+Basically, the covariance is a statistical summary that is used to assess the 
+__linear association between pairs of variables__.
+
+Assuming that the variables are mean-centered, we can get a more compact 
+expression of the covariance in vector notation:
+
+$$
+cov(\mathbf{x, y}) = \frac{1}{n} (\mathbf{x^\mathsf{T} y})
+$$
+
+Properties of covariance:
+
+- the covariance is a symmetric index: $cov(X,Y) = cov(Y,X)$
+- the covariance can take any real value (negative, null, positive)
+- the covariance is linked to variances under the name of the Cauchy-Schwarz inequality:
+ $$cov(X,Y)^2 \leq var(X) var(Y) $$
+
+
+
+## Correlation
+
+Although the covariance indicates the direction---positive or negative---of a possible linear relation, it does not tell us how big or small the relation might be. To have a more interpretable index, we must transform the convariance into a unit-free measure. To do this we must consider the standard deviations of the variables so we can normalize the convariance. The result of this normalization is the coefficient of linear correlation defined as:
+
+$$
+cor(X, Y) = \frac{cov(X, Y)}{\sqrt{var(X)} \sqrt{var(Y)}}
+$$
+
+Representing $X$ and $Y$ as vectors $\mathbf{x}$ and $\mathbf{y}$, we can express the correlation as:
+
+$$
+cor(\mathbf{x}, \mathbf{y}) = \frac{cov(\mathbf{x}, \mathbf{y})}{\sqrt{var(\mathbf{x})} \sqrt{var(\mathbf{y})}}
+$$
+
+Assuming that $\mathbf{x}$ and $\mathbf{y}$ are mean-centered, we can express the correlation as:
+
+$$
+cor(\mathbf{x, y}) = \frac{\mathbf{x^\mathsf{T} y}}{\|\mathbf{x}\| \|\mathbf{y}\|}
+$$
+
+
+As it turns out, the norm of a mean-centered variable $\mathbf{x}$ is 
+proportional to the square root of its variance (or standard deviation):
+
+$$
+\| \mathbf{x} \| = \sqrt{\mathbf{x^\mathsf{T} x}} 
+ = \sqrt{n} \sqrt{var(\mathbf{x})}
+$$
+
+Consequently, we can also express the correlation with inner products as:
+
+$$
+cor(\mathbf{x, y}) = \frac{\mathbf{x^\mathsf{T} y}}{\sqrt{(\mathbf{x^\mathsf{T} x})} \sqrt{(\mathbf{y^\mathsf{T} y})}}
+$$
+
+or equivalently:
+
+$$
+cor(\mathbf{x, y}) = \frac{\mathbf{x^\mathsf{T} y}}{\| \mathbf{x} \| \hspace{1mm} \| \mathbf{y} \|}
+$$
+
+In the case that both $\mathbf{x}$ and $\mathbf{y}$ are standardized (mean zero 
+and unit variance), that is:
+
+$$
+\mathbf{x} = \begin{bmatrix}
+\frac{x_1 - \bar{x}}{\sigma_{x}} \\
+\frac{x_2 - \bar{x}}{\sigma_{x}} \\
+\vdots \\
+\frac{x_n - \bar{x}}{\sigma_{x}}
+\end{bmatrix},
+\hspace{5mm}
+\mathbf{y} = \begin{bmatrix}
+\frac{y_1 - \bar{y}}{\sigma_{y}} \\
+\frac{y_2 - \bar{y}}{\sigma_{y}} \\
+\vdots \\
+\frac{y_n - \bar{y}}{\sigma_{y}}
+\end{bmatrix}
+$$
+
+the correlation is simply the inner product:
+
+$$
+cor(\mathbf{x, y}) = \mathbf{x^\mathsf{T} y} \hspace{5mm} \mathrm{(standardized} \hspace{1mm} \mathrm{variables)}
+$$
+
+
+Let's look at two variables (i.e. vectors) from a geometric perspective.
+
+```{r echo = FALSE, fig.cap = 'Two vectors in a 2-dimensional space'}
+# vectors coordinates
+x = c(2, 3)
+y = c(3, 1)
+
+op = par(mar = c(2, 2, 1, 1))
+plot.new()
+plot.window(xlim =c(0, 4), ylim = c(0, 4))
+axis(side = 1, pos = 0, labels = FALSE)
+mtext(text="axis 1", side=1, line=1)
+axis(side = 2, pos = 0, las = 2, labels = FALSE)
+mtext(text="axis 2", side=2, line=0.5)
+arrows(x0=c(0, 0), y0=c(0, 0), x1=x, y1=y, length = 0.1,
+       col = c("#ff9933", "#0099cc"), lwd = 3)
+text(x=x, y=y, labels = c("y", "x"), pos = 4, 
+     col = c("#ff9933", "#0099cc"), cex = 1.5)
+text(x=0.55, y=0.43, labels = expression(theta), col = "gray40", cex = 1.5)
+lines(x=c(0.48, 0.33), y=c(0.16, 0.5), col = "gray50", lwd = 3)
+par(op)
+```
+
+The inner product ot two mean-centered vectors $\mathbf{x'y}$ is obtained with the following equation:
+
+$$
+\mathbf{x^\mathsf{T} y} = \|\mathbf{x}\| \|\mathbf{y}\| cos(\theta_{x,y})
+$$
+
+where $cos(\theta_{x,y})$ is the angle between $\mathbf{x}$ and $\mathbf{y}$. Rearranging the terms in the previous equation we get that:
+
+$$
+cos(\theta_{x,y}) = \frac{\mathbf{x^\mathsf{T} y}}{\|\mathbf{x}\| \|\mathbf{y}\|} = cor(\mathbf{x, y}) 
+$$
+
+which means that the correlation between mean-centered vectors $\mathbf{x}$ and $\mathbf{y}$ turns out to be the cosine of the angle between $\mathbf{x}$ and $\mathbf{y}$.
+
+
+
+
+## Relation as Linear Approximation
+
+A linked but different way to examine relations between the variables is when 
+we ask: Can we approximate one of the variables in terms of the other? This is 
+an asymmetric type of association since we seek to say something about the 
+variability of one variable, say $\mathbf{y}$, in terms of the variability of 
+$\mathbf{x}$.
+
+We can think of several ways to approximate $\mathbf{y}$ in terms of 
+$\mathbf{x}$. The approximation of $\mathbf{y}$, denoted by $\hat{\mathbf{y}}$, 
+means finding a coefficient $b$ such that:
+
+$$
+\hat{\mathbf{y}} = b \mathbf{x}
+$$
+
+The common approach to get $\hat{\mathbf{y}}$ in some optimal way is by 
+minimizing the square difference between $\mathbf{y}$ and $\hat{\mathbf{y}}$. 
+
+```{r fig.cap='Linear approximation', echo = FALSE}
+knitr::include_graphics("images/covar/vectors-approximation.png")
+```
+
+The answer to this question comes in the form of a projection. More precisely, 
+we orthogonally project $\mathbf{y}$ onto $\mathbf{x}$:
+
+$$
+\hat{\mathbf{y}} = \mathbf{x} \left( \frac{\mathbf{y^\mathsf{T} x}}{\mathbf{x^\mathsf{T} x}} \right)
+$$
+
+or equivalently:
+
+$$
+\hat{\mathbf{y}} = \mathbf{x} \left( \frac{\mathbf{y^\mathsf{T} x}}{\| \mathbf{x} \|^2} \right)
+$$
+
+Note that the term in parenthesis is just a scalar, so we can actually express 
+$\hat{\mathbf{y}}$ as $b \mathbf{x}$. This means that a projection implies 
+multiplying $\mathbf{x}$ by some number $b$, such that 
+$\hat{\mathbf{y}} = b \mathbf{x}$ is a stretched or shrinked version of 
+$\mathbf{x}$. This is nothing else than the least squares regression of 
+$\mathbf{y}$ on $\mathbf{x}$. This is better appreciated in the following 
+figure.
+
+
+```{r fig.cap='Orthogonal projection', echo = FALSE}
+knitr::include_graphics("images/covar/orthogonal-projection.png")
+```
+
+Note that the correlation between $\mathbf{y}$ and $\hat{\mathbf{y}}$ is:
+
+$$
+cor(\mathbf{y}, \hat{\mathbf{y}}) = \frac{\mathbf{y^\mathsf{T} x}}{\| \mathbf{y} \|}
+$$
+
+
+or alternatively:
+
+$$
+cor^{2}(\mathbf{y}, \hat{\mathbf{y}}) = \frac{\mathbf{y^\mathsf{T} x}}{\mathbf{y^\mathsf{T}}y}
+$$
+
+

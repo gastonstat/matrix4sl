@@ -1,0 +1,20 @@
+book_filename: "matrix4sl"
+delete_merged_file: true
+rmd_files: [
+  "index.rmd",
+  "introduction.Rmd",
+  "data-table.Rmd",
+  "data-matrix.Rmd",
+  "variables.Rmd",
+  "transformations.Rmd",
+  
+  "duality.Rmd",
+  "vector-basics.Rmd",
+
+  "mean.Rmd",
+  "variance.Rmd",
+  "covariance.Rmd",
+  "cross-products.Rmd"
+]
+
+before_chapter_script: "_common.R"

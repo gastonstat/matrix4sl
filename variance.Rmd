@@ -1,0 +1,125 @@
+# Variance {#variance}
+
+A measure of center such as the mean is not enoguh to summarize the information of a variable. We also need a measure of the amount of variability. Synonym terms are variation, spread, scatter, and dispersion.
+
+There are several ways to measure spread:
+
+- overall range: $max(X) - min(X)$
+
+- interquartile range $Q_3(X) - Q_1(X)$
+
+- the length between two quantiles
+
+- variance (and its square root the standard deviation)
+
+
+Because of its relevance and importance for statistical learning methods, we will focus on the variance.
+
+
+## About the variance
+
+Simply put, the variance is a measure of spread around the mean. The main idea behind the calculation of the variance is to quantify the typical concentration of values around the mean. The way this is done is by averaging the squared deviations from the mean.
+
+$$
+var(X) = \frac{(x_i - \bar{x})^2 + \dots + (x_n - \bar{x})^2}{n} = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^2
+$$
+
+Let's disect the terms and operations involved in the formula of the variance.
+
+- the main terms are the _deviations from the mean_ $(x_i - \bar{x})$, that is, the difference between each observation $x_i$ and the mean $\bar{x}$.
+
+- conceptually speaking, we want to know what is the average size of the deviations around the mean.
+
+- simply averaging the deviations won't work because their sum is zero (i.e. the sum of deviations around the mean will cancel out because the mean is the balancing point).
+
+- this is why we square each deviation: $(x_i - \bar{x})^2$, which literally means getting the squared distance from $x_i$ to $\bar{x}$.
+
+- having squared all the deviations, then we average them to get the variance.
+
+Because the variance has squared units, we need to take the square root to "recover" the original units in which $X$ is expressed. This gives us the __standard deviation__
+
+$$
+sd(X) = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^2}
+$$
+
+In this sense, you can say that the standard deviation is roughly the average distance that the data points vary from the mean.
+
+
+### Sample Variance
+
+In practice, you will often find two versions of the formula for the variance: one in which the sum of squared deviations is divided by $n$, and another one in which the division is done by $n-1$. Each version is associated to the statistical inference view of variance in terms of whether the data comes from the _population_ or from a _sample_ of the population. 
+
+The _population variance_ is obtained dividing by $n$:
+
+$$
+\textsf{population variance:} \quad \frac{1}{(n)} \sum_{i=1}^{n} (x_i - \bar{x})^2
+$$
+
+The _sample variance_ is obtained dividing by $n - 1$ instead of dividing by $n$. The reason for doing this is to get an unbiased estimor of the population variance:
+
+$$
+\textsf{sample variance:} \quad \frac{1}{(n-1)} \sum_{i=1}^{n} (x_i - \bar{x})^2
+$$
+
+It is important to note that most statistical software compute the variance with the unbiased version. This is also the case in R with the function `var()`. For instance, the unbiased variance for the number of shots is:
+
+```{r}
+# variance of shots
+#var(X[,1])
+```
+
+Compare it to the biased variance:
+
+```{r}
+# biased variance of shots
+#(nrow(X) - 1) / (nrow(X)) * var(X[,1])
+```
+
+As you can tell from the two types of variances, there seems to be an important difference. This is because the number of observations $n = 5$ in this case is small. However, as the sample size increases, the difference between $n-1$ and $n$ will be negligible.
+
+If you implement your own functions and are planning to compare them against other software, then it is crucial to known what other programmers are using for computing the variance. Otherwise, your results might be a bit different from the ones with other people's code.
+
+In this book, to keep notation as simpler as possible, we will use the factor $\frac{1}{n}$ for the rest of the formulas. However, keep in mind that most variance-based computations in R use $\frac{1}{n-1}$.
+
+
+
+## Variance with Vector Notation
+
+In a similar way to expressing the mean with vector notation, you can also formulate the variance in terms of vector-matrix notation. First, notice that the formula of the variance consists of the addition of squared terms. Second, recall that a sum of numbers can be expressed with an inner product by using the unit vector (or summation operator). If we denote $\mathbf{1}_{n}$ a vector of ones of size $n$, then the variance of a vector $\mathbf{x}$ can be obtained with an inner product:
+
+$$
+var(\mathbf{x}) = \frac{1}{n} (\mathbf{x} - \mathbf{\bar{x}})^\mathsf{T} (\mathbf{x} - \mathbf{\bar{x}})
+$$
+
+where $\mathbf{\bar{x}}$ is an $n$-element vector of mean values $\bar{x}$.
+
+Assuming that $\mathbf{x}$ is already mean-centered, then the variance is proportional to the squared norm of $\mathbf{x}$
+
+$$
+var(\mathbf{x}) = \frac{1}{n} \hspace{1mm} \mathbf{x}^\mathsf{T} \mathbf{x} = \frac{1}{n} \| \mathbf{x} \|^2
+$$
+
+This means that we can formulate the variance with the general notion of inner product:
+
+$$
+var(\mathbf{x}) = \frac{1}{n} <\mathbf{x}, \mathbf{x}>
+$$
+
+
+## Standard Deviation as a Norm
+
+If we use a metric matrix $\mathbf{D} = diag(1/n)$ then we have that the variance is given by a special type of inner product:
+
+$$
+var(\mathbf{x}) = <\mathbf{x}, \mathbf{x}>_{D} = \mathbf{x}^\mathsf{T} \mathbf{D x}
+$$
+
+From this point of view, we can say that the variance of $\mathbf{x}$ is equivalent to its squared norm when the vector space is endowed with a metric $\mathbf{D}$. Consequently, the standard deviation is simply the length of $\mathbf{x}$ in this particular geometric space.
+
+$$
+sd(\mathbf{x}) = \| \mathbf{x} \|_{D}
+$$
+
+When looking at the standard deviation from this perspective, you can actually say that the amount of spread of a vector $\mathbf{x}$ is actually its length (in metric $\mathbf{D}$).
+
+

@@ -1,0 +1,170 @@
+# Matrix Cross-Products {#crossprods}
+
+Until now, we have been discussing statistical measures pertaining to one and two variables: things like mean, variance, covariance, and correlation. All of these summaries can be expressed with vector notation, and using common vector operations such as inner products, norms, angles, and projections. However, we can also use the entire data matrix to obtain other types of statistical measures. In this chapter, we'll describe statistical objects that are based on cross-products of a data matrix.
+
+
+## Common Data Matrices
+
+To begin our discussion we need to consider a data matrix $\mathbf{X}$ formed by $p$ variables measured on $n$ individuals. For convenience, we will also assume that the variables are quantitative. In other words, we assume that the data matrix contains columns with (roughly) continuous values. If the raw data matrix has categorical variables with string values or coded in a non-numerical way, you would have to transform and codify such variables to end up with a numeric data matrix.
+
+One general way to depict $\mathbf{X}$ is as:
+
+\[ \underset{n \times p}{\mathbf{X}} = 
+\left[\begin{array}{cccc}
+x_{11} & x_{12} & \cdots & x_{1p} \\
+x_{21} & x_{22} & \cdots & x_{2p} \\
+\vdots & \vdots & \ddots & \vdots \\
+x_{n1} & x_{n2} & \cdots & x_{np} \\
+\end{array}\right]
+\]
+
+
+#### Centered Matrix {-}
+
+If the variables are __mean-centered__, then $\mathbf{X}$ become $\mathbf{X_C}$ with elements:
+
+\[ \underset{n \times p}{\mathbf{X_C}} = 
+\left[\begin{array}{cccc}
+x_{11} - \bar{x}_1 & x_{12} - \bar{x}_2 & \cdots & x_{1p} - \bar{x}_p \\
+x_{21} - \bar{x}_1 & x_{22} - \bar{x}_2 & \cdots & x_{2p} - \bar{x}_p \\
+\vdots & \vdots & \ddots & \vdots \\
+x_{n1} - \bar{x}_1 & x_{n2} - \bar{x}_2 & \cdots & x_{np} - \bar{x}_p \\
+\end{array}\right]
+\]
+
+where $\bar{x}_j$ is the mean of the $j$-th variable ($j = 1, \dots, p$).
+
+Using matrix notation, the centering operation is expressed as:
+
+$$
+\mathbf{X_C} = (\mathbf{I} - \frac{1}{n} \mathbf{11^\mathsf{T}}) \mathbf{X} 
+$$
+
+where:
+
+- $\mathbf{I}$ is the $n \times n$ identity matrix
+- $\mathbf{1}$ is an $n \times 1$ vector of ones
+- $\mathbf{I} - \frac{1}{n} \mathbf{11^\mathsf{T}}$ is sometimes called the 
+__centering operator__
+
+
+#### Normalized Matrix {-}
+
+The scaled or normalized matrix $\mathbf{X_N}$:
+
+\[ \underset{n \times p}{\mathbf{X_N}} = 
+\left[\begin{array}{cccc}
+a_1 x_{11} & a_2 x_{12} & \cdots & a_p x_{1p} \\
+a_1 x_{21} & a_2 x_{22} & \cdots & a_p x_{2p} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_1 x_{n1} & a_2 x_{n2} & \cdots & a_p x_{np} \\
+\end{array}\right]
+\]
+
+where $a_j$ is a scaling factor for the $j$-th column
+
+Probably the most common scaling option is to divide by the standard deviation:
+
+$$
+a_j = \frac{1}{sd_j} = \frac{1}{\sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_{ij} - \bar{x}_j)^2}}
+$$
+
+The scaling factors $a_j$ can be put in a diagonal matrix $\mathbf{D_a}$
+
+\[ \underset{p \times p}{\mathbf{D_a}} = 
+\left[\begin{array}{cccc}
+a_1 & 0   & \cdots & 0 \\
+0   & a_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0   & 0   & \cdots & a_p \\
+\end{array}\right]
+\]
+
+then the scaled or normalized data matrix is given by:
+
+$$
+\mathbf{X_N} = \mathbf{X D_a}
+$$
+
+
+
+#### Standardized Matrix {-}
+
+The standardized matrix $\mathbf{X_S}$ is the mean-centered and scaled 
+(by the standard deviation) matrix:
+
+\[ \underset{n \times p}{\mathbf{X_S}} = 
+\left[\begin{array}{cccc}
+\frac{x_{11} - \bar{x}_1}{sd_1} & \frac{x_{12} - \bar{x}_2}{sd_2} & \cdots & \frac{x_{1p} - \bar{x}_p}{sd_p} \\
+\frac{x_{21} - \bar{x}_1}{sd_1} & \frac{x_{22} - \bar{x}_2}{sd_2} & \cdots & \frac{x_{2p} - \bar{x}_p}{sd_p} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{x_{n1} - \bar{x}_1}{sd_1} & \frac{x_{n2} - \bar{x}_2}{sd_2} & \cdots & \frac{x_{np} - \bar{x}_p}{sd_p} \\
+\end{array}\right]
+\]
+
+- $\bar{x}_j$ is the mean of the $j$-th variable
+- $sd_j$ is the standard deviation of the $j$-th variable
+
+When the scaling factors $a_j$ are the standard deviations $sd_j$, 
+the scaling matrix $\mathbf{D}_{\frac{1}{sd}}$ is:
+
+\[ \underset{p \times p}{\mathbf{D}_{\frac{1}{sd}}} = 
+\left[\begin{array}{cccc}
+\frac{1}{sd_1} & 0 & \cdots & 0 \\
+0 & \frac{1}{sd_2} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \frac{1}{sd_p} \\
+\end{array}\right]
+\]
+
+then the standardized data matrix $\mathbf{X_S}$
+$$
+\mathbf{X_S} = \mathbf{X_C} \mathbf{D}_{\frac{1}{sd}} = (\mathbf{I} - \frac{1}{n} \mathbf{11^\mathsf{T}}) \mathbf{X} \mathbf{D}_{\frac{1}{sd}}
+$$
+
+
+## Cross-Products
+
+There are two fundamental matrix products that play a crucial role when the data is in an $n \times p$ matrix $X$ with objects in rows, and variables in columns 
+(assume $n > p$):
+
+$$
+\mathbf{X^\mathsf{T} X} \quad \& \quad \mathbf{X X^\mathsf{T}}
+$$
+
+
+$\mathbf{X^\mathsf{T} X}$ is also known as the __minor product moment__ because it is of size $p \times p$ (assuming $n > p$).
+
+- sum-of-squares and cross-products (SSCP) of columns
+- made of inner products of the columns of $\mathbf{X}$
+- _association_ matrix for the variables
+
+
+$\mathbf{X X^\mathsf{T}}$ is also known as the __major product moment__ because is of size $n \times n$ (assuming $n > p$).
+
+- sum-of-squares and cross-products of rows
+- made of inner products of the rows of $\mathbf{X}$
+- association matrix for the objects
+
+
+#### Covariance Matrix {-}
+
+If $\mathbf{X}$ is mean-centered, i.e. $\mathbf{X} = \mathbf{X_C}$, then
+
+$$
+\frac{1}{n} \mathbf{X^\mathsf{T} X}  \qquad \text{and} \qquad \frac{1}{n-1} \mathbf{X^\mathsf{T} X}
+$$ 
+
+are the covariance matrices (population and sample flavors).
+
+
+#### Correlation Matrix {-}
+
+If $\mathbf{X}$ is standardized, i.e. $\mathbf{X} = \mathbf{X_S}$, then
+
+$$
+\frac{1}{n} \mathbf{X^\mathsf{T} X}  \qquad \text{and} \qquad \frac{1}{n-1} \mathbf{X^\mathsf{T} X}
+$$ 
+
+are the correlation matrices (population and sample flavors).
+

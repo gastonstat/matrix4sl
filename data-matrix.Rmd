@@ -1,0 +1,296 @@
+# Data Matrix {#datamatrix}
+
+
+In the previous chapter we talked about the standard notion of _data_ from the statistical learning perspective, that is, as a "set of individuals described by one or more variables". In addition, we looked at various types of data tables, and we also discussed about the distinction between _raw_ tables and _clean_ tables. In this chapter, we make the transition from a data table to a data matrix. I will introduce some notation used in the rest of the book, and focus on how to think of a data table in terms of a matrix, and what aspects to keep in mind while converting any data table into a mathematical matrix.
+
+
+## About Matrices
+
+First let's talk about matrices in the mathematical sense of the word. A matrix is a rectangular array of elements. More formally, a matrix is a mathematical object whose structure is a rectangular array of entries.
+
+Typically, we consider the elements of a matrix to be numbers. Although you can certainly generalize the contents of a matrix and think about them as any type of symbols, not necessarily numbers. This is perhaps a common way to conceive a generic matrix from a more computational-oriented perspective.
+
+From example, an R matrix may be numeric, but you can also have matrices containing logical values (`TRUE` or `FALSE`), or even a matrix made up of characters.
+
+```{r}
+# numeric matrix
+A <- matrix(1:12, nrow = 4, ncol = 3)
+A
+```
+
+```{r}
+# logical matrix
+L <- matrix(c(TRUE, FALSE), nrow = 4, ncol = 3)
+L
+```
+
+```{r}
+# character matrix
+S <- matrix(sample(letters, 12), nrow = 4, ncol = 3)
+S
+```
+
+
+
+## Data Matrix
+
+While the raw ingredient for any statistical learning endevour is a data set, typically reshaped and organized in a tabular form, the core input of any statistical learning method consists of the data matrix, or in some cases, matrices.
+
+To make things less abstract I'm going to use the following toy data table with four variables measured on six individuals:
+
+```{r setup, echo = FALSE}
+sw <- read.csv('data/starwars.csv')
+```
+
+```{r echo = FALSE, comment = ''}
+dat <- sw[1:6 ,c('gender', 'height', 'weight', 'jedi')]
+rownames(dat) <- sw$name[1:6]
+dat
+```
+
+You can actually find the corresponding CSV file in the `data/` folder of the book's github repository.
+
+
+
+### Why a data matrix?
+
+The reason to use matrices is simple: the typical structure in which the data can be mathematically manipulated from a multivariate standpoint is a __data matrix__.
+No other mathematical object adapts so well to the rectangular structure of a data table.
+
+Since we are getting into more formal mathematical territory, we need to define some terminology and notation that we'll use in the rest of the book. 
+
+We're going to represent matrices with bold upper-case letters like $\mathbf{A}$ or $\mathbf{B}$. 
+
+In general, a matrix $\mathbf{X}$ has $n$ rows and $p$ columns, and we say that $\mathbf{X}$ is an $n \times p$ matrix. In addition, we are going to assume that all the matrices are real matrices, that is, matrices containing elements in the set of Real numbers.
+
+\[ 
+\underset{n \times p}{\mathbf{X}} = 
+\left[\begin{array}{ccccc}
+x_{11} & \cdots & x_{1j} & \cdots & x_{1p} \\
+\vdots &        & \vdots &        & \vdots \\
+x_{i1} & \cdots & x_{ij} & \cdots & x_{ip} \\
+\vdots &        & \vdots &        & \vdots \\
+x_{n1} & \cdots & x_{nj} & \cdots & x_{np} \\
+\end{array}\right]
+\]
+
+An element of a matrix $\mathbf{X}$ is denoted by $x_{ij}$ which represents the element in the $i$-th row and the $j$-th column. For instance, the element $x_{23}$ in our toy $6 \times 4$ data matrix has the value `r dat[2,3]` and it represents the `r colnames(dat)[3]` of `r rownames(dat)[2]`.
+
+Together with matrices we also have variables, and vectors. We are going to represent variables with italized capital letters such as $Y$ and $Z$. Also, variables in a matrix $\mathbf{X}$ can be represented with subscripts such as $X_j$ to indicate the column-index position. The first three variables in our matrix $\mathbf{X}$ would be represented as $X_1$ (`r colnames(dat)[1]`), $X_2$ (`r colnames(dat)[2]`), and $X_3$ (`r colnames(dat)[3]`). 
+
+Vectors will be represented by bold lower case letters such as $\mathbf{w}$ or $\mathbf{u}$. A vector $\mathbf{w}$ with $m$ elements can be expressed as $\mathbf{w} = (w_1, w_2, \dots, w_m)$. Since variables can be expressed as vectors, we can use the vector notation $\mathbf{x}$ to represent a variable $X$. However, keep in mind that not all vectors are variables: a vector may well refer to an object or to any row of a matrix.
+
+
+### Matrix Representations
+
+You will that find people represent matrices in multiple ways, using various notations, symbols, and diagrams.
+
+We can represent a data matrix $\mathbf{X}$ by simply regarding the table from its columns (i.e. variables) perspective:
+
+$$
+\mathbf{X} =
+\left[\begin{array}{c|c|c|c|c|c}
+  &   &   &   &  & \\
+  \mathbf{x}_{1} & \mathbf{x}_{2} & \cdots & \mathbf{x}_{j} & \cdots & \mathbf{x}_{p} \\
+  &   &   &   &  & \\
+\end{array}\right]
+$$
+
+Note that each variable $X_j$ is represented with a column vector $\mathbf{x}_{j}$. In turn, the vertical lines are just a visual cue indicating separation between columns. Taking our toy data data matrix, we could represent it as:
+
+$$
+\mathbf{Data} =
+\left[\begin{array}{c|c|c|c}
+  &   &   &  \\
+  \texttt{gender} & \texttt{height} & \texttt{weight} & \texttt{jedi} \\
+  &   &   &  \\
+\end{array}\right]
+$$
+
+Being more minimalists, we can even get a more compact representation by just expressing a matrix $\mathbf{X}$ as a list or sequence of its variables:
+
+\[
+\mathbf{X} = 
+\left[\begin{array}{cccccc}
+\mathbf{x}_{1} & \mathbf{x}_{2} & \cdots & \mathbf{x}_{j} & \cdots & \mathbf{x}_{p} \\
+\end{array}\right]
+\]
+
+
+
+### A Block of Variables
+
+While most of us are used to think of multivariate data in terms of a table or matrix, there can be other interesting representation options. If you are a visual person like me, we can also use an alternative way to display the variables using a standard convention of drawing them in rectangular shape. In this way, we can depict a set of variables in a data matrix as a series of rectangles, like those below inside the dashed box:
+
+```{r out.width='50%', fig.cap='Variables in a matrix depicted as a set of rectangles', echo = FALSE}
+knitr::include_graphics("images/matrix/matrix-with-rectangle-variables.png")
+```
+
+The rectangular-box shape perfectly illustrates the idea of a __block__ of variables. I will use the term __block__ to convey the idea of a group or set of variables measured on a set of objects. If you prefer, you can also think of a block as a data table.
+
+
+
+## Types of Matrices
+
+There are various kinds of matrices which are commonly used in statistical learning methods. Let's briefly revisit some of them.
+
+
+### General Rectangular Matrix
+
+The most general type of matrix is a rectangular matrix. This means that there is an arbitrary number of $n$ rows and $p$ columns.
+
+\[ 
+\left[\begin{array}{ccc}
+1 & 2 & 3  \\
+4 & 5 & 6  \\
+7 & 8 & 9  \\
+10 & 11 & 12  \\
+\end{array}\right]
+\]
+
+If a matrix has more rows than columns $n > p$, sometimes we call this a vertical or _tall_ matrix:
+
+\[ 
+\left[\begin{array}{ccc}
+1 & 2 & 3  \\
+4 & 5 & 6  \\
+7 & 8 & 9  \\
+10 & 11 & 12  \\
+13 & 14 & 15  \\
+\end{array}\right]
+\]
+
+In contrast, if a matrix has more columns than rows, $p > n$, sometimes we call this a horizontal, _flat_ or _wide_ matrix:
+
+\[ 
+\left[\begin{array}{cccc}
+1 & 2 & 3 & 4 & 5 \\
+6 & 7 & 8 & 9 & 10 \\
+11 & 12 & 13 & 14 & 15 \\
+\end{array}\right]
+\]
+
+
+### Square Matrix
+
+A square matrix is one with same number of rows and columns, $n = p$. In statiscal learning, various matrices derived from a data matrix are typically square, this typically happens when working with derived cross-products such as $\mathbf{X^\mathsf{T} X}$ or $\mathbf{X X^\mathsf{T}}$.
+
+\[ 
+\left[\begin{array}{ccc}
+1 & 2 & 3  \\
+4 & 5 & 6  \\
+7 & 8 & 9  \\
+\end{array}\right]
+\]
+
+
+### Symmetric Matrix
+
+A symmetric matrix is a special case of a square matrix: the corresponding elements of corresponding rows and columns are equal. In other words, in a symmetric matrix we have that the element $x_{ij}$ is equal to $x_{ji}$.
+
+\[ 
+\left[\begin{array}{ccc}
+1 & 2 & 3  \\
+2 & 4 & 5  \\
+3 & 5 & 6  \\
+\end{array}\right]
+\]
+
+
+### Diagonal Matrix
+
+A diagonal matrix is a special case of symmetric matrix in which all nondiagonal elements are 0. 
+
+\[ 
+\left[\begin{array}{ccc}
+1 & 0 & 0  \\
+0 & 2 & 0  \\
+0 & 0 & 3  \\
+\end{array}\right]
+\]
+
+In other words, in a symmetric matrix, $x_{ij} = 0$ for $i \neq j$. The only elements that may not necessarily be qual to zero are those in the diagonal.
+
+\[ 
+\left[\begin{array}{ccc}
+x_{11} & 0 & 0  \\
+0 & x_{22} & 0  \\
+0 & 0 & x_{33}  \\
+\end{array}\right]
+\]
+
+
+### Scalar Matrix
+
+The scalar matrix is a special type of diagonal matrix in which all the diagonal elements are equal scalars.
+
+\[ 
+\left[\begin{array}{ccc}
+5 & 0 & 0  \\
+0 & 5 & 0  \\
+0 & 0 & 5  \\
+\end{array}\right]
+\]
+
+
+### Identity Matrix
+
+The identity matrix is a special case of the scalar matrix in which the diagonal elements are all equal to one. This matrix is typically represented with the letter $\mathbf{I}$. To indicate the dimensions of this matrix, we typically write it with a subscript for the number of rows (or columns). For example, $\mathbf{I}_{n}$ represents the identity matrix of dimension $n \times n$.
+
+\[ 
+\mathbf{I}_{3} = 
+\left[\begin{array}{ccc}
+1 & 0 & 0  \\
+0 & 1 & 0  \\
+0 & 0 & 1  \\
+\end{array}\right]
+\]
+
+In matrix algebra, the identity matrix plays the same role as the number 1 in ordinary or scalar algebra.
+
+
+### Triangular Matrix
+
+A square matrix with only 0's above or below the diagonal is called a _triangular_ matrix. There are two flavors of this type of matrix: upper triangular and lower triangular. 
+
+An upper triangular matrix has zeros below the diagonal. 
+
+\[ 
+\left[\begin{array}{ccc}
+1 & 2 & 3  \\
+0 & 5 & 6  \\
+0 & 0 & 9  \\
+\end{array}\right]
+\quad \textsf{or} \quad 
+\left[\begin{array}{ccc}
+1 & 2 & 3  \\
+ & 5 & 6  \\
+ &  & 9  \\
+\end{array}\right]
+\]
+
+Conversely, a lower triangular matrix has zeros above the diagonal.
+
+\[ 
+\left[\begin{array}{ccc}
+1 & 0 & 0  \\
+4 & 5 & 0  \\
+7 & 8 & 9  \\
+\end{array}\right]
+\quad \textsf{or} \quad 
+\left[\begin{array}{ccc}
+1 &  &   \\
+4 & 5 &  \\
+7 & 8 & 9  \\
+\end{array}\right]
+\]
+
+
+### Shapes of Matrices
+
+To summarize the various types of matrices described so far, here's a diagram depicting their shapes. The general type of matrix is a rectangular matrix which can be divided in three types: vertical or tall ($n > p$), square ($n = p$), and horizontal or wide ($n < p$). Among square matrices, the notion of symmetry plays a special role, and among symmetric matrices, we can say that diagonal ones have the most basic structure.
+
+```{r out.width='60%', fig.cap = 'Various shapes of matrices', echo = FALSE}
+knitr::include_graphics("images/matrix/matrix-shapes.png")
+```
+
