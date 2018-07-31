@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1527022072732.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3858569000",
+    "id" : "DC77DE92",
+    "lastKnownWriteTime" : 1527023620,
+    "last_content_update" : 1527023620607,
+    "path" : "~/Dropbox/matrix4sl/normal.Rmd",
+    "project_path" : "normal.Rmd",
+    "properties" : {
+        "cursorPosition" : "47,0",
+        "scrollLine" : "28",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

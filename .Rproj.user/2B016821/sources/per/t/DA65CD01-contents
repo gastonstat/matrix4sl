@@ -1,0 +1,33 @@
+--- 
+title: "A Matrix Algebra Companion for Statistical Learning"
+author: "Gaston Sanchez"
+description: "This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods."
+date: ""
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+always_allow_html: yes
+url: 'http\://gastonsanchez.com/matrix4sl/'
+github-repo: gastonstat/matrix4sl
+site: bookdown::bookdown_site
+documentclass: book
+---
+
+
+# Welcome {-}
+
+The purpose of this book is to help you understand how statistical notions are connected to matrix algebra concepts that constantly appear around Statistical Learning methods. 
+
+This book will teach you how to make the transition from a data table to a data matrix, how to think of a data matrix from a geometric perspective, and how to express---and interpret---statistical operations with vector-matrix notation. More specifically, you will learn how to express common statistical summaries (e.g. mean, variance, covariance, correlation) with vector-matrix notation. You will also learn how to _see_ data---geometrically speaking---and how to provide a geometric interpretation to statistical summaries and related measures.
+
+
+__How to cite this book__: 
+
+Sanchez, G. (2018) __A Matrix Algebra Companion for Statistical Learning__ <br>
+http://gastonsanchez.com/matrix4sl
+
+
+-----
+
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

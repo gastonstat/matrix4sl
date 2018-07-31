@@ -1,0 +1,99 @@
+# Inertia {#inertia}
+
+Focusing on distances among all pairs of objects implicitly entails taking into account the __dispersion__ or spread (i.e. variation) of the data.
+
+The reason to pay attention to distances and dispersion is to summarize in a quantitative way the configuration of the data points. In this chapter, you will learn about _Inertia_, which is another measure to quantify the amount of variation in a data set.
+
+
+## The concept of Inertia
+
+Consider three individuals and its centroid:
+
+```{r fig.cap='Dispersion 1', echo = FALSE, out.width='50%'}
+knitr::include_graphics("images/dispersion/spread_square_dist1.png")
+```
+
+Given a cloud of points, how can we measure how spread out is thie cloud? In other words, how can we measure the amount of spread in the data?
+
+One way to consider the dispersion of data (in a mathematical form) is by adding the squared distances among all pairs of points.
+
+```{r fig.cap='Dispersion 2', echo = FALSE, out.width='50%'}
+knitr::include_graphics("images/dispersion/spread_square_dist2.png")
+```
+
+$$
+\text{SSD} = 2 d^2(\text{Luke}, \text{Anakin}) + 2 d^2(\text{Luke}, \text{Yoda}) + 2 d^2(\text{Anakin}, \text{Yoda})
+$$
+
+
+Another way to measure the dispersion of data is by considering the squared distances of all points around the center of gravity (i.e. centroid)  $\mathbf{g}$ which is the _average_ individual.
+
+The total dispersion, measured by SSD, can also be calculated as: $2n$ times the sum of squared distances with respect to the centroid $\mathbf{g}$:
+
+```{r fig.cap='Dispersion 3', echo = FALSE, out.width='50%'}
+knitr::include_graphics("images/dispersion/spread_square_dist3.png")
+```
+
+$$
+\text{SSD} = (2 \times 3) \times \{ d^2(\text{Luke}, \mathbf{g}) + d^2(\text{Anakin}, \mathbf{g}) + d^2(\text{Yoda}, \mathbf{g}) \}
+$$
+
+```{r fig.cap='Dispersion 4', echo = FALSE, out.width='50%'}
+knitr::include_graphics("images/dispersion/spread_square_dist4.png")
+```
+
+One way to take into account the dispersion of the data is with the concept of 
+__Inertia__.
+
+- Inertia is a term borrowed from the _moment of inertia_ in mechanics (physics).
+- This involves thinking about data as a rigid body (i.e. particles).
+- We use the term Inertia to convey the idea of dispersion in the data.
+- In multivariate methods, the term Inertia generalizes the notion of variance.
+- Think of Inertia as a "multidimensional variance".
+
+
+
+
+## Inertia of a cloud of Poitns
+
+Now let's consider a cloud of points associated to a data set of $n$ individuals on which $p$ variables have been measured:
+
+```{r fig.cap='Cloud 1', echo = FALSE, out.width='50%'}
+knitr::include_graphics("images/dispersion/cloud_inertia1.png")
+```
+
+The Total Inertia, $I$, is a weighted sum of squared distances among all pairs of individuals:
+
+$$
+I = \frac{1}{2n^2} \sum_{i = 1}^{n}{\sum_{h = 1}^{n}{d^2(i,h)}}
+$$
+
+Equivalently, the Total Inertia can be calculated in terms of the centoid $\mathbf{g}$:
+
+```{r fig.cap='Cloud 2', echo = FALSE, out.width='50%'}
+knitr::include_graphics("images/dispersion/cloud_inertia2.png")
+```
+
+
+
+$$
+I = \frac{1}{n} \sum_{i = 1}^{n}{d^2(\mathbf{x_i}, \mathbf{g})}
+$$
+
+In this sense the Inertia is an average sum of squared distances around the centroid $\mathbf{g}$.
+
+When working with mean-centered data, then the centroid $\mathbf{g}$ becomes the origin of the cloud of points:
+
+```{r fig.cap='Cloud 3', echo = FALSE, out.width='50%'}
+knitr::include_graphics("images/dispersion/cloud_inertia3.png")
+```
+
+\begin{align*}
+Inertia &= \sum_{i=1}^{n} m_i d^2(\mathbf{x_i}, \mathbf{g}) \\
+& = \sum_{i=1}^{n} \frac{1}{n} (\mathbf{x_i} - \mathbf{g})^{\mathsf{T}}(\mathbf{x_i} - \mathbf{g}) \\
+& = \frac{1}{n} tr(\mathbf{X^\mathsf{T} X}) \\
+& = \frac{1}{n} tr(\mathbf{X X^\mathsf{T}})
+\end{align*}
+
+where $m_i$ is the mass (i.e. weight) of individual $i$, usually $1/n$
+
