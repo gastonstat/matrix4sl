@@ -1,5 +1,6 @@
 --- 
 title: "A Matrix Algebra Companion for Statistical Learning"
+subtitle: "(work in progress)"
 author: "Gaston Sanchez"
 description: "This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods."
 date: ""
@@ -16,7 +17,7 @@ documentclass: book
 
 # Welcome {-}
 
-The purpose of this book is to help you understand how statistical notions are connected to matrix algebra concepts that constantly appear around Statistical Learning methods. 
+The purpose of this book is to help you understand how statistical notions are connected to matrix algebra concepts that constantly appear around Statistical Learning methods.
 
 This book will teach you how to make the transition from a data table to a data matrix, how to think of a data matrix from a geometric perspective, and how to express---and interpret---statistical operations with vector-matrix notation. More specifically, you will learn how to express common statistical summaries (e.g. mean, variance, covariance, correlation) with vector-matrix notation. You will also learn how to _see_ data---geometrically speaking---and how to provide a geometric interpretation to statistical summaries and related measures.
 
