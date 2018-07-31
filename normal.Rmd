@@ -1,0 +1,47 @@
+# Normal Distributions {#normal}
+
+The normal distribution, although rarely find in practice, it is still used in many statistical learning methods. In this chapter, we provide a review of the Normal distribution in its univariate version, its bivariate version, and in its multivariate version.
+
+
+## Bivariate Normal Distribution
+
+_From Tatsuoka__: For the case of two variances $X_1$ and $X_2$, the bivariate normal density function is:
+
+$$
+f(X_1, X_2) = \frac{1}{2 \pi |\mathbf{\Sigma}|} \hspace{1mm} exp \left \{ (\mathbf{x} - \boldsymbol{\mu})^\mathsf{T} \mathbf{\Sigma}^{-1} (\mathbf{x} - \boldsymbol{\mu}) \right \}
+$$
+
+The surface represented by this equation resembles a bell-shaped mound, distorted by being stretched out in one direction and compressed in the direction perpendicular to the first---the degrees of distortion being dependent on the value of $r = cor(X_1, X_2)$ and the ratio $s_1/s_2$.
+
+INSERT FIGURE
+
+The figure above depicts the general appearance of the bivariate normal surface for $r = 0.60$ and $s_1/s_2 = 1$. Since such a perspective drawing is difficult to construct and conveys little or no quantitative information, it is customary to represent a bivariate normal surface by drawing an arbitrarily selected _isodensity contour_---that is, the cross section of the surface made by a plane parallel to the $(X_1, X_2)$-plane. The equation for such a contour curve is obtained by setting the expression $(\mathbf{x} - \boldsymbol{\mu})^\mathsf{T} \mathbf{\Sigma}^{-1} (\mathbf{x} - \boldsymbol{\mu})$ equal to a positive constant $C$. The smaller this constant, the larger is the altitude (representing density) along the contour, since the altitude is proportional to the negative exponential of $C/2(1-r^2)$.
+
+By the use of elementary analytic geometry, it can be shown that the equation in question, namely
+
+$$
+(\mathbf{x} - \boldsymbol{\mu})^\mathsf{T} \mathbf{\Sigma}^{-1} (\mathbf{x} - \boldsymbol{\mu}) = C
+$$
+
+represents an ellipse with center at the point $(\mu_1, \mu_2)$, which is called the centroid of the bivariate population, and major or minor axis along the line passing through this point and making the following angle with the positive $X_1$-axis.
+
+Since the angle $\theta$ depends only on $s_1$, $s_2$, and $r$, and is dependent of $C$, it follows that taking various values of $C$ (in other words, making cross sections of the density surface with planes at various elevations) generates a family of concentric ellipses, all with the same orientation. Thus a representation by a series of contour lines of the bivariate normal surface depicted in the figure above would look something like the following figure:
+
+INSERT FIGURE
+
+_Numeric example_: Suppose that $X_1$ and $X_2$ follow a bivariate normal distribution with $\mu_1 = 15$ and $mu_2 = 20$, $s_1 = s_2 = 5$, and $r = 0.60$. Then the expression $(\mathbf{x} - \boldsymbol{\mu})^\mathsf{T} \mathbf{\Sigma}^{-1} (\mathbf{x} - \boldsymbol{\mu})$ for the density function becomes:
+
+$$
+(X_1 - 15)^2 / 25 + (X_2 - 20)^2 / 25 - 1.2 (X_1 - 15) (X_2 - 20) = 25 C
+$$
+
+Setting this equation equal to any positive constact $C$ gives the equation of an isodensity contour ellipse. Thus, treating $C$ as a parameter, the equation 
+
+$$
+(X_1 - 15)^2 + (X_2 - 20)^2 - 1.2 (X_1 - 15) (X_2 - 20) = 25 C
+$$
+
+represents a family of concentric ellipses centered at $(15, 20)$, with major axis making a 45 degree angle with the $X_1$-axis, because $s_1 = s_2$, and $r>0$. The following figure shows several members of this family of ellipses for selected values of $C$.
+
+INSERT FIGURE
+

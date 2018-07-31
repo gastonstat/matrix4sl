@@ -1,0 +1,48 @@
+# (PART) Distances and Dissimilarities {-}
+
+# Measuring Differences {#dissimilarites}
+
+A fundamental concept in statistics is that of variability. At the lowest level, to measure the amount of variability within a set of observations, you need to assess how different two objects are. If all objects have the same values, then there is no variability. As one or more objects start to show differences in some values, then variation will be present.
+
+When the objects of interest are the individuals, we can use distances.
+
+
+## Distance
+
+Following the premise of our [geometric mindset](#duality), we assume that the individuals can be represented as elements of an abstract $p$-dimensional space, where $p$ is the number of columns of numeric data matrix.
+
+When the values of the variables of two or more individuals in the dataset are the same, we then expect that these individuals are mapped to the same point in the descriptor space. Likewise, if two individuals have variables with different values, then we expect that they are mapped to different locations in the descriptor space. It makes sense that as the differences between the values of the descriptors becomes larger, the individuals become more dissimilar. So having a way to measure how similar or dissimilar two individuals are is of vital importance.
+
+Dissimilarity between two objects is closely related to the notion of distance. One natural way to measure the distance between two points is the Euclidean distance, which is part of the general concept of __metric__. In fact, the Eucidean distance is not the only possible way to measure distance. There is actually a wide array of different metrics, and non-metric distances, more commonly referred to as dissimilarities.
+
+
+
+
+
+
+
+The simplest type of distance is the magnitude of the difference between two values, that is $|x_1 - x_2|$. When observations have two or more variables, the distance between individuals $(x_1, y_1)$ and $(x_2, y_2)$ can be calculated with the Pythagoras formula:
+
+$$
+d_{12} = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}
+$$
+
+For observations measured with three variables, the Pythogoras formula for the distance between observations 1 and 2 is extended to:
+
+$$
+d_{12} = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2 + (z_1 - z_2)^2}
+$$
+
+In general, the Pythogoras formula gives rise to the famous Euclidean distance. This distance involves adding the squared differences between pair of values, and then calculating the square root of such addition:
+
+$$
+d_{12} = \sqrt{\sum_{j=1}^{p} (x_{1j} - x_{2j})^2}
+$$
+
+The Euclidean distance depends on the units of measurement of the $p$ variables. Keep in mind that when an individual is characterized with variables measured in different units (e.g. meters, kilograms, celsius degrees), the distance calculated by mixing these variables is difficult to interpret.
+
+Also, Euclidean distance will be dominated by those variables with the largest variability even when the values are measured in the same units. For example, when a bivariate observation is characterized by monthly expenses in dollars comprising $X_1$ mortgage payment and $X_2$ coffee drinks, the mortgage payment dominates any conclusions based on Euclidean distance. Coffee drinks could be around $80 (assuming a daily $4 cup of coffee during week days), whereas mortgage payment will very likey vary over a broader range, for instance $2000 month. A difference of one or two dollars in coffee drinks (which is a substiantial difference) will have almost no effect in a Euclidean summary containing mortgage payments, even though both variables are measured in dollars.
+
+Another interesting aspect of Euclidean distance is that it does not take into account correlations among variables. If two variables are highly correlated, they basically measure the same thing, which adds a redundancy to the Euclidean distance.
+
+

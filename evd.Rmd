@@ -1,0 +1,420 @@
+# Eigenvalue Decomposition  {#evd}
+
+Eigenvalue decompositions play a fundamental role in statistics. This is particularly true in the case of multivariate analysis where eigenvalues of cross-product matrices (e.g. covariance matrices, correlations matrices) allow you to obtain simplified structures of data matrices.
+
+
+## Eigenvectors and Eigenvalues
+
+Let's begin with the classic definition of eigenvectors and eigenvalues. Consider a square matrix $\mathbf{A}$ of order $p \times p$. Any vector $\mathbf{v}$ such that $\mathbf{Av} = \lambda \mathbf{v}$, with $\lambda \neq 0$ some scalar, is called an eigenvector of $\mathbf{A}$, and $\lambda$ an eigenvalue.
+
+For example, consider the following matrix $\mathbf{A}$ and a vector $\mathbf{v_1}$:
+
+$$
+\mathbf{A} = 
+\
+\begin{bmatrix} 
+2 & 3 \\
+4 & 1 \\
+\end{bmatrix},
+\
+\qquad
+\mathbf{v_1} = 
+\
+\begin{bmatrix} 
+1 \\
+1 \\
+\end{bmatrix}
+$$
+
+The vector resulting from multiplying $\mathbf{Av_1}$ is:
+
+$$
+\mathbf{A v_1} = 
+\
+\begin{bmatrix} 
+2 & 3 \\
+4 & 1 \\
+\end{bmatrix}
+\
+\begin{bmatrix} 
+1 \\
+1 \\
+\end{bmatrix}
+\
+=
+\begin{bmatrix} 
+5 \\
+5 \\
+\end{bmatrix}
+=
+5
+\begin{bmatrix} 
+1 \\
+1 \\
+\end{bmatrix}
+$$
+
+As you can tell, $\mathbf{Av_1} = 5 \mathbf{v_1}$. Therefore, $\mathbf{v_1}$ and $\lambda_1 = 5$ are an eigenvector and eigenvalue, respectively, of $\mathbf{A}$.
+
+More formally, if we think of a square matrix $\mathbf{A}$ as a _transformation_, an eigenvector $\mathbf{v}$ of $\mathbf{A}$ is a special kind of vector: it is a vector which under the transformation $\mathbf{A}$ maps into itself or a multiple of itself. Another way to put it is by saying that eigenvectors are _invariant vectors_ under a given transformation.
+
+
+### Where do eigenvectors come from?
+
+The definition of an eigenvector and an eigenvalue tells us what they are, but it does not tell us where they come from. To understand how eigen-elements come into existance, we need to take a closer look at the matrix equation:
+
+$$
+\mathbf{Av} = \lambda \mathbf{v}
+$$
+
+We can rearrange the terms as follows:
+
+$$
+\mathbf{Av} - \lambda \mathbf{v} = \mathbf{0}
+$$
+
+or equivalently:
+
+$$
+\mathbf{Av} - \lambda \mathbf{Iv} = \mathbf{0}
+$$
+
+Notice that $\mathbf{0}$ is not the scalar 0, but a $p$-element vector of zeros.
+
+Next, we can factor out $\mathbf{v}$ to get:
+
+$$
+\left( \mathbf{A} - \lambda \mathbf{I} \right) \mathbf{v} = \mathbf{0}
+$$
+
+This matrix equation involves a system of $p$ homogeneous equations with the elements of $\mathbf{v}$ as $p$ unknowns. The equations can be solved only if the matrix of coefficients has rank smaller than $p$; so the determinant of the $p \times p$ matrix $( \mathbf{A} - \lambda \mathbf{I} )$ must be equal to zero:
+
+$$
+| \mathbf{A} - \lambda \mathbf{I} | = 0
+$$
+
+Notice that this equation turns into an equation in $\lambda$ only; so the eigenvalues can be found.
+
+In the example above, we have:
+
+$$
+| \mathbf{A} - \lambda \mathbf{I} | = 
+\left | 
+\begin{bmatrix} 
+2 & 3 \\
+4 & 1 \\
+\end{bmatrix}
+- \lambda
+\begin{bmatrix} 
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}
+\right |
+=
+\left |
+\begin{matrix} 
+2 - \lambda & 3 \\
+4 & 1 - \lambda \\
+\end{matrix}
+\right |
+= 0
+$$
+
+The determinant can be rewritten as:
+
+$$
+(2 - \lambda) (1 - \lambda) - 12 = 0
+$$
+
+or
+
+$$
+\lambda^2 - 3\lambda - 10 = 0
+$$
+
+with solutions $\lambda_1 = 5$ and $\lambda_2 = -2$.
+
+Expanding the determinant $| \mathbf{A} - \lambda \mathbf{I} |$ becomes an equation of a $p$-th degree polynomial in $\lambda$ from which the values $\lambda_1, \lambda_2, \dots, \lambda_p$ are the desired eigenvalues. This equation is the so-called __characteristic equation__, and it  will have, in general, $p$ different roots which are the eigenvalues. This means that finding eigenvalues is nothing else than finding the roots of a $p$-th degree polynomial. The problem is that, in general, the direct computation of the roots from the characteristic equation cannot be obtained in an analytical way.
+
+So how do people find the roots of the polynomial associated to the characteristic equation? Well, this is a problem that has called the attention of many mathematicians for many centuries. The bad news is that there is no general formula for the solution of the roots of a polynomial of degree greater than 4. The good news is that we can use iterative procedures based on the idea of successive approximation or linearization. Roughly speaking, the idea of the successive approximation involves starting from one or more initial approximations to a given root, so we can produce a sequence $l_0, l_1, l_2, \dots$ which presumably converges to the desired root.
+
+
+## Properties of Eigenstructures
+
+Knowing about the properties of eigenstructures will pay off when you encounter methods whose solutions involve an eigenvalue decomposition.
+
+Because all the following properties have the same premise, I prefer to state it here: suppose that matrix $\mathbf{A}$ has an eigenvalue $\lambda$ and an associated eigenvector $\mathbf{v}$:
+
+$$
+\mathbf{Av} = \lambda \mathbf{v}
+$$
+
+
+#### Prop. 1 {-} 
+
+The matrix $b \mathbf{A}$, where $b$ is an arbitrary scalar, has $b \lambda$ as an eigenvalue, with $\mathbf{v}$ as the associated eigenvector.
+
+
+#### Prop. 2 {-}
+
+The matrix $\mathbf{B} = \mathbf{A} + c \mathbf{I}$, where $c$ is an arbitrary scalar, has $(\lambda + c)$ as an eigenvalue, with $\mathbf{v}$ as the associated eigenvector.
+
+
+#### Prop. 3 {-}
+
+The matrix $\mathbf{A}^m$, where $m$ is any positive integer, has $\lambda^m$ as an eigenvalue, with $\mathbf{v}$ as the associated eigenvector.
+
+In other words, if $\mathbf{v}$ is an eigenvector of $\mathbf{A}$, then $\mathbf{v}$ is also an eigenvector of $\mathbf{A}^2$, $\mathbf{A}^3$, and so on. Likewise, $\lambda^2$ is an eigenvalue of $\mathbf{A}^2$, $\lambda^3$ is an eigenvalue of $\mathbf{A}^3$, etc. 
+
+
+#### Prop. 4 {-} 
+
+The matrix $\mathbf{A}^{-1}$, assuming that $| \mathbf{A} | \neq 0$, has $1 / \lambda$ as an eigenvalue, with $\mathbf{v}$ as the associated eigenvector. 
+
+Also, when $\mathbf{A}^{-1}$ exists, then $\mathbf{A}^{-p}$ has the same eigenvectors as $\mathbf{A}$ and $\lambda_{k}^{n}$ is the $k$-th eigenvalue.
+
+In general, $\mathbf{A}^{-1} \mathbf{V} = \mathbf{V} \mathbf{\Lambda}^{-1}$.
+
+
+#### Prop. 5 {-}
+
+If $\mathbf{A}$ is symmetric, then the eigenvectors of $\mathbf{A}$ are also eigenvectors of $\mathbf{A^\mathsf{T} A}$.
+
+
+#### Prop. 6 {-}
+
+The sum of the eigenvalues of a matrix is equal to the sum of the diagonal elements of the matrix (the trace of the matrix). 
+
+$$
+tr(\mathbf{A}) = \sum_{k=1}^{n} \lambda_k
+$$
+
+
+#### Prop. 7 {-}
+
+The product of the eigenvalues of $\mathbf{A}$ equals the determinant of $\mathbf{A}$:
+
+$$
+\prod_{k=1}^{n} \lambda_k = | \mathbf{A} |
+$$
+
+
+#### Prop. 8 {-}
+
+If $\mathbf{A}$, a matrix of order $n \times n$, has rank $r$, then $\mathbf{A}$ has $n - r$ eigenvalues equal to zero.
+
+
+#### Prop. 9 {-}
+
+If a symmetric matrix $\mathbf{A}$ can be written as the product $\mathbf{A} = \mathbf{V \Lambda V^\mathsf{T}}$, where $\mathbf{\Lambda}$ is diagonal with all entries nonnegative and $\mathbf{V}$ is an orthogonal matrix of eigenvectors, then:
+
+$$
+\mathbf{A}^{1/2} = \mathbf{V \Lambda}^{1/2} \mathbf{V}
+$$
+
+and it is the case that $\mathbf{A}^{1/2} \mathbf{A}^{1/2} = \mathbf{A}$.
+
+
+#### Prop. 10 {-}
+
+If a symmetric matrix $\mathbf{A}^{-1}$ can be written as the product $\mathbf{A}^{-1} = \mathbf{V \Lambda}^{-1} \mathbf{V^\mathsf{T}}$, where $\mathbf{\Lambda}^{-1}$ is diagonal with all entries nonnegative and $\mathbf{V}$ is an orthogonal matrix of eigenvectors, then:
+
+$$
+\mathbf{A}^{-1/2} = \mathbf{V \Lambda}^{-1/2} \mathbf{V}
+$$
+
+and it is the case that $\mathbf{A}^{-1/2} \mathbf{A}^{-1/2} = \mathbf{A}^{-1}$.
+
+
+### Symmetric Matrices
+
+The following table lists characteristics of eigenvalues depending of the type of symmetric matrices.
+
+| Symmetric matrix | Eigenvalues |
+|------------------|-------------|
+| All elements of $\mathbf{A}$ are real | All eigenvalues are real |
+| $\mathbf{A}$ is positive definite     | All eigenvalues are positive |
+| $\mathbf{A}$ is positive semidefinite and of rank $r$ | There are $r$ positive and $p-r$ null eigenvalues |
+| $\mathbf{A}$ is negative semidefinite and of rank $r$ | There are $r$ negative and $p-r$ null eigenvalues |
+| $\mathbf{A}$ is indefinite and of rank $r$ | There are $r$ non-null and $n-r$ null eigenvalues |
+| $\mathbf{A}$ is diagonal | The diagonal elements are the eigenvalues |
+
+
+
+
+## Power Method
+
+Among all the set of methods which can be used to find eigenvalues and eigenvectors, one of the basic procedures following a successive approximation approach is the so-called _Power Method_. 
+
+In its simplest form, the Power Method (PM) allows us to find _the largest_ 
+eigenvector and its corresponding eigenvalue. To be more precise, the PM 
+allows us to find an approximation for the first eigenvalue of a symmetric 
+matrix $\mathbf{S}$. The basic idea of the power method is to choose an 
+arbitrary vector $\mathbf{w_0}$ to which we will apply the symmetric matrix 
+$\mathbf{S}$ repeatedly to form the following sequence:
+
+\begin{align*}
+ \mathbf{w_1} &= \mathbf{S w_0} \\
+ \mathbf{w_2} &= \mathbf{S w_1 = S^2 w_0} \\
+ \mathbf{w_3} &= \mathbf{S w_2 = S^3 w_0} \\
+ \vdots \\
+ \mathbf{w_k} &= \mathbf{S w_{k-1} = S^k w_0}
+\end{align*}
+
+As you can see, the PM reduces to simply calculate the powers of $\mathbf{S}$ multiplied to the initial vector $\mathbf{w_0}$. Hence the name of _power method_.
+
+```{r power-method-example, fig.cap='Illustration of the sequence of vectors in the Power Method', echo=FALSE, message=FALSE}
+library(car)
+library(RColorBrewer)
+
+a <- matrix(c(3, 1, 1, 2), 2, 2)
+x <- y <- c(-1.5, 3)
+
+op = par(mar = c(2, 2, 1, 1))
+plot(x, y, xlim = c(-2,4), ylim = c(-1, 3), 
+     type = "n", axes = FALSE)
+axis(side = 1, pos = -1, col = "gray70", col.ticks = "gray70", 
+     col.axis = "gray70")
+axis(side = 2, pos = -2, las = 2, col = "gray70", 
+     col.ticks = "gray70", col.axis = "gray70")
+segments(0, -1, 0, 3, col = "gray80", lwd = 1.5)
+segments(-2, 0, 4, 0, col = "gray80", lwd = 1.5)
+ellipse(c(0, 0), diag(2), 1, col = "gray80", center.cex = 0)
+u <- c(-0.4, 1.3)
+r = brewer.pal(n=8, name="Blues")[3:8]
+for (i in 1:6) {
+  arrows(0, 0, u[1], u[2], col = r[i], length = 0.15, lwd = 2)
+  u <- u / sqrt(sum(u*u))
+  v <- colSums(u*a)
+  arrows(0, 0, v[1], v[2], col = r[i], length = 0.15, lwd = 2)
+  u <- v
+}
+text(x = -0.4, y = 1.3, expression(w[0]), col = r[1], pos = 3, cex = 1.3)
+text(x = v[1], y = v[2], expression(w[k]), col = r[6], pos = 4, cex = 1.3)
+par(op)
+```
+
+In practice, we must rescale the obtained vector $\mathbf{w_k}$ at each step in 
+order to avoid an eventual overflow or underflow. Also, the rescaling will 
+allows us to judge whether the sequence is converging. Assuming a reasonable 
+scaling strategy, the sequence of iterates will usually converge to the 
+dominant eigenvector of $\mathbf{S}$. In other words, after some iterations, 
+the vector $\mathbf{w_{k-1}}$ and $\mathbf{w_k}$ will be very similar, if not 
+identical. The obtained vector is the dominant eigenvector. To get the 
+corresponding eigenvalue we calculate the so-called _Rayleigh quotient_ 
+given by:
+
+$$
+\lambda = \frac{\mathbf{w_{k}^{\mathsf{T}} S^\mathsf{T} w_k}}{\| \mathbf{w_k} \|^2}
+$$
+
+
+```{r power-method-rescale, fig.cap='Sequence of vectors before and after scaling to unit norm', echo=FALSE, message=FALSE}
+a <- matrix(c(3, 1, 1, 2), 2, 2)
+x <- y <- c(-1.5, 3)
+
+op = par(mar = c(2, 2, 1, 1))
+plot(x, y, xlim = c(-2,4), ylim = c(-1, 3), 
+     type = "n", axes = FALSE)
+axis(side = 1, pos = -1, col = "gray70", col.ticks = "gray70", 
+     col.axis = "gray70")
+axis(side = 2, pos = -2, las = 2, col = "gray70", 
+     col.ticks = "gray70", col.axis = "gray70")
+segments(0, -1, 0, 3, col = "gray80", lwd = 1.5)
+segments(-2, 0, 4, 0, col = "gray80", lwd = 1.5)
+ellipse(c(0, 0), diag(2), 1, col = "gray80", center.cex = 0)
+u <- c(-0.4, 1.3)
+r = brewer.pal(n=8, name="Blues")[3:8]
+arrows(0, 0, u[1], u[2], col = r[1], length = 0.1, lwd = 1, lty = 2)
+for (i in 1:6) {
+  u <- u / sqrt(sum(u*u))
+  v <- colSums(u*a)
+  arrows(0, 0, u[1], u[2], col = r[i], length = 0.1, lwd = 2)
+  arrows(0, 0, v[1], v[2], col = r[i], length = 0.1, lwd = 1, lty = 2)
+  u <- v
+}
+text(x = -0.35, y = 1, expression(w[0]), col = r[1], pos = 2, cex = 1.3)
+text(x = 0.84, y = 0.45, expression(w[k]), col = r[6], pos = 4, cex = 1.3)
+par(op)
+```
+
+
+### Power Method Algorithm
+
+There are some conditions for the power method to be succesfully used. One of 
+them is that the matrix must have a _dominant_ eigenvalue. The starting vector 
+$\mathbf{w_0}$ must be nonzero. Very important, we need to scale each of the 
+vectors $\mathbf{w_k}$, otherwise the algorithm will "explode". 
+
+The Power Method is of a striking simplicity. The only thing we need, 
+computationally speaking, is the operation of matrix multiplication. Let's 
+consider a more detailed version of the PM algorithm walking through it step by 
+step:
+
+1. Start with an arbitraty initial vector $\mathbf{w}$
+2. obtain product $\mathbf{\tilde{w} = S w}$
+3. normalize $\mathbf{\tilde{w}}$
+$$\mathbf{w} = \frac{\mathbf{\tilde{w}}}{\| \mathbf{\tilde{w}} \|}$$
+4. compare $\mathbf{w}$ with its previous version
+5. repeat steps 2 till 4 until convergence
+
+
+### Convergence of the Power Method
+
+To see why and how the power method converges to the dominant eigenvalue, we 
+need an important assumption. Let's say the matrix $\mathbf{S}$ has $p$ 
+eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_p$, and that they are ordered 
+in decreasing way $|\lambda_1| > |\lambda_2| \geq \dots \geq |\lambda_p|$. 
+Note that the first eigenvalue is strictly greater than the second one. This is 
+a very important assumption. In the same way, we'll assume that the matrix 
+$\mathbf{S}$ has $p$ linearly independent vectors 
+$\mathbf{u_1}, \dots, \mathbf{u_p}$ ordered in such a way that $\mathbf{u_j}$ 
+corresponds to $\lambda_j$. 
+
+The initial vector $\mathbf{w_0}$ may be expressed as a linear combination of 
+$\mathbf{u_1}, \dots, \mathbf{u_p}$
+
+$$
+\mathbf{w_0} = a_1 \mathbf{u_1} + \dots + a_p \mathbf{u_p}
+$$
+At every step of the iterative process the vector $\mathbf{w_m}$ is given by:
+
+$$
+\mathbf{S}^m = a_1 \lambda_{1}^m \mathbf{u_1} + \dots + a_p \lambda_{p}^m \mathbf{u_p}
+$$
+
+Since $\lambda_1$ is the dominant eigenvalue, the component in the direction of 
+$\mathbf{u_1}$ becomes relatively greater than the other components as $m$ 
+increases. If we knew $\lambda_1$ in advance, we could rescale at each step by 
+dividing by it to get:
+
+$$
+\left(\frac{1}{\lambda_{1}^m}\right) \mathbf{S}^m = a_1 \mathbf{u_1} + \dots + a_p \left(\frac{\lambda_{p}^m}{\lambda_{1}^m}\right) \mathbf{u_p}
+$$
+
+which converges to the eigenvector $a_1 \mathbf{u_1}$, provided that $a_1$ is nonzero. Of course, in real life this scaling strategy is not possible---we 
+don't know $\lambda_1$. Consequenlty, the eigenvector is determined only up to 
+a constant multiple, which is not a concern since the really important thing is 
+the _direction_ not the length of the vector.
+
+The speed of the convergence depends on how bigger $\lambda_1$ is respect with 
+to $\lambda_2$, and on the choice of the initial vector $\mathbf{w_0}$. If 
+$\lambda_1$ is not much larger than $\lambda_2$, then the convergence will be 
+slow.
+
+One of the advantages of the power method is that it is a sequential method; 
+this means that we can obtain $\mathbf{w_1, w_2}$, and so on, so that if we 
+only need the first $k$ vectors, we can stop the procedure at the desired stage. 
+Once we've obtained the first eigenvector $\mathbf{w_1}$, we can compute the 
+second vector by reducing the matrix $\mathbf{S}$ by the amount explained by the 
+first principal component. This operation of reduction is called __deflation__ 
+and the residual matrix is obtained as:
+
+$$
+\mathbf{E = S - z_{1}^{\mathsf{T}} z_1}
+$$
+In order to calculate the second eigenvalue and its corresponding eigenvector, 
+we operate on $\mathbf{E}$ in the same way as the operations on $\mathbf{S}$ to 
+obtain $\mathbf{w_1}$. The quantity $\mathbf{z'_2 z_2}$ will be the amount of 
+variation explained by the second PC.
+

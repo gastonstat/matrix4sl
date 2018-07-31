@@ -1,0 +1,36 @@
+# Distances {#distances}
+
+Dissimilarity between two objects is closely related to the notion of distance. One natural way to measure the distance between two points is the Euclidean distance, which is part of the general concept of __metric__. In fact, the Eucidean distance is not the only possible way to measure distance. There is actually a wide array of different metrics, and non-metric distances, more commonly referred to as dissimilarities.
+
+
+## Distance Metrics
+
+The common way to measure the dissimilarity between two individuals $\mathbf{a}$ and $\mathbf{b}$ is with a measure of distance or __metric__. Mathematically, a metric is a function with four properties. Let be $d_{ab} = d(\mathbf{a}, \mathbf{b})$ denote the distance between two objects $a$ and $b$, represented by vector $\mathbf{a}$ and $\mathbf{b}$, respectively. The four characteristics of a distance are:
+
+1) __Non-negativity__: <br>
+    $d(\mathbf{a}, \mathbf{b}) \geq 0$
+
+2) __Identity__: <br>
+    $d(\mathbf{a}, \mathbf{b}) = 0 \Longleftrightarrow \mathbf{a} = \mathbf{b}$
+
+3) __Symmetry__: <br>
+    $d(\mathbf{a}, \mathbf{b}) = d(\mathbf{b}, \mathbf{a})$
+
+4) __Triangle inequality__: <br>
+    $d(\mathbf{a}, \mathbf{b}) \leq d(\mathbf{a}, \mathbf{c}) + d(\mathbf{b}, \mathbf{c})$
+
+
+The first property says that the distance between two objects $a$ and $b$ is a non-negative value. In other words, there are no negative distances.
+
+The second property tells you that the distance from $a$ to $b$ is the same as from $b$ to $a$; this is why a distance is a symmetric function.
+
+The third property can be seen as a special case of the first one: when two individuals are identical, $a = b$, then their distance must be 0.
+
+The fourth property is an interesting one. If you graph three points $a$, $b$, and $c$, and connect them with a triangle, then you should be able to tell that the distance from $a$ to $b$ must be shorter than the sum of the distances via a third point $c$. This is the famous __triangle inequality__ property. The only case in which the triangle inequality becomes zero is when the object $c$ lies on the line connecting $a$ and $b$.
+
+It is precisely the triangle inequality that makes a dissimilarity measure to be considered as a distance or metric. I have to say that this is also the propoerty that iit is more difficult to satisfy in practice.
+
+
+
+
+

@@ -1,0 +1,49 @@
+# Mahalanobis Distance {#mahalanobis}
+
+We mentioned that the Euclidean distance does not take into account correlations among variables. If two variables are highly correlated, they basically measure the same thing, which adds a redundancy to the Euclidean distance. So, in order to account for correlations of the variables when measuring a distance, you can use the so-called Mahalanobis disstance, named after famed Indian statistician Prasanta Chandra Mahalanobis (1893 - 1972). 
+
+
+## Motivation
+
+The Mahalanobis distance is another metric that can be used to measure the dissimilarity between individuals with quantitative variables (ideally in a continuous scale).
+
+To illustrate the rationale behind the Mahalanobis distance, let's consider the following diagram. This image shows three scatter plots that have the same centroid (or average individual) $a$ with x-y coordinates at (5, 5). Also, there are two other special points $b$ located at (3, 7), and $c$ located at (7, 7). In all the three scatter plots, $b$ and $c$ have the same Euclidean distance from $a$. 
+
+INSERT IMAGE
+
+The data points in plot (i) are equally spread in all directions around centroid $a$, and you can say that $b$ and $c$ are equally likely to be part of the general shape or distribution.
+
+In contrast to (ii), the data in plot (i) shows a strong negative covariance between variables $X$ and $Y$. As you can tell, $b$ is more likely to be a member of the general cloud of points, compared to $c$ which falls outside the main pattern of dispersion.
+
+Finally, the data in plot (iii) hows a strong positive covariance between variables $X$ and $Y$. In this context, you can say that $c$ is more likely to be a member of the general cloud of points, as compared to $d$ which falls outside the main pattern of distribution.
+
+If we are interested in assessing the dissimilarity between $b$ and $a$---or conversely the dissimilarity between $c$ and $a$---it does not seem to be enough with calculating the standard Euclidean distance. It would be more convenient if we could also take into account the covariability between variables. And this is precisely what the Mahalanobis distance does.
+
+
+## Mahalanobis Metric
+
+Let $\mathbf{V}$ a variance-covariance matrix. The Mahalanobis between two points $a$ and $b$ is given by:
+
+$$
+d_{ab} = d(\mathbf{a}, \mathbf{b}) = \sqrt{(\mathbf{a} - \mathbf{b})^\mathsf{T} \mathbf{V}^{-1} (\mathbf{a} - \mathbf{b})}
+$$
+
+It is more common to work with squared distances:
+
+$$
+d^{2}_{ab} = d^2(\mathbf{a}, \mathbf{b}) = (\mathbf{a} - \mathbf{b})^\mathsf{T} \mathbf{V}^{-1} (\mathbf{a} - \mathbf{b})
+$$
+
+What does the Mahalanobis distance do? It uses the covariance to scale or weigh distances. If there is a direction where data is spread out then the distance along this direction is caled down. Likewise, if there is a direction where data is tightly compacted then the distance along this direction is scaled up.
+
+
+Notice that the equation of the Mahalanobis distance is essentially an inner product. The interesting part lies in the use $\mathbf{V}^{-1}$ as the metric matrix. In other words, the Mahalanobis distance uses the inverse of a variance-covariance matrix, which has two associated effects. On one hand, the larger the variance of a variable, the less weight the difference between the values for that variable will contribute to the obtained distance. On the other hand, the larger the covariance between two variables (the larger their correlation), the less weight they contribute to the distance.
+
+Another effect of using the inverse of the covariance matrix is that it rescales the differences between variables so that all the variables have unit variance, which removes the effects of the covariances.
+
+
+### Geometry of Mahalanobis Distance
+
+From the geometric point of view, the Mahalanobis distance has a very enlightening interpretation. Since $\mathbf{V}^{-1}$ is a metric matrix, it defines an orthonormal coordinate system with an origin at the individual we are calculating the distance from. It also defines a primary axis aligned with the direction of the largest dispersion in the data.
+
+Moreover, the rotation and scaling of the axes are the result of the product by the inverse of the covariance matrix.

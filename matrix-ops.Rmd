@@ -1,0 +1,96 @@
+# Matrix Operations
+
+In this chapter we review common matrix products important for Statistical Learning methods.
+
+- $\mathbf{X^\mathsf{T} X}$
+
+- $\mathbf{X X^\mathsf{T}}$
+
+
+## Cross-Products
+
+The various cross product matrices of interest to multivariate analysis are computed quite simply from $\mathbf{X}, \mathbf{X_d}$ and $\mathbf{X_s}$. Each cross product matrix is of the same general form and each has its particular role to play in multivariate analysis. 
+
+
+__Sums of squares and cross products matrix__
+
+First, the raw sums of squares and cross products matrix is defined as the product of the transpose of the data matrix by the data matrix itself:
+
+$$
+\mathbf{B = X^\mathsf{T} X}
+$$
+
+```{r eval = FALSE}
+# covariance matrix
+B = t(X) %*% X
+B
+```
+
+
+__Corrected Sums of Squares and Cross Products Matrix__
+
+Next, the corrected sums of squares and cross products matrix $\mathbf{S}$ is given by:
+
+$$
+\mathbf{S = X^\mathsf{T}_d X_d}
+$$
+
+```{r eval = FALSE}
+# covariance matrix
+S = t(Xd) %*% Xd
+S
+```
+
+
+__Covariance Matrix__
+
+If the entries of $\mathbf{S}$ are each divided by $n - 1$, we have the covariance matrix:
+
+$$
+\mathbf{C} = \frac{1}{n-1} \mathbf{S}
+$$
+
+```{r eval = FALSE}
+# covariance matrix
+Cov = (1/(n-1)) * t(Xd) %*% Xd
+Cov
+```
+
+
+__Correlation Matrix__
+
+Finally, the correlation matrix $\mathbf{R}$ can be obtained from the matrix of standardized variates as:
+
+$$
+\mathbf{R} = \frac{1}{n-1} \mathbf{X^\mathsf{T}_s X_s}
+$$
+
+or equivalently, from the covariance matrix by adjustment for differences in standard deviations:
+
+$$
+\mathbf{R = D^{1/2} C D^{1/2}}
+$$
+
+```{r eval = FALSE}
+# correlation matrix
+cor(X)
+```
+
+At this point, then, vector and matrix operations have provided a concise set of procedures for finding various statistical quantities of interest that involve a simgle sample of multivariate data. 
+
+
+
+
+
+
+
+### Deviate PM matrix
+
+Where the original data values have been centered, by having the column mean subtracted from each variable value, thus forming the matrix $\mathbf{X_d}$ of deviate scores. This has the effect of removing the overall average effect of each variable.
+
+
+
+### Dispersion (variance-covariance) matrix
+
+When each entry in the deviate matrix is divided by $n$ (or by $p$ in Q-analysis), the PM matrix formed from it contains variances (averaged sum of squared deviations) in the diagonal elements, and covariances (averaged sum of corrected crossproducts) in the off-diagonal elements.
+

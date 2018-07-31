@@ -1,0 +1,57 @@
+# Dispersion Matrices {#dispersion}
+
+When analyzing one quantitative variable, among the several numeric measures that can be obtained, we typically pay attention to two of them: a measure of center (usually the mean), and a measure of spread (usually the variance or standard deviation). There are multivariate equivalents of a center and a spread. In terms of center, we have the average individual or centroid. In terms of spread, there are actually a couple of more or less similar measures. In this chapter, we discuss such measures of multivariate dispersion.
+
+
+## Introduction
+
+_From Tatsuoka_: Some methods use the covariance matrix $\mathbf{\Sigma}$ as a multivariate analog of the variance $\sigma^2$ of a univariate distribution. There is another extension of the concept of variance to multivariate distributions, and this is the determinant $| \mathbf{\Sigma} |$ of the covariance matrix, which is called the _generalized variance_.
+
+We digress briefly to give a geometric interpretation of the generalized variance, which emerges when we use the $n$-space representation of multivariate observations---that is, a representation in which the coordinate axes correspond to individuals instead of variates. Thus, each point (or vector from the origin to the point) in $n$-space represents a separate individual. This representation has two important properties. First, when the scores are in deviations from the mean $(X - \bar{X} = x)$, the length of a test vector is
+
+$$
+| \mathbf{x} | = \sqrt{\sum_{i=1}^{n} x^{2}_{i}} = \sqrt{n-1} \hspace{1mm} s
+$$
+
+that is, $\sqrt{n-1}$ times the standard deviation of that test. Second, the cosine of the angle between any two test vectors (likewise in deviation form) is equal to the product-moment correlation between these tests.
+
+With this background, let's consider the sample counterpart of $|\mathbf{\Sigma} |$, namely $|\mathbf{S} / (n-1)|$. For simplicity, we treat the bivariate case, but the result is immediately generalizable to the $P$-variate case, and is equally applicable to the population covariance matrix.
+
+The sample covariance matrix may be written as:
+
+$$
+\mathbf{S} / (n-1) = 
+\left[\begin{array}{cc}
+s^2_1 & rs_1s_2 \\
+rs_2s_1 & s^2_2 \\
+\end{array}\right]
+$$
+
+where $x_{ij}$ $(j = 1, 2, i = 1, 2, \dots, n)$ is the score of the $i$-th individual on the $J$-th test. Hence the sample generalized variance for the bivariate case is 
+
+$$
+\mathbf{S} / (n-1) = s^2_1 s^2_2 (1 - r^2) = (s_1 s_2)^2 (1 - cos^2(\theta)) = (s_1 s_2 sin(\theta))^2
+$$
+
+where $\theta$ is the angle between the test vectors in deviation-score form. But as shown above, each standard deviation is $1 / \sqrt{n-1}$ times the length of the corresponding test vector. Therefore, 
+
+$$
+s_1 s_2 sin(\theta) = \frac{|\mathbf{x}_1|}{\sqrt{n-1}} \times \frac{|\mathbf{x}_2|}{\sqrt{n-1}} \hspace{2mm} sin(\theta)
+$$
+
+is equal to the area of the parallelogram formed by the rescaled test vectors $\mathbf{x}_1 / \sqrt{n-1}$ and $\mathbf{x}_2 / \sqrt{n-1}$ in $n$-space.
+
+INSERT IMAGE (see page 90 Tatsuoka)
+
+Thus the generalized variance is the square of this area. In the $p$-variate case, the generalized variance is the square of the $p$-dimensional volumne of the parallelotope formed by the rescaled test vectors
+
+$$
+\mathbf{x}_i / \sqrt{(n-1)} \qquad (i = 1, 2, \dots, p)
+$$
+
+in the $n$-dimensional individual space.
+
+We thus see that the two multivariate analogs of variance, $\mathbf{\Sigma}$ and $| \mathbf{\Sigma} |$, have their geometric interpretation in the $p$-dimensional test space (as the matrix of isodensity ellipsoids) and the $n$-dimensional person space, respectively.
+
+_END Tatsuoka_
+
