@@ -50,7 +50,7 @@ __centering operator__
 
 #### Normalized Matrix {-}
 
-The scaled or normalized matrix $\mathbf{X_N}$:
+Another special matrix is the scaled or _normalized_ matrix $\mathbf{X_N}$:
 
 \[ \underset{n \times p}{\mathbf{X_N}} = 
 \left[\begin{array}{cccc}
