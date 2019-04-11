@@ -101,13 +101,13 @@ Keep in mind that not all variables fit neatly and unambiguously into one of the
 
 
 
-## Coding Values
+## Encoding Values
 
-Another important aspect intimately connected with the various types of variables is that of how variable values are codified. To better understand what this is about, let me discuss a simple example.
+Another important aspect intimately connected with the various types of variables is that of how variable values are encoded. To better understand what this is about, let me discuss a simple example.
 
 Notice that the quantitative variables in the star wars data set have numeric values, while the categorical variables have non-numeric values. Does that mean that all numeric variables can be considered to be quantitative? And that all non-numeric variables can be considered to be categorical? The answer is: Not necessarily.
 
-Often, analysts assign numeric values to the categories of a qualitative variable. Sooner or later you will find variables with numeric values that are not quantitative. An example could be a ice-cream flavors in which the categories are codified with numbers. For example, consider three ice-cream flavors: vanilla, chocolate, and lemon. And imagine that we assign a numeric code to each flavor: 1 = vanilla, 2 = chocolate, 3 = lemon. This numeric labeling is just for convenience purposes.
+Often, analysts assign numeric values to the categories of a qualitative variable. Sooner or later you will find variables with numeric values that are not quantitative. An example could be ice-cream flavors in which the categories are codified with numbers. For example, consider three ice-cream flavors: vanilla, chocolate, and lemon. And imagine that we assign a numeric code to each flavor: 1 = vanilla, 2 = chocolate, 3 = lemon. This numeric labeling is just for convenience purposes.
 
 Assume that you get the preferred ice-cream flavor of 10 subjects with the following values: 
 
@@ -117,14 +117,14 @@ icecreams <- sample(1:3, size = 10, replace = TRUE)
 cat(icecreams)
 ```
 
-The above numbers, which are hypothetical values of a variable `icecream`, do not represent quantities; they represent flavors. Just because there are numbers, it does not mean that we can use those numbers to carry out arithmetic operations. What is the result of: 3 - 1, that is, lemon minus vanilla? It is meaningless to attempt this type of operation. 
+The above numbers, which are hypothetical values of a variable `icecream`, do not represent quantities; they represent flavors. Just because there are numbers, it does not mean that we can use those numbers to carry out arithmetic operations. What is the result of: 3 - 1, that is, _lemon_ minus _vanilla_? It is meaningless to attempt this type of operation. 
 
-Likewise, we could assign numbers to sizes: 1=small, 2=medium, 3=large. In this case, the numers are again used for convenient purposes. And we can even take one further step and say that we can use the numbers to rank the categories. But it will be impossible to add 1+2, since small + medium does not equal large.
+Likewise, we could assign numbers to sizes: 1=small, 2=medium, 3=large. In this case, the numbers are again used for convenient purposes. And we can even take one further step and say that we can use the numbers to rank the categories. But it will be impossible to add 1+2, since _small_ + _medium_ does not equal _large_.
 
 The point is that just because a variable contains numbers, that doesn't automatically make it quantitative. You should always ask yourself if the numbers represent some sort of quantity. If the answer is a sounded yes, then you have a quantitative variable. Otherwise, you have a categorical one.
 
 
-### More on coding
+### More on encoding
 
 We can find categorical data under a wide range of formats. I've seen categorical data codified in different ways, and sometimes people are very creative in the way they do this.
 
@@ -140,11 +140,11 @@ Here's an example with a `gender` variable:
 - as numbers: 1 (female), 0 (male)
 - as logical: `TRUE` (female), `FALSE` (male)
 
-When talking about the way data is stored and codified, I don't think there's an ideal/universal way to store categorical data effectively and efficiently. It all depends on the field of application, the size of the data, the legibility, the usage purposes, etc. What I do believe is that, when categorical data is being analyzed, we should consider a couple of issues:
+When talking about the way data is stored and encoded, I don't think there's an ideal/universal way to store categorical data effectively and efficiently. It all depends on the field of application, the size of the data, the legibility, the usage purposes, etc. What I do believe in is that, when categorical data is being analyzed, we should consider a couple of issues:
 
-- __understandability__: the analyst should be able to read, interpret and understand. Reduce friction, avoid having to decodified numbers.
+- __understandability__: the analyst should be able to read, interpret and understand what the available values represent. Whenever possible, you should aim to reduce friction, and avoid having to struggle with decodifying numbers.
 
-- __compatibility__: this has to do with functions and commands in data analysis and statistical software. Some functions are programmed in a way that they accept a specific type of input (either a vector, a factor, a data frame, etc).
+- __compatibility__: this has to do with functions and commands in data analysis and statistical software. Some functions are programmed in a way that they accept a specific type of input (either a vector, a factor, a data frame, etc). Often, you will need to manipulate some kind of object in order to convert it into another type  of object better suited for a certain functions or command.
 
 - __visibility__: this aspect is related to visual displays in graphics. Maybe long labels look fine in a table, but for plotting purposes they could cluttered the screen.
 
