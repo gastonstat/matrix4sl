@@ -2,14 +2,14 @@
 
 # Mean {#mean}
 
-The starting point in multivariate analysis consists in computing various summary measures---such as means, and variances---to get an idea of the common or central values, and the amount of variability of each variable. In this chapter you will learn how concepts like means can be expressed in terms of vector-matrix operations.
+The starting point in multivariate analysis consists in computing various summary measures---such as means, and variances---to get an idea of the common or central values, and the amount of variability of each variable. In this chapter you will learn how concepts like the mean of a variable can be expressed in terms of vector-matrix operations.
 
 
 ## Mean of a variable
 
 To measure variation, we usually begin by calculating a "typical" value. The idea is to summarize the values of a variable with one or two representative values. You will find this notion under several terms like measures of center, location, central tendency, or centrality.
 
-The prototypical summary value of center is the mean, sometimes referred to as average. The mean of a variable $X = (x_1, x_2, \dots, x_n)$, represented by $\bar{x}$, is obtained by adding all the $x_i$ values and then dividing by their total number $n$:
+The prototypical summary value of center is the __mean__, sometimes referred to as average. The mean of an $n-$element variable $X = (x_1, x_2, \dots, x_n)$, represented by $\bar{x}$, is obtained by adding all the $x_i$ values and then dividing by their total number $n$:
 
 $$
 \bar{x} = \frac{x_1 + x_2 + \dots + x_n}{n}
@@ -45,13 +45,16 @@ $$
 
 What does the mean do? In what sense the mean is a "typical" value? How do you make sense of a mean value?
 
-To understand what the mean is doing is helpful to visualize the values of a variable as points in a number-line, or with a dot-plot. Imagine that the number line is like a weighting scale or a teeter-totter (or see-saw). The mean plays the role of the __balancing point__. In other words, $\bar{x}$ is the value that balances out the scale and keeps things on equilibrium.
+To understand what the mean is doing is helpful to visualize the values of a variable as points in a number-line, or with a dot-plot. Consider a variable having five numbers: $X = (1, 2, 6, 7, 9)$, that can be visualized on a number line (see image below). Imagine that the number line is like a weighting scale or a teeter-totter (or see-saw). 
 
 ```{r fig.cap='Values on a number-line', echo = FALSE, out.width = '30%'}
 knitr::include_graphics("images/mean/mean-number-line.png")
 ```
 
-The value of 5 is the balancing point:
+The mean plays the role of the __balancing point__. In other words, $\bar{x}$ is the value that balances out the scale and keeps things on equilibrium.
+
+
+In this example, the value of 5 is the balancing point:
 
 
 ```{r fig.cap='Mean as a balancing point', echo = FALSE}
@@ -72,7 +75,7 @@ $$
 
 What would $a$ be? Then mean $\bar{x}$! No other value would be able to cancel out the sum of deviations around itself.
 
-Keep in mind that the mean is just a summary. One possible kind of "typical" value (other common measures of center are the median or the mode). As any summary statistic, it involves compressing the information of a variable into a single representative number. But remember: this number does not tell you the whole story about a variable.
+Keep in mind that the mean is just a summary. In fact, it is just one possible kind of "typical" value (other common measures of center are the median or the mode). As any summary statistic, it involves compressing the information of a variable into a single representative number. But remember: this number does not tell you the whole story about the variability in a variable.
 
 
 
@@ -107,7 +110,7 @@ $$
 
 ## Mean as a Projection
 
-We can gain insight to what a mean is doing if we regard a variable from the space of individuals perspective. This interpretation is less common than the balancing point, but it is equally revealing and informative.
+We can gain insight to what a mean is doing if we regard a variable from the perspective of the individuals' space. This interpretation is less common than the balancing point, but it is equally revealing and informative.
 
 Consider the $n$-dimensional space $\mathbb{R}^n$ illustrated in the figure below. In this space, each dimension is associated to an individual. The variable $X$ is represented by the blue vector $\mathbf{x}$. In turn, the orange vector represents the $n$-element unit-vector $\mathbf{1}$. From this point of view, the mean acquires a very interesting meaning: it turns out that the mean is the measure of the projection of $\mathbf{x}$ onto the axis spanned by the unit vector $\mathbf{1}$.
 
