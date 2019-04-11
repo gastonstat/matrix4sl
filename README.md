@@ -1,11 +1,11 @@
 # A Matrix Algebra Companion for Statistical Learning
 
-This repository contains the work in progress of the book __[A Matrix Algebra Companion for Statistical Learning](http://gastonsanchez.com/matrix4sl)__.
+This repository contains the work in progress of the book __[A Matrix Algebra Companion for Statistical Learning](https://www.gastonsanchez.com/matrix4sl)__.
 
 
 ## Author
 
-[Gaston Sanchez](http://gastonsanchez.com)
+[Gaston Sanchez](https://www.gastonsanchez.com)
 
 
 ## License
