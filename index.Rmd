@@ -25,7 +25,7 @@ This book will teach you how to make the transition from a data table to a data 
 __How to cite this book__: 
 
 Sanchez, G. (2018) __A Matrix Algebra Companion for Statistical Learning__ <br>
-http://gastonsanchez.com/matrix4sl
+https://www.gastonsanchez.com/matrix4sl
 
 
 -----
