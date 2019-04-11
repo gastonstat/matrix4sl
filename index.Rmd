@@ -8,7 +8,7 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 always_allow_html: yes
-url: 'http\://gastonsanchez.com/matrix4sl/'
+url: 'https\://www.gastonsanchez.com/matrix4sl/'
 github-repo: gastonstat/matrix4sl
 site: bookdown::bookdown_site
 documentclass: book
