@@ -7,7 +7,7 @@ In chapter [Data Matrix](#data-matrix) we talked about how a data table can be m
 
 ## Matrix Perspectives
 
-It's very enlightening to think of a data matrix as viewed from the glass of Geometry. The key idea is to think of the data in a matrix as elements living in a multidimensional space. Actually, we can regard a data matrix from two apparently different perspectives that, in reality, are  intimately connected: the _rows perspective_ and the _columns perspective_. In order to explain these perspectives, let me use the following diagram of a data matrix $\mathbf{X}$ with $n$ rows and $p$ columns, with $x_{ij}$ representing the element in the $i$-th row and $j$-th column.
+It's very enlightening to think of a data matrix as viewed from the glass of Geometry. The key idea is to think of the data in a matrix as elements living in a multidimensional space. Actually, we can regard a data matrix from two apparently different perspectives that, in reality, are  intimately connected: the __rows perspective__ and the __columns perspective__. In order to explain these perspectives, let me use the following diagram of a data matrix $\mathbf{X}$ with $n$ rows and $p$ columns, with $x_{ij}$ representing the element in the $i$-th row and $j$-th column.
 
 ```{r fig.cap='Duality of a data matrix', echo = FALSE}
 knitr::include_graphics("images/duality/data-perspectives.png")
@@ -26,13 +26,13 @@ Because each row of the data matrix has $p$ elements, we can regard individuals 
 knitr::include_graphics("images/duality/rows-space.png")
 ```
 
-In the figure above, even though I'm showing only three axes, you should pretend that you are visualizing a $p$-dimensional space (imaging that there are $p$ axes). Each point in this scape corresponds to a single individual, and they all form what you can call a _cloud of points_.
+In the figure above, even though I'm showing only three axes, you should pretend that you are visualizing a $p$-dimensional space (imaging that there are $p$ axes). Each point in this space corresponds to a single individual, and they all form what you can call a _cloud of points_.
 
 
 
 ### Columns Space
 
-We can do the same visual exercise with the columns of a data matrix. Since each variable has $n$ elements, we can regard the set of $p$ variables as objects that live in an $n$-dimensional space. For convention purposes, and in order to distinguish them from the individuals, we use an arrow (or vector) to graphically represent each variable:
+We can do the same visual exercise with the columns of a data matrix. Since each variable has $n$ elements, we can regard the set of $p$ variables as objects that live in an $n$-dimensional space. For convenient purposes, and in order to distinguish them from the individuals, we use an arrow (or vector) to graphically represent each variable:
 
 ```{r fig.cap='Columns space', echo = FALSE}
 knitr::include_graphics("images/duality/columns-space.png")
@@ -44,7 +44,7 @@ Analogously to the rows space and its cloud of individuals, you should also pret
 
 ### Toy Example
 
-To make things less abstract, let's consider a toy $2 \times 2$ data matrix of _weight_ and _height_ values measured on two individuals Leia and Luke. Here's the code in R to create a matrix `X` for this example:
+To make things less abstract, let's consider a toy $2 \times 2$ data matrix of _weight_ and _height_ values measured on two individuals: Leia and Luke. Here's the code in R to create a matrix `X` for this example:
 
 ```{r}
 # toy matrix
@@ -55,7 +55,7 @@ colnames(X) <- c("weight", "height")
 X
 ```
 
-__Space of individuals__: If you look at the data in `X` from the individuals standpoint, each of them can be depicted as a dot in the 2-dimensional space of variables `weight` and `height`:
+__Space of individuals__: If you look at the data in `X` from the individuals standpoint, each of them can be depicted as a dot in the 2-dimensional space spanned by variables `weight` and `height`:
 
 ```{r echo = FALSE, fig.asp = 0.9}
 plot.new()
@@ -75,11 +75,19 @@ text(X[,1], X[,2], labels = rownames(X), col = "#4a86e8", cex = 1.2, pos = 2)
 __Space of variables__: If you look at the data in `X` from the variables standpoint, each of them can be depicted as a vector in the 2-dimensional space spanned by `Leia` and `Luke`:
 
 ```{r echo = FALSE, fig.asp = 0.9}
-plot(t(X), xlim = c(0, 150), ylim = c(0, 180), las = 1, type = "n")
+plot.new()
+plot.window(xlim = c(0, 160), ylim = c(0, 180), xaxs = "i")
+axis(side = 1, pos = 0, at = seq(from=0, to=160, by=20), col = "gray20",  
+     lwd.ticks = 0, cex.axis = 1, col.axis = "gray20", lwd = 1.5) 
+axis(side = 2, at = seq(from=0, to=180, by=20), col = "gray20",  
+     las = 2, lwd.ticks = 0, cex.axis = 1, col.axis = "gray20", lwd = 1.5)
+segments(seq(20, 160, 20), rep(0, 8), seq(20, 160, 20), rep(180, 8), col = "lightgray")
+segments(rep(0, 9), seq(20, 180, 20), rep(160, 9), seq(20, 180, 20), col = "lightgray")
 arrows(0, 0, 49, 77, lwd = 2, col = "#4a86e8", length = 0.1)
 arrows(0, 0, 150, 172, lwd = 2, col = "#4a86e8", length = 0.1)
 text(X[1,], X[2,], labels = colnames(X), col = "#4a86e8", cex = 1.2, pos = 2)
 ```
+
 
 
 ### Dual Space
