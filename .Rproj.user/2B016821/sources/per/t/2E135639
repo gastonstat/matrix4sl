@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1544386778423.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2572302258",
+    "id" : "2E135639",
+    "lastKnownWriteTime" : 1544387106,
+    "last_content_update" : 1544387106752,
+    "path" : "~/Dropbox/matrix4sl/variance.Rmd",
+    "project_path" : "variance.Rmd",
+    "properties" : {
+        "cursorPosition" : "132,167",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

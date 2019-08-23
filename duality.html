@@ -1,40 +1,40 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>A Matrix Algebra Companion for Statistical Learning</title>
-  <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Geometric Duality | A Matrix Algebra Companion for Statistical Learning</title>
+  <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="A Matrix Algebra Companion for Statistical Learning" />
+  <meta property="og:title" content="6 Geometric Duality | A Matrix Algebra Companion for Statistical Learning" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="http://gastonsanchez.com/matrix4sl/" />
+  <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
   <meta property="og:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="A Matrix Algebra Companion for Statistical Learning" />
+  <meta name="twitter:title" content="6 Geometric Duality | A Matrix Algebra Companion for Statistical Learning" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
 
-<meta name="author" content="Gaston Sanchez">
+<meta name="author" content="Gaston Sanchez" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="transformations.html">
-<link rel="next" href="vector-basics.html">
+<link rel="prev" href="transformations.html"/>
+<link rel="next" href="vector-basics.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -49,69 +49,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -130,7 +102,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">matrix4sl</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#give-now"><i class="fa fa-check"></i>Give Now</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#how-this-book-is-organized"><i class="fa fa-check"></i><b>1.1</b> How this book is organized?</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#prerequisites"><i class="fa fa-check"></i><b>1.2</b> Prerequisites</a></li>
@@ -180,8 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.4" data-path="variables.html"><a href="variables.html#continuous-variable"><i class="fa fa-check"></i><b>4.2.4</b> Continuous Variable</a></li>
 <li class="chapter" data-level="4.2.5" data-path="variables.html"><a href="variables.html#caveat"><i class="fa fa-check"></i><b>4.2.5</b> Caveat</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="variables.html"><a href="variables.html#coding-values"><i class="fa fa-check"></i><b>4.3</b> Coding Values</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="variables.html"><a href="variables.html#more-on-coding"><i class="fa fa-check"></i><b>4.3.1</b> More on coding</a></li>
+<li class="chapter" data-level="4.3" data-path="variables.html"><a href="variables.html#encoding-values"><i class="fa fa-check"></i><b>4.3</b> Encoding Values</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="variables.html"><a href="variables.html#more-on-encoding"><i class="fa fa-check"></i><b>4.3.1</b> More on encoding</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="transformations.html"><a href="transformations.html"><i class="fa fa-check"></i><b>5</b> Transformations</a><ul>
@@ -262,7 +236,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In chapter <a href="datamatrix.html#data-matrix">Data Matrix</a> we talked about how a data table can be mathematically treated as a data matrix: typically as an array of individuals and variables. In this chapter we take a further step that should let you adopt a <strong>geometrical mindset</strong>. More specifically, you will learn how to think and look at any data matrix from a geometric standpoint. This is an incredible insightful concept which some authors refer to as the <em>duality</em> of a data matrix.</p>
 <div id="matrix-perspectives" class="section level2">
 <h2><span class="header-section-number">6.1</span> Matrix Perspectives</h2>
-<p>It’s very enlightening to think of a data matrix as viewed from the glass of Geometry. The key idea is to think of the data in a matrix as elements living in a multidimensional space. Actually, we can regard a data matrix from two apparently different perspectives that, in reality, are intimately connected: the <em>rows perspective</em> and the <em>columns perspective</em>. In order to explain these perspectives, let me use the following diagram of a data matrix <span class="math inline">\(\mathbf{X}\)</span> with <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns, with <span class="math inline">\(x_{ij}\)</span> representing the element in the <span class="math inline">\(i\)</span>-th row and <span class="math inline">\(j\)</span>-th column.</p>
+<p>It’s very enlightening to think of a data matrix as viewed from the glass of Geometry. The key idea is to think of the data in a matrix as elements living in a multidimensional space. Actually, we can regard a data matrix from two apparently different perspectives that, in reality, are intimately connected: the <strong>rows perspective</strong> and the <strong>columns perspective</strong>. In order to explain these perspectives, let me use the following diagram of a data matrix <span class="math inline">\(\mathbf{X}\)</span> with <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns, with <span class="math inline">\(x_{ij}\)</span> representing the element in the <span class="math inline">\(i\)</span>-th row and <span class="math inline">\(j\)</span>-th column.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-41"></span>
 <img src="images/duality/data-perspectives.png" alt="Duality of a data matrix" width="70%" />
 <p class="caption">
@@ -280,11 +254,11 @@ Figure 6.1: Duality of a data matrix
 Figure 6.2: Rows space
 </p>
 </div>
-<p>In the figure above, even though I’m showing only three axes, you should pretend that you are visualizing a <span class="math inline">\(p\)</span>-dimensional space (imaging that there are <span class="math inline">\(p\)</span> axes). Each point in this scape corresponds to a single individual, and they all form what you can call a <em>cloud of points</em>.</p>
+<p>In the figure above, even though I’m showing only three axes, you should pretend that you are visualizing a <span class="math inline">\(p\)</span>-dimensional space (imaging that there are <span class="math inline">\(p\)</span> axes). Each point in this space corresponds to a single individual, and they all form what you can call a <em>cloud of points</em>.</p>
 </div>
 <div id="columns-space" class="section level3">
 <h3><span class="header-section-number">6.1.2</span> Columns Space</h3>
-<p>We can do the same visual exercise with the columns of a data matrix. Since each variable has <span class="math inline">\(n\)</span> elements, we can regard the set of <span class="math inline">\(p\)</span> variables as objects that live in an <span class="math inline">\(n\)</span>-dimensional space. For convention purposes, and in order to distinguish them from the individuals, we use an arrow (or vector) to graphically represent each variable:</p>
+<p>We can do the same visual exercise with the columns of a data matrix. Since each variable has <span class="math inline">\(n\)</span> elements, we can regard the set of <span class="math inline">\(p\)</span> variables as objects that live in an <span class="math inline">\(n\)</span>-dimensional space. For convenient purposes, and in order to distinguish them from the individuals, we use an arrow (or vector) to graphically represent each variable:</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-43"></span>
 <img src="images/duality/columns-space.png" alt="Columns space" width="70%" />
 <p class="caption">
@@ -295,20 +269,20 @@ Figure 6.3: Columns space
 </div>
 <div id="toy-example" class="section level3">
 <h3><span class="header-section-number">6.1.3</span> Toy Example</h3>
-<p>To make things less abstract, let’s consider a toy <span class="math inline">\(2 \times 2\)</span> data matrix of <em>weight</em> and <em>height</em> values measured on two individuals Leia and Luke. Here’s the code in R to create a matrix <code>X</code> for this example:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># toy matrix</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">150</span>, <span class="dv">172</span>, <span class="dv">49</span>, <span class="dv">77</span>), <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw">rownames</span>(X) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Leia&quot;</span>, <span class="st">&quot;Luke&quot;</span>)</a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="kw">colnames</span>(X) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;weight&quot;</span>, <span class="st">&quot;height&quot;</span>)</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6">X</a>
-<a class="sourceLine" id="cb17-7" data-line-number="7">     weight height</a>
-<a class="sourceLine" id="cb17-8" data-line-number="8">Leia    <span class="dv">150</span>     <span class="dv">49</span></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9">Luke    <span class="dv">172</span>     <span class="dv">77</span></a></code></pre></div>
-<p><strong>Space of individuals</strong>: If you look at the data in <code>X</code> from the individuals standpoint, each of them can be depicted as a dot in the 2-dimensional space of variables <code>weight</code> and <code>height</code>:</p>
-<p><img src="matrix4sl_files/figure-html4/unnamed-chunk-45-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>To make things less abstract, let’s consider a toy <span class="math inline">\(2 \times 2\)</span> data matrix of <em>weight</em> and <em>height</em> values measured on two individuals: Leia and Luke. Here’s the code in R to create a matrix <code>X</code> for this example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># toy matrix</span>
+X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">150</span>, <span class="dv">172</span>, <span class="dv">49</span>, <span class="dv">77</span>), <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)
+<span class="kw">rownames</span>(X) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Leia&quot;</span>, <span class="st">&quot;Luke&quot;</span>)
+<span class="kw">colnames</span>(X) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;weight&quot;</span>, <span class="st">&quot;height&quot;</span>)
+
+X
+     weight height
+Leia    <span class="dv">150</span>     <span class="dv">49</span>
+Luke    <span class="dv">172</span>     <span class="dv">77</span></code></pre></div>
+<p><strong>Space of individuals</strong>: If you look at the data in <code>X</code> from the individuals standpoint, each of them can be depicted as a dot in the 2-dimensional space spanned by variables <code>weight</code> and <code>height</code>:</p>
+<p><img src="matrix4sl_files/figure-html/unnamed-chunk-45-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><strong>Space of variables</strong>: If you look at the data in <code>X</code> from the variables standpoint, each of them can be depicted as a vector in the 2-dimensional space spanned by <code>Leia</code> and <code>Luke</code>:</p>
-<p><img src="matrix4sl_files/figure-html4/unnamed-chunk-46-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="matrix4sl_files/figure-html/unnamed-chunk-46-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="dual-space" class="section level3">
 <h3><span class="header-section-number">6.1.4</span> Dual Space</h3>
@@ -349,7 +323,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -359,6 +333,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -375,10 +353,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

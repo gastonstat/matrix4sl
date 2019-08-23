@@ -1,40 +1,40 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>A Matrix Algebra Companion for Statistical Learning</title>
-  <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Data Matrix | A Matrix Algebra Companion for Statistical Learning</title>
+  <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="A Matrix Algebra Companion for Statistical Learning" />
+  <meta property="og:title" content="3 Data Matrix | A Matrix Algebra Companion for Statistical Learning" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="http://gastonsanchez.com/matrix4sl/" />
+  <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
   <meta property="og:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="A Matrix Algebra Companion for Statistical Learning" />
+  <meta name="twitter:title" content="3 Data Matrix | A Matrix Algebra Companion for Statistical Learning" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
 
-<meta name="author" content="Gaston Sanchez">
+<meta name="author" content="Gaston Sanchez" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="data.html">
-<link rel="next" href="variables.html">
+<link rel="prev" href="data.html"/>
+<link rel="next" href="variables.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -49,69 +49,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -130,7 +102,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">matrix4sl</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#give-now"><i class="fa fa-check"></i>Give Now</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#how-this-book-is-organized"><i class="fa fa-check"></i><b>1.1</b> How this book is organized?</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#prerequisites"><i class="fa fa-check"></i><b>1.2</b> Prerequisites</a></li>
@@ -180,8 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.4" data-path="variables.html"><a href="variables.html#continuous-variable"><i class="fa fa-check"></i><b>4.2.4</b> Continuous Variable</a></li>
 <li class="chapter" data-level="4.2.5" data-path="variables.html"><a href="variables.html#caveat"><i class="fa fa-check"></i><b>4.2.5</b> Caveat</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="variables.html"><a href="variables.html#coding-values"><i class="fa fa-check"></i><b>4.3</b> Coding Values</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="variables.html"><a href="variables.html#more-on-coding"><i class="fa fa-check"></i><b>4.3.1</b> More on coding</a></li>
+<li class="chapter" data-level="4.3" data-path="variables.html"><a href="variables.html#encoding-values"><i class="fa fa-check"></i><b>4.3</b> Encoding Values</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="variables.html"><a href="variables.html#more-on-encoding"><i class="fa fa-check"></i><b>4.3.1</b> More on encoding</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="transformations.html"><a href="transformations.html"><i class="fa fa-check"></i><b>5</b> Transformations</a><ul>
@@ -265,30 +239,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First let’s talk about matrices in the mathematical sense of the word. A matrix is a rectangular array of elements. More formally, a matrix is a mathematical object whose structure is a rectangular array of entries.</p>
 <p>Typically, we consider the elements of a matrix to be numbers. Although you can certainly generalize the contents of a matrix and think about them as any type of symbols, not necessarily numbers. This is perhaps a common way to conceive a generic matrix from a more computational-oriented perspective.</p>
 <p>From example, an R matrix may be numeric, but you can also have matrices containing logical values (<code>TRUE</code> or <code>FALSE</code>), or even a matrix made up of characters.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># numeric matrix</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">A</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">     [,<span class="dv">1</span>] [,<span class="dv">2</span>] [,<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">[<span class="dv">1</span>,]    <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">9</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">[<span class="dv">2</span>,]    <span class="dv">2</span>    <span class="dv">6</span>   <span class="dv">10</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">[<span class="dv">3</span>,]    <span class="dv">3</span>    <span class="dv">7</span>   <span class="dv">11</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">[<span class="dv">4</span>,]    <span class="dv">4</span>    <span class="dv">8</span>   <span class="dv">12</span></a></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># logical matrix</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">L &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">L</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">      [,<span class="dv">1</span>]  [,<span class="dv">2</span>]  [,<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">[<span class="dv">1</span>,]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">[<span class="dv">2</span>,] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">[<span class="dv">3</span>,]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">[<span class="dv">4</span>,] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></a></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># character matrix</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">S &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(letters, <span class="dv">12</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">S</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">     [,<span class="dv">1</span>] [,<span class="dv">2</span>] [,<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">[<span class="dv">1</span>,] <span class="st">&quot;h&quot;</span>  <span class="st">&quot;y&quot;</span>  <span class="st">&quot;t&quot;</span> </a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">[<span class="dv">2</span>,] <span class="st">&quot;c&quot;</span>  <span class="st">&quot;m&quot;</span>  <span class="st">&quot;u&quot;</span> </a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">[<span class="dv">3</span>,] <span class="st">&quot;n&quot;</span>  <span class="st">&quot;a&quot;</span>  <span class="st">&quot;d&quot;</span> </a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">[<span class="dv">4</span>,] <span class="st">&quot;l&quot;</span>  <span class="st">&quot;z&quot;</span>  <span class="st">&quot;i&quot;</span> </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># numeric matrix</span>
+A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)
+A
+     [,<span class="dv">1</span>] [,<span class="dv">2</span>] [,<span class="dv">3</span>]
+[<span class="dv">1</span>,]    <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">9</span>
+[<span class="dv">2</span>,]    <span class="dv">2</span>    <span class="dv">6</span>   <span class="dv">10</span>
+[<span class="dv">3</span>,]    <span class="dv">3</span>    <span class="dv">7</span>   <span class="dv">11</span>
+[<span class="dv">4</span>,]    <span class="dv">4</span>    <span class="dv">8</span>   <span class="dv">12</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># logical matrix</span>
+L &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)
+L
+      [,<span class="dv">1</span>]  [,<span class="dv">2</span>]  [,<span class="dv">3</span>]
+[<span class="dv">1</span>,]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>
+[<span class="dv">2</span>,] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span>
+[<span class="dv">3</span>,]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>
+[<span class="dv">4</span>,] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># character matrix</span>
+S &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(letters, <span class="dv">12</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)
+S
+     [,<span class="dv">1</span>] [,<span class="dv">2</span>] [,<span class="dv">3</span>]
+[<span class="dv">1</span>,] <span class="st">&quot;h&quot;</span>  <span class="st">&quot;y&quot;</span>  <span class="st">&quot;t&quot;</span> 
+[<span class="dv">2</span>,] <span class="st">&quot;c&quot;</span>  <span class="st">&quot;m&quot;</span>  <span class="st">&quot;u&quot;</span> 
+[<span class="dv">3</span>,] <span class="st">&quot;n&quot;</span>  <span class="st">&quot;a&quot;</span>  <span class="st">&quot;d&quot;</span> 
+[<span class="dv">4</span>,] <span class="st">&quot;l&quot;</span>  <span class="st">&quot;z&quot;</span>  <span class="st">&quot;i&quot;</span> </code></pre></div>
 </div>
 <div id="data-matrix" class="section level2">
 <h2><span class="header-section-number">3.2</span> Data Matrix</h2>
@@ -304,8 +278,7 @@ Obi-Wan Kenobi     male   1.82   77.0 yes_jedi</code></pre>
 <p>You can actually find the corresponding CSV file in the <code>data/</code> folder of the book’s github repository.</p>
 <div id="why-a-data-matrix" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Why a data matrix?</h3>
-<p>The reason to use matrices is simple: the typical structure in which the data can be mathematically manipulated from a multivariate standpoint is a <strong>data matrix</strong>.
-No other mathematical object adapts so well to the rectangular structure of a data table.</p>
+<p>The reason to use matrices is simple: the typical structure in which the data can be mathematically manipulated from a multivariate standpoint is a <strong>data matrix</strong>. No other mathematical object adapts so well to the rectangular structure of a data table.</p>
 <p>Since we are getting into more formal mathematical territory, we need to define some terminology and notation that we’ll use in the rest of the book.</p>
 <p>We’re going to represent matrices with bold upper-case letters like <span class="math inline">\(\mathbf{A}\)</span> or <span class="math inline">\(\mathbf{B}\)</span>.</p>
 <p>In general, a matrix <span class="math inline">\(\mathbf{X}\)</span> has <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns, and we say that <span class="math inline">\(\mathbf{X}\)</span> is an <span class="math inline">\(n \times p\)</span> matrix. In addition, we are going to assume that all the matrices are real matrices, that is, matrices containing elements in the set of Real numbers.</p>
@@ -533,7 +506,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -543,6 +516,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -559,10 +536,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
