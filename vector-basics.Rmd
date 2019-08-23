@@ -145,7 +145,7 @@ $$
 Likewise, we can project $\mathbf{x}$ on $\mathbf{y}$:
 
 $$
-\text{projection } \mathbf{\hat{x}} = \mathbf{y} \left( \frac{\mathbf{x^\mathsf{T} y}}{\mathbf{y^\mathsf{T} y}} \right)
+\text{proj}_{x} y \mathbf{\hat{x}} = \mathbf{y} \left( \frac{\mathbf{x^\mathsf{T} y}}{\mathbf{y^\mathsf{T} y}} \right)
 $$
 
 $$
