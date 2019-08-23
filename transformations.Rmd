@@ -235,3 +235,17 @@ where $\lambda$ is a positive real number that plays the role of a power paramet
 Interestingly, the Box-Cox transformation approximates to the log-transformation as the power parameter $\lambda$ tends to 0. The division by $\lambda$ has a reason: it keeps the scale of the original variable from collapsing. For instance, if you take the 10th roots $x^{0.1}$ of a variable, you should see that all the values are close to 1, so dividing by 1/10 multiplies the values by 10, which is almost a logarithmic scale.
 In summary, Box-Cox transformations provide a way of making data more symmetric, which could be very helpful in regression analysis tools.
 
+
+-----
+
+#### Make a donation {-}
+
+If you find this resource useful, please consider making a one-time donation in any amount. Your support really matters.
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_donations" />
+<input type="hidden" name="business" value="ZF6U7K5MW25W2" />
+<input type="hidden" name="currency_code" value="USD" />
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+</form>
