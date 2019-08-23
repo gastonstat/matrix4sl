@@ -196,3 +196,18 @@ knitr::include_graphics("images/tables/table-distance.png")
 - Unless otherwise specified, in this book we'll assume that all the variables in a data matrix have numerical variables.
 
 - For most of this book, we'll consider a data set to be integrated by a group of _individuals_ or objects on which we observe or measure one or more characteristics called _variables_.
+
+
+-----
+
+#### Make a donation {-}
+
+If you find this resource useful, please consider making a one-time donation in any amount. Your support really matters.
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_donations" />
+<input type="hidden" name="business" value="ZF6U7K5MW25W2" />
+<input type="hidden" name="currency_code" value="USD" />
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+</form>
