@@ -151,9 +151,9 @@ When talking about the way data is stored and encoded, I don't think there's an 
 
 -----
 
-#### Make a donation {-}
+#### _Make a donation_ {-}
 
-If you find this resource useful, please consider making a one-time donation in any amount. Your support really matters.
+_If you find this resource useful, please consider making a one-time donation in any amount. Your support really matters._
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_donations" />
