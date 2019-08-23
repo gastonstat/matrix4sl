@@ -17,6 +17,10 @@ documentclass: book
 
 # Welcome {-}
 
+```{r echo = FALSE, out.width = "70%"}
+knitr::include_graphics("images/cover-matrix4sl.png")
+```
+
 The purpose of this book is to help you understand how statistical notions are connected to matrix algebra concepts that constantly appear around Statistical Learning methods.
 
 This book will teach you how to make the transition from a data table to a data matrix, how to think of a data matrix from a geometric perspective, and how to express---and interpret---statistical operations with vector-matrix notation. More specifically, you will learn how to express common statistical summaries (e.g. mean, variance, covariance, correlation) with vector-matrix notation. You will also learn how to _see_ data---geometrically speaking---and how to provide a geometric interpretation to statistical summaries and related measures.
