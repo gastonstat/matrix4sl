@@ -15,7 +15,7 @@ documentclass: book
 ---
 
 
-# Welcome {-}
+## Welcome {-}
 
 ```{r echo = FALSE, out.width = "70%"}
 knitr::include_graphics("images/cover-matrix4sl.png")
