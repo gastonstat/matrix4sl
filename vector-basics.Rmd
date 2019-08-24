@@ -1,4 +1,4 @@
-# Vector Basics
+# Vector Basics {#vector}
 
 Because variables can be treated as vectors in a geometric sense, I would like to briefly revisit a couple of key concepts for operating with vectors: __the inner product__ and derived operations.
 
