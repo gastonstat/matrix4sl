@@ -1,7 +1,7 @@
 book_filename: "matrix4sl"
 delete_merged_file: true
 rmd_files: [
-  "index.rmd",
+  "index.Rmd",
   "introduction.Rmd",
   "data-table.Rmd",
   "data-matrix.Rmd",
