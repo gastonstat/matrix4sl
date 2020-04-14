@@ -86,7 +86,11 @@ $$
 \| \texttt{height} \| = \sqrt{(49 \times 49) + (77 \times 77)} = 91.2688
 $$
 
-Note that the inner product of a vector with itself is equal to its squared norm: $\mathbf{x^\mathsf{T} x} = \| \mathbf{x} \|^2$
+Note that the inner product of a vector with itself is equal to its squared norm: 
+
+$$
+\mathbf{x^\mathsf{T} x} = \| \mathbf{x} \|^2
+$$
 
 
 ## Angle
@@ -97,13 +101,13 @@ $$
 cos(\theta) = \frac{\mathbf{x^\mathsf{T} y}}{\sqrt{\mathbf{x^\mathsf{T} x}} \hspace{1mm} \sqrt{\mathbf{y^\mathsf{T} y}}}
 $$
 
-or
+or equivalently
 
 $$
 cos(\theta) = \frac{\mathbf{x^\mathsf{T} y}}{\| \mathbf{x} \| \hspace{1mm} \| \mathbf{y} \|}
 $$
 
-Equivalently, we can reexpress the formula of the inner product using 
+Rearranging some terms, we can reexpress the formula of the inner product as: 
 
 $$
 \mathbf{x^\mathsf{T} y} = \| \mathbf{x} \| \hspace{1mm} \| \mathbf{y} \| \hspace{1mm} cos(\theta)
