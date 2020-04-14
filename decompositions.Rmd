@@ -2,22 +2,60 @@
 
 # Matrix Decompositions {#decomps}
 
-This part of the book is dedicated to matrix decompositions. This is a central topic in matrix algebra and it is also a fundamental tool for many statistical learning methods. Decompositions, even though they may seem obscure and scary the first time we encounter them, they are our friends. Thanks to them we can analyze a great variety of data sets and do many great things that would otherwise be impossible.
+This part of the book is dedicated to matrix decompositions. This is a central 
+topic in matrix algebra, and it is also a fundamental tool for many statistical 
+learning methods. Decompositions, even though they may seem obscure and scary 
+the first time we encounter them, are our friends. Thanks to them we can 
+analyze a great variety of data sets and do many great things that would 
+otherwise be impossible.
 
 
 ## Decompositions
 
-Simply put, decompositions are like factorizations of numbers, for example when you factorize 6 as the product of 3 and 2. More formally, a matrix decomposition is a way of expressing a matrix $\mathbf{A}$ as the product of a set of new---typically two or three---matrices, usually simpler in some way, that shed light on the structures or relationships implicit in $\mathbf{A}$. By "simpler" we mean more compact matrices, with less dimensions, less number of rows, or less number of columns, perhaps triangular matrices or even matrices almost full of zeros, except in their diagonal.
+Simply put, decompositions are like factorizations of numbers. For example, 
+consider the number 6; we can _decompose_ 6 as the product of 3 and 2:
 
-Matrix factorizations are very useful because they allow us to break down a matrix and decompose it in its main parts. In other words, decompositions allow us to dismantle a matrix into a product of matrices that are "simpler". Think of a matrix decompositions like the factorizations of polynomials, they make it easier to study the properties of the mathematical objects, matrices in this case. Also, given a decomposition, computation generally becomes easier.
+$$
+6 = 3 \times 2
+$$
 
-There are many different types of matrix decompositions, and each of them reveal different kinds of underlying structure. We are going to focus our discussion on two of them: the Singular Value Decomposition (SVD), and the Eigen Value Decomposition (EVD). Why these two decompositions? Because we concentrate on the two types of matrices more important in statistics: _general rectangular matrices_ used to represent data tables, and _positive semi-definite matrices_ used to represent covariance matrices, correlation matrices, and any matrix that results from a crossproduct.
+that is, we factorize 6 in terms of "simpler" numbers. 
+
+More formally, a matrix decomposition is a way of expressing a matrix
+$\mathbf{M}$ as the product of a set of new---typically two or three---matrices, 
+usually simpler in some way, that shed light on the structures or relationships 
+implicit in $\mathbf{M}$. By "simpler" we mean a series of ideas such as 
+more compact matrices, or with less dimensions, or with less number of rows, 
+or less number of columns; perhaps triangular matrices, or even matrices almost 
+full of zeros, except in their diagonal.
+
+Matrix factorizations are very useful because they allow us to break down a 
+matrix and decompose it in its main parts. In other words, decompositions allow 
+us to dismantle a matrix into a product of matrices that are "simpler". Think of 
+a matrix decompositions like the factorizations of polynomials, they make it 
+easier to study the properties of the mathematical objects, matrices in this 
+case. Also, given a decomposition, computation generally becomes easier.
+
+There are many different types of matrix decompositions, and each of them reveal 
+different kinds of underlying structure. We are going to focus our discussion on 
+two of them: 
+
+1) the Singular Value Decomposition (SVD), and 
+
+2) the Eigen Value Decomposition (EVD).
+
+Why these two decompositions? Because we concentrate on the 
+two types of matrices more important in statistics: 
+_general rectangular matrices_ used to represent data tables, 
+and _positive semi-definite matrices_ used to represent covariance matrices, 
+correlation matrices, and any matrix that results from a crossproduct.
 
 
 
 ## General Idea
 
-Roughly speaking, the decomposition of a matrix $\mathbf{M}$ can be described by an equation:
+Roughly speaking, the decomposition of a matrix $\mathbf{M}$ can be described 
+by an equation:
 
 $$
 \mathbf{M} = \mathbf{A B C}
@@ -30,7 +68,8 @@ where the dimensions of the matrices are as follows:
 - $\mathbf{B}$ is $k \times k$ (usually diagonal)
 - $\mathbf{C}$ is $k \times p$ 
 
-The following figure illustrates a matrix decomposition from the point of view of matrix shapes:
+The following figure illustrates a matrix decomposition from the point of view 
+of matrix shapes:
 
 ```{r fig.cap = 'Matrix Decomposition Diagram', echo = FALSE}
 knitr::include_graphics("images/decomps/matrix-decomposition.png")
