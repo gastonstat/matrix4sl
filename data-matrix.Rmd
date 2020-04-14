@@ -45,10 +45,12 @@ sw <- read.csv('data/starwars.csv')
 ```{r echo = FALSE, comment = ''}
 dat <- sw[1:6 ,c('gender', 'height', 'weight', 'jedi')]
 rownames(dat) <- sw$name[1:6]
-dat
+print(dat, print.gap = 2)
 ```
 
 You can actually find the corresponding CSV file in the `data/` folder of the book's github repository.
+
+https://github.com/gastonstat/matrix4sl/blob/master/data/starwars.csv
 
 
 
@@ -59,7 +61,7 @@ No other mathematical object adapts so well to the rectangular structure of a da
 
 Since we are getting into more formal mathematical territory, we need to define some terminology and notation that we'll use in the rest of the book. 
 
-We're going to represent matrices with bold upper-case letters like $\mathbf{A}$ or $\mathbf{B}$. 
+We are going to represent matrices with bold upper-case letters like $\mathbf{A}$ or $\mathbf{B}$. 
 
 In general, a matrix $\mathbf{X}$ has $n$ rows and $p$ columns, and we say that $\mathbf{X}$ is an $n \times p$ matrix. In addition, we are going to assume that all the matrices are real matrices, that is, matrices containing elements in the set of Real numbers.
 
