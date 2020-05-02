@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Variables | A Matrix Algebra Companion for Statistical Learning</title>
+  <title>Chapter 3 Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Variables | A Matrix Algebra Companion for Statistical Learning" />
+  <meta property="og:title" content="Chapter 3 Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Variables | A Matrix Algebra Companion for Statistical Learning" />
+  <meta name="twitter:title" content="Chapter 3 Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="datamatrix.html"/>
-<link rel="next" href="transformations.html"/>
+<link rel="prev" href="types-of-matrices.html"/>
+<link rel="next" href="types-of-variables.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -39,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -49,41 +52,68 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -99,117 +129,145 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">matrix4sl</a></li>
+<li><a href="./"><b>A Matrix Algebra Companion for SL</b></a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#give-now"><i class="fa fa-check"></i>Give Now</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#how-this-book-is-organized"><i class="fa fa-check"></i><b>1.1</b> How this book is organized?</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#prerequisites"><i class="fa fa-check"></i><b>1.2</b> Prerequisites</a></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#why-this-book"><i class="fa fa-check"></i><b>1.3</b> Why this book?</a></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#acknowledgements"><i class="fa fa-check"></i><b>1.4</b> Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#how-this-book-is-organized"><i class="fa fa-check"></i>How this book is organized?</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#why-this-book"><i class="fa fa-check"></i>Why this book?</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
 <li class="part"><span><b>I Data Essentials</b></span></li>
-<li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data Tables</a><ul>
-<li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html#data-individuals-and-variables"><i class="fa fa-check"></i><b>2.1</b> Data: Individuals and Variables</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="data.html"><a href="data.html#representing-data"><i class="fa fa-check"></i><b>2.1.1</b> Representing Data</a></li>
-<li class="chapter" data-level="2.1.2" data-path="data.html"><a href="data.html#tabular-data"><i class="fa fa-check"></i><b>2.1.2</b> Tabular Data</a></li>
+<li class="chapter" data-level="1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>1</b> Data Tables</a><ul>
+<li class="chapter" data-level="1.1" data-path="data-individuals-and-variables.html"><a href="data-individuals-and-variables.html"><i class="fa fa-check"></i><b>1.1</b> Data: Individuals and Variables</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="data-individuals-and-variables.html"><a href="data-individuals-and-variables.html#representing-data"><i class="fa fa-check"></i><b>1.1.1</b> Representing Data</a></li>
+<li class="chapter" data-level="1.1.2" data-path="data-individuals-and-variables.html"><a href="data-individuals-and-variables.html#tabular-data"><i class="fa fa-check"></i><b>1.1.2</b> Tabular Data</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#types-of-tables"><i class="fa fa-check"></i><b>2.2</b> Types of Tables</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="data.html"><a href="data.html#heterogeneous-table"><i class="fa fa-check"></i><b>2.2.1</b> Heterogeneous Table</a></li>
-<li class="chapter" data-level="2.2.2" data-path="data.html"><a href="data.html#binary-table"><i class="fa fa-check"></i><b>2.2.2</b> Binary table</a></li>
-<li class="chapter" data-level="2.2.3" data-path="data.html"><a href="data.html#modalities-table"><i class="fa fa-check"></i><b>2.2.3</b> Modalities table</a></li>
-<li class="chapter" data-level="2.2.4" data-path="data.html"><a href="data.html#preference-table"><i class="fa fa-check"></i><b>2.2.4</b> Preference table</a></li>
-<li class="chapter" data-level="2.2.5" data-path="data.html"><a href="data.html#frequency-table"><i class="fa fa-check"></i><b>2.2.5</b> Frequency table</a></li>
-<li class="chapter" data-level="2.2.6" data-path="data.html"><a href="data.html#distance-table"><i class="fa fa-check"></i><b>2.2.6</b> Distance table</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="data.html"><a href="data.html#summary"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="datamatrix.html"><a href="datamatrix.html"><i class="fa fa-check"></i><b>3</b> Data Matrix</a><ul>
-<li class="chapter" data-level="3.1" data-path="datamatrix.html"><a href="datamatrix.html#about-matrices"><i class="fa fa-check"></i><b>3.1</b> About Matrices</a></li>
-<li class="chapter" data-level="3.2" data-path="datamatrix.html"><a href="datamatrix.html#data-matrix"><i class="fa fa-check"></i><b>3.2</b> Data Matrix</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="datamatrix.html"><a href="datamatrix.html#why-a-data-matrix"><i class="fa fa-check"></i><b>3.2.1</b> Why a data matrix?</a></li>
-<li class="chapter" data-level="3.2.2" data-path="datamatrix.html"><a href="datamatrix.html#matrix-representations"><i class="fa fa-check"></i><b>3.2.2</b> Matrix Representations</a></li>
-<li class="chapter" data-level="3.2.3" data-path="datamatrix.html"><a href="datamatrix.html#a-block-of-variables"><i class="fa fa-check"></i><b>3.2.3</b> A Block of Variables</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="datamatrix.html"><a href="datamatrix.html#types-of-matrices"><i class="fa fa-check"></i><b>3.3</b> Types of Matrices</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="datamatrix.html"><a href="datamatrix.html#general-rectangular-matrix"><i class="fa fa-check"></i><b>3.3.1</b> General Rectangular Matrix</a></li>
-<li class="chapter" data-level="3.3.2" data-path="datamatrix.html"><a href="datamatrix.html#square-matrix"><i class="fa fa-check"></i><b>3.3.2</b> Square Matrix</a></li>
-<li class="chapter" data-level="3.3.3" data-path="datamatrix.html"><a href="datamatrix.html#symmetric-matrix"><i class="fa fa-check"></i><b>3.3.3</b> Symmetric Matrix</a></li>
-<li class="chapter" data-level="3.3.4" data-path="datamatrix.html"><a href="datamatrix.html#diagonal-matrix"><i class="fa fa-check"></i><b>3.3.4</b> Diagonal Matrix</a></li>
-<li class="chapter" data-level="3.3.5" data-path="datamatrix.html"><a href="datamatrix.html#scalar-matrix"><i class="fa fa-check"></i><b>3.3.5</b> Scalar Matrix</a></li>
-<li class="chapter" data-level="3.3.6" data-path="datamatrix.html"><a href="datamatrix.html#identity-matrix"><i class="fa fa-check"></i><b>3.3.6</b> Identity Matrix</a></li>
-<li class="chapter" data-level="3.3.7" data-path="datamatrix.html"><a href="datamatrix.html#triangular-matrix"><i class="fa fa-check"></i><b>3.3.7</b> Triangular Matrix</a></li>
-<li class="chapter" data-level="3.3.8" data-path="datamatrix.html"><a href="datamatrix.html#shapes-of-matrices"><i class="fa fa-check"></i><b>3.3.8</b> Shapes of Matrices</a></li>
+<li class="chapter" data-level="1.2" data-path="types-of-tables.html"><a href="types-of-tables.html"><i class="fa fa-check"></i><b>1.2</b> Types of Tables</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="types-of-tables.html"><a href="types-of-tables.html#heterogeneous-table"><i class="fa fa-check"></i><b>1.2.1</b> Heterogeneous Table</a></li>
+<li class="chapter" data-level="1.2.2" data-path="types-of-tables.html"><a href="types-of-tables.html#binary-table"><i class="fa fa-check"></i><b>1.2.2</b> Binary table</a></li>
+<li class="chapter" data-level="1.2.3" data-path="types-of-tables.html"><a href="types-of-tables.html#modalities-table"><i class="fa fa-check"></i><b>1.2.3</b> Modalities table</a></li>
+<li class="chapter" data-level="1.2.4" data-path="types-of-tables.html"><a href="types-of-tables.html#preference-table"><i class="fa fa-check"></i><b>1.2.4</b> Preference table</a></li>
+<li class="chapter" data-level="1.2.5" data-path="types-of-tables.html"><a href="types-of-tables.html#frequency-table"><i class="fa fa-check"></i><b>1.2.5</b> Frequency table</a></li>
+<li class="chapter" data-level="1.2.6" data-path="types-of-tables.html"><a href="types-of-tables.html#distance-table"><i class="fa fa-check"></i><b>1.2.6</b> Distance table</a></li>
+<li class="chapter" data-level="1.2.7" data-path="types-of-tables.html"><a href="types-of-tables.html#summary"><i class="fa fa-check"></i><b>1.2.7</b> Summary</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i><b>4</b> Variables</a><ul>
-<li class="chapter" data-level="4.1" data-path="variables.html"><a href="variables.html#types-of-variables"><i class="fa fa-check"></i><b>4.1</b> Types of Variables</a></li>
-<li class="chapter" data-level="4.2" data-path="variables.html"><a href="variables.html#variable-flavors"><i class="fa fa-check"></i><b>4.2</b> Variable Flavors</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="variables.html"><a href="variables.html#nominal-variable"><i class="fa fa-check"></i><b>4.2.1</b> Nominal Variable</a></li>
-<li class="chapter" data-level="4.2.2" data-path="variables.html"><a href="variables.html#ordinal-variable"><i class="fa fa-check"></i><b>4.2.2</b> Ordinal Variable</a></li>
-<li class="chapter" data-level="4.2.3" data-path="variables.html"><a href="variables.html#discrete-variable"><i class="fa fa-check"></i><b>4.2.3</b> Discrete Variable</a></li>
-<li class="chapter" data-level="4.2.4" data-path="variables.html"><a href="variables.html#continuous-variable"><i class="fa fa-check"></i><b>4.2.4</b> Continuous Variable</a></li>
-<li class="chapter" data-level="4.2.5" data-path="variables.html"><a href="variables.html#caveat"><i class="fa fa-check"></i><b>4.2.5</b> Caveat</a></li>
+<li class="chapter" data-level="2" data-path="datamatrix.html"><a href="datamatrix.html"><i class="fa fa-check"></i><b>2</b> Data Matrix</a><ul>
+<li class="chapter" data-level="2.1" data-path="about-matrices.html"><a href="about-matrices.html"><i class="fa fa-check"></i><b>2.1</b> About Matrices</a></li>
+<li class="chapter" data-level="2.2" data-path="data-matrix.html"><a href="data-matrix.html"><i class="fa fa-check"></i><b>2.2</b> Data Matrix</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-matrix.html"><a href="data-matrix.html#why-a-data-matrix"><i class="fa fa-check"></i><b>2.2.1</b> Why a data matrix?</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-matrix.html"><a href="data-matrix.html#matrix-representations"><i class="fa fa-check"></i><b>2.2.2</b> Matrix Representations</a></li>
+<li class="chapter" data-level="2.2.3" data-path="data-matrix.html"><a href="data-matrix.html#a-block-of-variables"><i class="fa fa-check"></i><b>2.2.3</b> A Block of Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="variables.html"><a href="variables.html#encoding-values"><i class="fa fa-check"></i><b>4.3</b> Encoding Values</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="variables.html"><a href="variables.html#more-on-encoding"><i class="fa fa-check"></i><b>4.3.1</b> More on encoding</a></li>
+<li class="chapter" data-level="2.3" data-path="types-of-matrices.html"><a href="types-of-matrices.html"><i class="fa fa-check"></i><b>2.3</b> Types of Matrices</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="types-of-matrices.html"><a href="types-of-matrices.html#general-rectangular-matrix"><i class="fa fa-check"></i><b>2.3.1</b> General Rectangular Matrix</a></li>
+<li class="chapter" data-level="2.3.2" data-path="types-of-matrices.html"><a href="types-of-matrices.html#square-matrix"><i class="fa fa-check"></i><b>2.3.2</b> Square Matrix</a></li>
+<li class="chapter" data-level="2.3.3" data-path="types-of-matrices.html"><a href="types-of-matrices.html#symmetric-matrix"><i class="fa fa-check"></i><b>2.3.3</b> Symmetric Matrix</a></li>
+<li class="chapter" data-level="2.3.4" data-path="types-of-matrices.html"><a href="types-of-matrices.html#diagonal-matrix"><i class="fa fa-check"></i><b>2.3.4</b> Diagonal Matrix</a></li>
+<li class="chapter" data-level="2.3.5" data-path="types-of-matrices.html"><a href="types-of-matrices.html#scalar-matrix"><i class="fa fa-check"></i><b>2.3.5</b> Scalar Matrix</a></li>
+<li class="chapter" data-level="2.3.6" data-path="types-of-matrices.html"><a href="types-of-matrices.html#identity-matrix"><i class="fa fa-check"></i><b>2.3.6</b> Identity Matrix</a></li>
+<li class="chapter" data-level="2.3.7" data-path="types-of-matrices.html"><a href="types-of-matrices.html#triangular-matrix"><i class="fa fa-check"></i><b>2.3.7</b> Triangular Matrix</a></li>
+<li class="chapter" data-level="2.3.8" data-path="types-of-matrices.html"><a href="types-of-matrices.html#shapes-of-matrices"><i class="fa fa-check"></i><b>2.3.8</b> Shapes of Matrices</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="transformations.html"><a href="transformations.html"><i class="fa fa-check"></i><b>5</b> Transformations</a><ul>
-<li class="chapter" data-level="5.1" data-path="transformations.html"><a href="transformations.html#dummy-variables"><i class="fa fa-check"></i><b>5.1</b> Dummy Variables</a></li>
-<li class="chapter" data-level="5.2" data-path="transformations.html"><a href="transformations.html#standardization"><i class="fa fa-check"></i><b>5.2</b> Standardization</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="transformations.html"><a href="transformations.html#by-standard-units"><i class="fa fa-check"></i><b>5.2.1</b> By Standard Units</a></li>
-<li class="chapter" data-level="5.2.2" data-path="transformations.html"><a href="transformations.html#by-the-overall-range"><i class="fa fa-check"></i><b>5.2.2</b> By the Overall Range</a></li>
-<li class="chapter" data-level="5.2.3" data-path="transformations.html"><a href="transformations.html#by-chosen-percentiles"><i class="fa fa-check"></i><b>5.2.3</b> By Chosen Percentiles</a></li>
-<li class="chapter" data-level="5.2.4" data-path="transformations.html"><a href="transformations.html#by-the-mean"><i class="fa fa-check"></i><b>5.2.4</b> By the Mean</a></li>
-<li class="chapter" data-level="5.2.5" data-path="transformations.html"><a href="transformations.html#about-standardization"><i class="fa fa-check"></i><b>5.2.5</b> About standardization</a></li>
+<li class="chapter" data-level="3" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i><b>3</b> Variables</a><ul>
+<li class="chapter" data-level="3.1" data-path="types-of-variables.html"><a href="types-of-variables.html"><i class="fa fa-check"></i><b>3.1</b> Types of Variables</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="types-of-variables.html"><a href="types-of-variables.html#nominal-variable"><i class="fa fa-check"></i><b>3.1.1</b> Nominal Variable</a></li>
+<li class="chapter" data-level="3.1.2" data-path="types-of-variables.html"><a href="types-of-variables.html#ordinal-variable"><i class="fa fa-check"></i><b>3.1.2</b> Ordinal Variable</a></li>
+<li class="chapter" data-level="3.1.3" data-path="types-of-variables.html"><a href="types-of-variables.html#discrete-variable"><i class="fa fa-check"></i><b>3.1.3</b> Discrete Variable</a></li>
+<li class="chapter" data-level="3.1.4" data-path="types-of-variables.html"><a href="types-of-variables.html#continuous-variable"><i class="fa fa-check"></i><b>3.1.4</b> Continuous Variable</a></li>
+<li class="chapter" data-level="3.1.5" data-path="types-of-variables.html"><a href="types-of-variables.html#caveat"><i class="fa fa-check"></i><b>3.1.5</b> Caveat</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="transformations.html"><a href="transformations.html#logarithmic-transformations"><i class="fa fa-check"></i><b>5.3</b> Logarithmic Transformations</a></li>
-<li class="chapter" data-level="5.4" data-path="transformations.html"><a href="transformations.html#power-transformations"><i class="fa fa-check"></i><b>5.4</b> Power Transformations</a></li>
+<li class="chapter" data-level="3.2" data-path="encoding-values.html"><a href="encoding-values.html"><i class="fa fa-check"></i><b>3.2</b> Encoding Values</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="encoding-values.html"><a href="encoding-values.html#more-on-encoding"><i class="fa fa-check"></i><b>3.2.1</b> More on encoding</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="transformations.html"><a href="transformations.html"><i class="fa fa-check"></i><b>4</b> Transformations</a><ul>
+<li class="chapter" data-level="4.1" data-path="dummy-variables.html"><a href="dummy-variables.html"><i class="fa fa-check"></i><b>4.1</b> Dummy Variables</a></li>
+<li class="chapter" data-level="4.2" data-path="standardization.html"><a href="standardization.html"><i class="fa fa-check"></i><b>4.2</b> Standardization</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="standardization.html"><a href="standardization.html#by-standard-units"><i class="fa fa-check"></i><b>4.2.1</b> By Standard Units</a></li>
+<li class="chapter" data-level="4.2.2" data-path="standardization.html"><a href="standardization.html#by-the-overall-range"><i class="fa fa-check"></i><b>4.2.2</b> By the Overall Range</a></li>
+<li class="chapter" data-level="4.2.3" data-path="standardization.html"><a href="standardization.html#by-chosen-percentiles"><i class="fa fa-check"></i><b>4.2.3</b> By Chosen Percentiles</a></li>
+<li class="chapter" data-level="4.2.4" data-path="standardization.html"><a href="standardization.html#by-the-mean"><i class="fa fa-check"></i><b>4.2.4</b> By the Mean</a></li>
+<li class="chapter" data-level="4.2.5" data-path="standardization.html"><a href="standardization.html#about-standardization"><i class="fa fa-check"></i><b>4.2.5</b> About standardization</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="logarithmic-transformations.html"><a href="logarithmic-transformations.html"><i class="fa fa-check"></i><b>4.3</b> Logarithmic Transformations</a></li>
+<li class="chapter" data-level="4.4" data-path="power-transformations.html"><a href="power-transformations.html"><i class="fa fa-check"></i><b>4.4</b> Power Transformations</a></li>
 </ul></li>
 <li class="part"><span><b>II Geometric Mindset</b></span></li>
-<li class="chapter" data-level="6" data-path="duality.html"><a href="duality.html"><i class="fa fa-check"></i><b>6</b> Geometric Duality</a><ul>
-<li class="chapter" data-level="6.1" data-path="duality.html"><a href="duality.html#matrix-perspectives"><i class="fa fa-check"></i><b>6.1</b> Matrix Perspectives</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="duality.html"><a href="duality.html#rows-space"><i class="fa fa-check"></i><b>6.1.1</b> Rows Space</a></li>
-<li class="chapter" data-level="6.1.2" data-path="duality.html"><a href="duality.html#columns-space"><i class="fa fa-check"></i><b>6.1.2</b> Columns Space</a></li>
-<li class="chapter" data-level="6.1.3" data-path="duality.html"><a href="duality.html#toy-example"><i class="fa fa-check"></i><b>6.1.3</b> Toy Example</a></li>
-<li class="chapter" data-level="6.1.4" data-path="duality.html"><a href="duality.html#dual-space"><i class="fa fa-check"></i><b>6.1.4</b> Dual Space</a></li>
+<li class="chapter" data-level="5" data-path="duality.html"><a href="duality.html"><i class="fa fa-check"></i><b>5</b> Geometric Duality</a><ul>
+<li class="chapter" data-level="5.1" data-path="matrix-perspectives.html"><a href="matrix-perspectives.html"><i class="fa fa-check"></i><b>5.1</b> Matrix Perspectives</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="matrix-perspectives.html"><a href="matrix-perspectives.html#rows-space"><i class="fa fa-check"></i><b>5.1.1</b> Rows Space</a></li>
+<li class="chapter" data-level="5.1.2" data-path="matrix-perspectives.html"><a href="matrix-perspectives.html#columns-space"><i class="fa fa-check"></i><b>5.1.2</b> Columns Space</a></li>
+<li class="chapter" data-level="5.1.3" data-path="matrix-perspectives.html"><a href="matrix-perspectives.html#toy-example"><i class="fa fa-check"></i><b>5.1.3</b> Toy Example</a></li>
+<li class="chapter" data-level="5.1.4" data-path="matrix-perspectives.html"><a href="matrix-perspectives.html#dual-space"><i class="fa fa-check"></i><b>5.1.4</b> Dual Space</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="vector-basics.html"><a href="vector-basics.html"><i class="fa fa-check"></i><b>7</b> Vector Basics</a><ul>
-<li class="chapter" data-level="7.1" data-path="vector-basics.html"><a href="vector-basics.html#inner-product"><i class="fa fa-check"></i><b>7.1</b> Inner Product</a></li>
-<li class="chapter" data-level="7.2" data-path="vector-basics.html"><a href="vector-basics.html#length"><i class="fa fa-check"></i><b>7.2</b> Length</a></li>
-<li class="chapter" data-level="7.3" data-path="vector-basics.html"><a href="vector-basics.html#angle"><i class="fa fa-check"></i><b>7.3</b> Angle</a></li>
-<li class="chapter" data-level="7.4" data-path="vector-basics.html"><a href="vector-basics.html#orthogonality"><i class="fa fa-check"></i><b>7.4</b> Orthogonality</a></li>
-<li class="chapter" data-level="7.5" data-path="vector-basics.html"><a href="vector-basics.html#projection"><i class="fa fa-check"></i><b>7.5</b> Projection</a></li>
+<li class="chapter" data-level="6" data-path="vector.html"><a href="vector.html"><i class="fa fa-check"></i><b>6</b> Vector Basics</a><ul>
+<li class="chapter" data-level="6.1" data-path="inner-product.html"><a href="inner-product.html"><i class="fa fa-check"></i><b>6.1</b> Inner Product</a></li>
+<li class="chapter" data-level="6.2" data-path="length.html"><a href="length.html"><i class="fa fa-check"></i><b>6.2</b> Length</a></li>
+<li class="chapter" data-level="6.3" data-path="angle.html"><a href="angle.html"><i class="fa fa-check"></i><b>6.3</b> Angle</a></li>
+<li class="chapter" data-level="6.4" data-path="orthogonality.html"><a href="orthogonality.html"><i class="fa fa-check"></i><b>6.4</b> Orthogonality</a></li>
+<li class="chapter" data-level="6.5" data-path="projection.html"><a href="projection.html"><i class="fa fa-check"></i><b>6.5</b> Projection</a></li>
 </ul></li>
 <li class="part"><span><b>III Statistical Measures</b></span></li>
-<li class="chapter" data-level="8" data-path="mean.html"><a href="mean.html"><i class="fa fa-check"></i><b>8</b> Mean</a><ul>
-<li class="chapter" data-level="8.1" data-path="mean.html"><a href="mean.html#mean-of-a-variable"><i class="fa fa-check"></i><b>8.1</b> Mean of a variable</a></li>
-<li class="chapter" data-level="8.2" data-path="mean.html"><a href="mean.html#mean-as-a-balancing-point"><i class="fa fa-check"></i><b>8.2</b> Mean as a Balancing Point</a></li>
-<li class="chapter" data-level="8.3" data-path="mean.html"><a href="mean.html#mean-with-vector-notation"><i class="fa fa-check"></i><b>8.3</b> Mean with Vector Notation</a></li>
-<li class="chapter" data-level="8.4" data-path="mean.html"><a href="mean.html#mean-as-a-projection"><i class="fa fa-check"></i><b>8.4</b> Mean as a Projection</a></li>
-<li class="chapter" data-level="8.5" data-path="mean.html"><a href="mean.html#centroid"><i class="fa fa-check"></i><b>8.5</b> Centroid</a></li>
+<li class="chapter" data-level="7" data-path="mean.html"><a href="mean.html"><i class="fa fa-check"></i><b>7</b> Mean</a><ul>
+<li class="chapter" data-level="7.1" data-path="mean-of-a-variable.html"><a href="mean-of-a-variable.html"><i class="fa fa-check"></i><b>7.1</b> Mean of a variable</a></li>
+<li class="chapter" data-level="7.2" data-path="mean-as-a-balancing-point.html"><a href="mean-as-a-balancing-point.html"><i class="fa fa-check"></i><b>7.2</b> Mean as a Balancing Point</a></li>
+<li class="chapter" data-level="7.3" data-path="mean-with-vector-notation.html"><a href="mean-with-vector-notation.html"><i class="fa fa-check"></i><b>7.3</b> Mean with Vector Notation</a></li>
+<li class="chapter" data-level="7.4" data-path="mean-as-a-projection.html"><a href="mean-as-a-projection.html"><i class="fa fa-check"></i><b>7.4</b> Mean as a Projection</a></li>
+<li class="chapter" data-level="7.5" data-path="centroid.html"><a href="centroid.html"><i class="fa fa-check"></i><b>7.5</b> Centroid</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="variance.html"><a href="variance.html"><i class="fa fa-check"></i><b>9</b> Variance</a><ul>
-<li class="chapter" data-level="9.1" data-path="variance.html"><a href="variance.html#about-the-variance"><i class="fa fa-check"></i><b>9.1</b> About the variance</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="variance.html"><a href="variance.html#sample-variance"><i class="fa fa-check"></i><b>9.1.1</b> Sample Variance</a></li>
+<li class="chapter" data-level="8" data-path="variance.html"><a href="variance.html"><i class="fa fa-check"></i><b>8</b> Variance</a><ul>
+<li class="chapter" data-level="8.1" data-path="about-the-variance.html"><a href="about-the-variance.html"><i class="fa fa-check"></i><b>8.1</b> About the variance</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="about-the-variance.html"><a href="about-the-variance.html#sample-variance"><i class="fa fa-check"></i><b>8.1.1</b> Sample Variance</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="variance.html"><a href="variance.html#variance-with-vector-notation"><i class="fa fa-check"></i><b>9.2</b> Variance with Vector Notation</a></li>
-<li class="chapter" data-level="9.3" data-path="variance.html"><a href="variance.html#standard-deviation-as-a-norm"><i class="fa fa-check"></i><b>9.3</b> Standard Deviation as a Norm</a></li>
+<li class="chapter" data-level="8.2" data-path="variance-with-vector-notation.html"><a href="variance-with-vector-notation.html"><i class="fa fa-check"></i><b>8.2</b> Variance with Vector Notation</a></li>
+<li class="chapter" data-level="8.3" data-path="standard-deviation-as-a-norm.html"><a href="standard-deviation-as-a-norm.html"><i class="fa fa-check"></i><b>8.3</b> Standard Deviation as a Norm</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="covar.html"><a href="covar.html"><i class="fa fa-check"></i><b>10</b> Covariance and Correlation</a><ul>
-<li class="chapter" data-level="10.1" data-path="covar.html"><a href="covar.html#two-variables"><i class="fa fa-check"></i><b>10.1</b> Two Variables</a></li>
-<li class="chapter" data-level="10.2" data-path="covar.html"><a href="covar.html#covariance"><i class="fa fa-check"></i><b>10.2</b> Covariance</a></li>
-<li class="chapter" data-level="10.3" data-path="covar.html"><a href="covar.html#correlation"><i class="fa fa-check"></i><b>10.3</b> Correlation</a></li>
-<li class="chapter" data-level="10.4" data-path="covar.html"><a href="covar.html#relation-as-linear-approximation"><i class="fa fa-check"></i><b>10.4</b> Relation as Linear Approximation</a></li>
+<li class="chapter" data-level="9" data-path="covar.html"><a href="covar.html"><i class="fa fa-check"></i><b>9</b> Covariance and Correlation</a><ul>
+<li class="chapter" data-level="9.1" data-path="two-variables.html"><a href="two-variables.html"><i class="fa fa-check"></i><b>9.1</b> Two Variables</a></li>
+<li class="chapter" data-level="9.2" data-path="covariance.html"><a href="covariance.html"><i class="fa fa-check"></i><b>9.2</b> Covariance</a></li>
+<li class="chapter" data-level="9.3" data-path="correlation.html"><a href="correlation.html"><i class="fa fa-check"></i><b>9.3</b> Correlation</a></li>
+<li class="chapter" data-level="9.4" data-path="relation-as-linear-approximation.html"><a href="relation-as-linear-approximation.html"><i class="fa fa-check"></i><b>9.4</b> Relation as Linear Approximation</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="crossprods.html"><a href="crossprods.html"><i class="fa fa-check"></i><b>11</b> Matrix Cross-Products</a><ul>
-<li class="chapter" data-level="11.1" data-path="crossprods.html"><a href="crossprods.html#common-data-matrices"><i class="fa fa-check"></i><b>11.1</b> Common Data Matrices</a></li>
-<li class="chapter" data-level="11.2" data-path="crossprods.html"><a href="crossprods.html#cross-products"><i class="fa fa-check"></i><b>11.2</b> Cross-Products</a></li>
+<li class="chapter" data-level="10" data-path="crossprods.html"><a href="crossprods.html"><i class="fa fa-check"></i><b>10</b> Matrix Cross-Products</a><ul>
+<li class="chapter" data-level="10.1" data-path="common-data-matrices.html"><a href="common-data-matrices.html"><i class="fa fa-check"></i><b>10.1</b> Common Data Matrices</a></li>
+<li class="chapter" data-level="10.2" data-path="cross-products.html"><a href="cross-products.html"><i class="fa fa-check"></i><b>10.2</b> Cross-Products</a></li>
+</ul></li>
+<li class="part"><span><b>IV Matrix Decompositions</b></span></li>
+<li class="chapter" data-level="11" data-path="decomps.html"><a href="decomps.html"><i class="fa fa-check"></i><b>11</b> Matrix Decompositions</a><ul>
+<li class="chapter" data-level="11.1" data-path="decompositions.html"><a href="decompositions.html"><i class="fa fa-check"></i><b>11.1</b> Decompositions</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="decompositions.html"><a href="decompositions.html#general-idea"><i class="fa fa-check"></i><b>11.1.1</b> General Idea</a></li>
+<li class="chapter" data-level="11.1.2" data-path="decompositions.html"><a href="decompositions.html#some-comments"><i class="fa fa-check"></i><b>11.1.2</b> Some Comments</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="rank.html"><a href="rank.html"><i class="fa fa-check"></i><b>11.2</b> Rank</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="evd.html"><a href="evd.html"><i class="fa fa-check"></i><b>12</b> Eigenvalue Decomposition</a><ul>
+<li class="chapter" data-level="12.1" data-path="eigenvectors-and-eigenvalues.html"><a href="eigenvectors-and-eigenvalues.html"><i class="fa fa-check"></i><b>12.1</b> Eigenvectors and Eigenvalues</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="eigenvectors-and-eigenvalues.html"><a href="eigenvectors-and-eigenvalues.html#where-do-eigenvectors-come-from"><i class="fa fa-check"></i><b>12.1.1</b> Where do eigenvectors come from?</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="properties-of-eigenstructures.html"><a href="properties-of-eigenstructures.html"><i class="fa fa-check"></i><b>12.2</b> Properties of Eigenstructures</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="properties-of-eigenstructures.html"><a href="properties-of-eigenstructures.html#symmetric-matrices"><i class="fa fa-check"></i><b>12.2.1</b> Symmetric Matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="power-method.html"><a href="power-method.html"><i class="fa fa-check"></i><b>12.3</b> Power Method</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="power-method.html"><a href="power-method.html#power-method-algorithm"><i class="fa fa-check"></i><b>12.3.1</b> Power Method Algorithm</a></li>
+<li class="chapter" data-level="12.3.2" data-path="power-method.html"><a href="power-method.html#convergence-of-the-power-method"><i class="fa fa-check"></i><b>12.3.2</b> Convergence of the Power Method</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="svd.html"><a href="svd.html"><i class="fa fa-check"></i><b>13</b> Singular Value Decomposition</a><ul>
+<li class="chapter" data-level="13.1" data-path="svd-basics.html"><a href="svd-basics.html"><i class="fa fa-check"></i><b>13.1</b> SVD Basics</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="svd-basics.html"><a href="svd-basics.html#svd-properties"><i class="fa fa-check"></i><b>13.1.1</b> SVD Properties</a></li>
+<li class="chapter" data-level="13.1.2" data-path="svd-basics.html"><a href="svd-basics.html#diagrams-of-svd"><i class="fa fa-check"></i><b>13.1.2</b> Diagrams of SVD</a></li>
+<li class="chapter" data-level="13.1.3" data-path="svd-basics.html"><a href="svd-basics.html#example"><i class="fa fa-check"></i><b>13.1.3</b> Example</a></li>
+<li class="chapter" data-level="13.1.4" data-path="svd-basics.html"><a href="svd-basics.html#relation-of-svd-and-cross-product-matrices"><i class="fa fa-check"></i><b>13.1.4</b> Relation of SVD and Cross-Product Matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="svd-rank-reduction-theorem.html"><a href="svd-rank-reduction-theorem.html"><i class="fa fa-check"></i><b>13.2</b> SVD Rank-Reduction Theorem</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Thanks to bookdown</a></li>
@@ -223,7 +281,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Matrix Algebra Companion for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Matrix Algebra Companion for Statistical Learning (matrix4sl)</a>
           </h1>
         </div>
 
@@ -232,167 +290,40 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="variables" class="section level1">
-<h1><span class="header-section-number">4</span> Variables</h1>
-<p>To illustrate some of the ideas presented in this chapter I’m going to use a toy example with data from the characters of the Star Wars universe. You can actually find the corresponding CSV file in the <code>data/</code> folder of the book’s github repository.</p>
-<pre><code>               name gender height weight     species     jedi
-1  Anakin Skywalker   male   1.88   84.0       human yes_jedi
-2     Padme Amidala female   1.65   45.0       human  no_jedi
-3    Luke Skywalker   male   1.72   77.0       human yes_jedi
-4       Leia Organa female   1.50   49.0       human  no_jedi
-5      Qui-Gon Jinn   male   1.93   88.5       human yes_jedi
-6    Obi-Wan Kenobi   male   1.82   77.0       human yes_jedi
-7          Han Solo   male   1.80   80.0       human  no_jedi
-8   Sheev Palpatine   male   1.73   75.0       human  no_jedi
-9             R2-D2   male   0.96   32.0       droid  no_jedi
-10            C-3PO   male   1.67   75.0       droid  no_jedi
-11             Yoda   male   0.66   17.0        yoda yes_jedi
-12       Darth Maul   male   1.75   80.0 dathomirian  no_jedi
-13            Dooku   male   1.93   86.0       human yes_jedi
-14        Chewbacca   male   2.28  112.0     wookiee  no_jedi
-15            Jabba   male   3.90     NA        hutt  no_jedi
-16 Lando Calrissian   male   1.78   79.0       human  no_jedi
-17        Boba Fett   male   1.83   78.0       human  no_jedi
-18       Jango Fett   male   1.83   79.0       human  no_jedi
-19         Grievous   male   2.16  159.0     kaleesh  no_jedi
-20     Chief Chirpa   male   1.00   50.0        ewok  no_jedi
-            weapon
-1       lightsaber
-2          unarmed
-3       lightsaber
-4          blaster
-5       lightsaber
-6       lightsaber
-7          blaster
-8  force-lightning
-9          unarmed
-10         unarmed
-11      lightsaber
-12      lightsaber
-13      lightsaber
-14       bowcaster
-15         unarmed
-16         blaster
-17         blaster
-18         blaster
-19     slugthrower
-20           spear</code></pre>
-<p>The table consists of 20 rows and 7 columns. The rows correspond to <em>individuals</em> and the columns correspond to <em>variables</em>. Although this data set is a toy example, it contains variables of different types commonly found in real data sets.</p>
-<div id="types-of-variables" class="section level2">
-<h2><span class="header-section-number">4.1</span> Types of Variables</h2>
-<p>In statistical learning, the most typical data format involves a set of individuals or objects described by several characteristics commonly known as <em>variables</em>. Interestingly, we can classify variables in a couple of different ways.</p>
-<p>The most basic and usual way to classify variables is in two distinct types: <strong>quantitative</strong> variables and <strong>categorical</strong> (or qualitative) variables.</p>
-<p><img src="images/variables/variable-types.png" width="50%" style="display: block; margin: auto;" /></p>
-<p>The variables <code>height</code> and <code>weight</code> are examples of quantitative variables because their values represent quantities. That is, they can be measured numerically on some sort of interval scale.</p>
-<p>In turn, variables such as <code>name</code>, <code>gender</code>, <code>species</code>, <code>jedi</code>, and <code>weapon</code> are categorical or qualitative variables because their values represent categories (or qualities). More formally, they describe a quality of an individual, and allows you to place an individual into a category or group, such as male or female.</p>
-</div>
-<div id="variable-flavors" class="section level2">
-<h2><span class="header-section-number">4.2</span> Variable Flavors</h2>
-<p>The division between categorical and quantitative variables is not the only one. Often, data scientists further classifiy categorical variables as <em>nominal</em> or <em>ordinal</em>. Likewise, quantitative variables can be classified as <em>discrete</em> or <em>continuous</em>. This next level of classification is chiefly based on the notion of <em>scales of measurement</em> of the variables.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-27"></span>
-<img src="images/variables/variable-qual-quant.png" alt="Further classification of variables" width="70%" />
+<h1><span class="header-section-number">Chapter 3</span> Variables</h1>
+<p>In statistical learning, the most typical data format involves a set of individuals
+or objects described by several characteristics commonly known as <em>variables</em>.
+Likewise, the most common format in which data is organized is in a table with
+columns representing variables, and rows representing individuals, like in
+the following figure.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-26"></span>
+<img src="images/tables/table-inds-vars.png" alt="Conceptual table of individuals and variables" width="50%" />
 <p class="caption">
-Figure 4.1: Further classification of variables
+Figure 3.1: Conceptual table of individuals and variables
 </p>
 </div>
-<div id="nominal-variable" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> Nominal Variable</h3>
-<p>A categorical variable is <strong>nominal</strong> when it results from naming or labeling values that don’t have a natural order. An example of a nominal variable is <code>weapon</code> which has the following values:</p>
-<pre><code>[1] &quot;blaster&quot;         &quot;bowcaster&quot;       &quot;force-lightning&quot; &quot;lightsaber&quot;     
-[5] &quot;slugthrower&quot;     &quot;spear&quot;           &quot;unarmed&quot;        </code></pre>
-<p>Can you order the categories in a “natural” way? Not really. The term <em>nominal</em> according the dictionary means “existing in name only”. Thus, nominal values are just that: names. There is no reason why blaster is better or greater than lightsaber. You could say that you prefer a blaster over a lightsaber but that’s a different variable: personal preference.</p>
-<p>Other typical examples of nominal variables are:</p>
-<ul>
-<li><p>the sex of a newborn child: e.g. female or male</p></li>
-<li><p>the ethnicity of an individual: e.g. Native-American, African-American, Asian, White</p></li>
-<li><p>ice cream flavors: e.g. chocolate, vanilla, strawberry</p></li>
-<li><p>the numbers on the players’ jerseys of a soccer team: numbers used as identifiers</p></li>
-</ul>
-</div>
-<div id="ordinal-variable" class="section level3">
-<h3><span class="header-section-number">4.2.2</span> Ordinal Variable</h3>
-<p>A categorical variable is <strong>ordinal</strong> when it results from ordering values into a series of categories when no appropriate numerical scale is available. For example, consider a variable “usage frequency” measured with values <em>never</em>, <em>sometimes</em>, and <em>always</em>. In this case we can order the categories from less usage to more usage, or viceversa.</p>
-<p>Some examples of ordinal variables are:</p>
-<ul>
-<li><p>size of clothes: extra-small, small, medium, large, extra-large</p></li>
-<li><p>college year: freshman, sophomore, junior, senior</p></li>
-<li><p>spiciness: none, mild, moderate, very</p></li>
-<li><p>jedis ranks: youngling, padawan, knight, master, and grand master</p></li>
-</ul>
-</div>
-<div id="discrete-variable" class="section level3">
-<h3><span class="header-section-number">4.2.3</span> Discrete Variable</h3>
-<p>A quantitative variable is <strong>discrete</strong> when it results from counting. To be more precise, a discrete variable takes on zero or a positive integer value. Some examples of discrete variables are:</p>
-<ul>
-<li><p>the number of male ewooks in a family with four children (0, 1, 2, 3, or 4).</p></li>
-<li><p>the number of robots per Imperial Star Destroyer</p></li>
-<li><p>the number of moons orbiting around a planet</p></li>
-</ul>
-</div>
-<div id="continuous-variable" class="section level3">
-<h3><span class="header-section-number">4.2.4</span> Continuous Variable</h3>
-<p>A quantitative variable is <strong>continuous</strong> when it results from measuring. More technically, a continuous variable theoretically takes on an infinite number of possible values, however, its reported values are subject to the precision or accuracy of the measurement device. Some examples of continuous variables are:</p>
-<ul>
-<li>the height of an individual</li>
-<li>the weight of a robot</li>
-<li>the speed of a starship</li>
-</ul>
-</div>
-<div id="caveat" class="section level3">
-<h3><span class="header-section-number">4.2.5</span> Caveat</h3>
-<p>Keep in mind that not all variables fit neatly and unambiguously into one of the previous classes. For example, the age of an individual could be considered of a discrete variable when it gets reported in (whole) number of years. However, age could also be considered to be continuous when measured in a more granular scale: e.g. days, or hours, or seconds. Moreover, sometimes age is reported into ordered categories such as 0 to 5 years, 6 to 10, 11 to 15, and so on. These values would turn age into an ordinal variable.</p>
-</div>
-</div>
-<div id="encoding-values" class="section level2">
-<h2><span class="header-section-number">4.3</span> Encoding Values</h2>
-<p>Another important aspect intimately connected with the various types of variables is that of how variable values are encoded. To better understand what this is about, let me discuss a simple example.</p>
-<p>Notice that the quantitative variables in the star wars data set have numeric values, while the categorical variables have non-numeric values. Does that mean that all numeric variables can be considered to be quantitative? And that all non-numeric variables can be considered to be categorical? The answer is: Not necessarily.</p>
-<p>Often, analysts assign numeric values to the categories of a qualitative variable. Sooner or later you will find variables with numeric values that are not quantitative. An example could be ice-cream flavors in which the categories are codified with numbers. For example, consider three ice-cream flavors: vanilla, chocolate, and lemon. And imagine that we assign a numeric code to each flavor: 1 = vanilla, 2 = chocolate, 3 = lemon. This numeric labeling is just for convenience purposes.</p>
-<p>Assume that you get the preferred ice-cream flavor of 10 subjects with the following values:</p>
-<pre><code>1 1 2 2 1 2 1 2 1 3</code></pre>
-<p>The above numbers, which are hypothetical values of a variable <code>icecream</code>, do not represent quantities; they represent flavors. Just because there are numbers, it does not mean that we can use those numbers to carry out arithmetic operations. What is the result of: 3 - 1, that is, <em>lemon</em> minus <em>vanilla</em>? It is meaningless to attempt this type of operation.</p>
-<p>Likewise, we could assign numbers to sizes: 1=small, 2=medium, 3=large. In this case, the numbers are again used for convenient purposes. And we can even take one further step and say that we can use the numbers to rank the categories. But it will be impossible to add 1+2, since <em>small</em> + <em>medium</em> does not equal <em>large</em>.</p>
-<p>The point is that just because a variable contains numbers, that doesn’t automatically make it quantitative. You should always ask yourself if the numbers represent some sort of quantity. If the answer is a sounded yes, then you have a quantitative variable. Otherwise, you have a categorical one.</p>
-<div id="more-on-encoding" class="section level3">
-<h3><span class="header-section-number">4.3.1</span> More on encoding</h3>
-<p>We can find categorical data under a wide range of formats. I’ve seen categorical data codified in different ways, and sometimes people are very creative in the way they do this.</p>
-<p>The main types of formats can be classified in three main groups:</p>
-<ul>
-<li>text or characters</li>
-<li>numbers (ideally integers)</li>
-<li>logical (TRUE / FALSE), typically for binary variables</li>
-</ul>
-<p>Here’s an example with a <code>gender</code> variable:</p>
-<ul>
-<li>as text: <code>&quot;F&quot;</code> (female), <code>&quot;M&quot;</code> (male)</li>
-<li>as numbers: 1 (female), 0 (male)</li>
-<li>as logical: <code>TRUE</code> (female), <code>FALSE</code> (male)</li>
-</ul>
-<p>When talking about the way data is stored and encoded, I don’t think there’s an ideal/universal way to store categorical data effectively and efficiently. It all depends on the field of application, the size of the data, the legibility, the usage purposes, etc. What I do believe in is that, when categorical data is being analyzed, we should consider a couple of issues:</p>
-<ul>
-<li><p><strong>understandability</strong>: the analyst should be able to read, interpret and understand what the available values represent. Whenever possible, you should aim to reduce friction, and avoid having to struggle with decodifying numbers.</p></li>
-<li><p><strong>compatibility</strong>: this has to do with functions and commands in data analysis and statistical software. Some functions are programmed in a way that they accept a specific type of input (either a vector, a factor, a data frame, etc). Often, you will need to manipulate some kind of object in order to convert it into another type of object better suited for a certain functions or command.</p></li>
-<li><p><strong>visibility</strong>: this aspect is related to visual displays in graphics. Maybe long labels look fine in a table, but for plotting purposes they could cluttered the screen.</p></li>
-</ul>
-
-</div>
-</div>
+<p>Before moving onto more matrix algebra concepts, we need to discuss a couple
+of things about variables in terms of how they can be classified, and also how
+users tend to encode values in them.</p> 
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="datamatrix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="transformations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="types-of-matrices.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="types-of-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -400,12 +331,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -417,6 +347,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -433,7 +367,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

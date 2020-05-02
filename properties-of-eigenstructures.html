@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>12.2 Properties of Eigenstructures | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="12.2 Properties of Eigenstructures | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="12.2 Properties of Eigenstructures | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="eigenvectors-and-eigenvalues.html"/>
+<link rel="next" href="power-method.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,121 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="properties-of-eigenstructures" class="section level2">
+<h2><span class="header-section-number">12.2</span> Properties of Eigenstructures</h2>
+<p>Knowing about the properties of eigenstructures will pay off when you encounter methods whose solutions involve an eigenvalue decomposition.</p>
+<p>Because all the following properties have the same premise, I prefer to state it here: suppose that matrix <span class="math inline">\(\mathbf{A}\)</span> has an eigenvalue <span class="math inline">\(\lambda\)</span> and an associated eigenvector <span class="math inline">\(\mathbf{v}\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{Av} = \lambda \mathbf{v}
+\]</span></p>
+<div id="prop.-1" class="section level4 unnumbered">
+<h4>Prop. 1</h4>
+<p>The matrix <span class="math inline">\(b \mathbf{A}\)</span>, where <span class="math inline">\(b\)</span> is an arbitrary scalar, has <span class="math inline">\(b \lambda\)</span> as an eigenvalue, with <span class="math inline">\(\mathbf{v}\)</span> as the associated eigenvector.</p>
+</div>
+<div id="prop.-2" class="section level4 unnumbered">
+<h4>Prop. 2</h4>
+<p>The matrix <span class="math inline">\(\mathbf{B} = \mathbf{A} + c \mathbf{I}\)</span>, where <span class="math inline">\(c\)</span> is an arbitrary scalar, has <span class="math inline">\((\lambda + c)\)</span> as an eigenvalue, with <span class="math inline">\(\mathbf{v}\)</span> as the associated eigenvector.</p>
+</div>
+<div id="prop.-3" class="section level4 unnumbered">
+<h4>Prop. 3</h4>
+<p>The matrix <span class="math inline">\(\mathbf{A}^m\)</span>, where <span class="math inline">\(m\)</span> is any positive integer, has <span class="math inline">\(\lambda^m\)</span> as an eigenvalue, with <span class="math inline">\(\mathbf{v}\)</span> as the associated eigenvector.</p>
+<p>In other words, if <span class="math inline">\(\mathbf{v}\)</span> is an eigenvector of <span class="math inline">\(\mathbf{A}\)</span>, then <span class="math inline">\(\mathbf{v}\)</span> is also an eigenvector of <span class="math inline">\(\mathbf{A}^2\)</span>, <span class="math inline">\(\mathbf{A}^3\)</span>, and so on. Likewise, <span class="math inline">\(\lambda^2\)</span> is an eigenvalue of <span class="math inline">\(\mathbf{A}^2\)</span>, <span class="math inline">\(\lambda^3\)</span> is an eigenvalue of <span class="math inline">\(\mathbf{A}^3\)</span>, etc.</p>
+</div>
+<div id="prop.-4" class="section level4 unnumbered">
+<h4>Prop. 4</h4>
+<p>The matrix <span class="math inline">\(\mathbf{A}^{-1}\)</span>, assuming that <span class="math inline">\(| \mathbf{A} | \neq 0\)</span>, has <span class="math inline">\(1 / \lambda\)</span> as an eigenvalue, with <span class="math inline">\(\mathbf{v}\)</span> as the associated eigenvector.</p>
+<p>Also, when <span class="math inline">\(\mathbf{A}^{-1}\)</span> exists, then <span class="math inline">\(\mathbf{A}^{-p}\)</span> has the same eigenvectors as <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\lambda_{k}^{n}\)</span> is the <span class="math inline">\(k\)</span>-th eigenvalue.</p>
+<p>In general, <span class="math inline">\(\mathbf{A}^{-1} \mathbf{V} = \mathbf{V} \mathbf{\Lambda}^{-1}\)</span>.</p>
+</div>
+<div id="prop.-5" class="section level4 unnumbered">
+<h4>Prop. 5</h4>
+<p>If <span class="math inline">\(\mathbf{A}\)</span> is symmetric, then the eigenvectors of <span class="math inline">\(\mathbf{A}\)</span> are also eigenvectors of <span class="math inline">\(\mathbf{A^\mathsf{T} A}\)</span>.</p>
+</div>
+<div id="prop.-6" class="section level4 unnumbered">
+<h4>Prop. 6</h4>
+<p>The sum of the eigenvalues of a matrix is equal to the sum of the diagonal elements of the matrix (the trace of the matrix).</p>
+<p><span class="math display">\[
+tr(\mathbf{A}) = \sum_{k=1}^{n} \lambda_k
+\]</span></p>
+</div>
+<div id="prop.-7" class="section level4 unnumbered">
+<h4>Prop. 7</h4>
+<p>The product of the eigenvalues of <span class="math inline">\(\mathbf{A}\)</span> equals the determinant of <span class="math inline">\(\mathbf{A}\)</span>:</p>
+<p><span class="math display">\[
+\prod_{k=1}^{n} \lambda_k = | \mathbf{A} |
+\]</span></p>
+</div>
+<div id="prop.-8" class="section level4 unnumbered">
+<h4>Prop. 8</h4>
+<p>If <span class="math inline">\(\mathbf{A}\)</span>, a matrix of order <span class="math inline">\(n \times n\)</span>, has rank <span class="math inline">\(r\)</span>, then <span class="math inline">\(\mathbf{A}\)</span> has <span class="math inline">\(n - r\)</span> eigenvalues equal to zero.</p>
+</div>
+<div id="prop.-9" class="section level4 unnumbered">
+<h4>Prop. 9</h4>
+<p>If a symmetric matrix <span class="math inline">\(\mathbf{A}\)</span> can be written as the product <span class="math inline">\(\mathbf{A} = \mathbf{V \Lambda V^\mathsf{T}}\)</span>, where <span class="math inline">\(\mathbf{\Lambda}\)</span> is diagonal with all entries nonnegative and <span class="math inline">\(\mathbf{V}\)</span> is an orthogonal matrix of eigenvectors, then:</p>
+<p><span class="math display">\[
+\mathbf{A}^{1/2} = \mathbf{V \Lambda}^{1/2} \mathbf{V}
+\]</span></p>
+<p>and it is the case that <span class="math inline">\(\mathbf{A}^{1/2} \mathbf{A}^{1/2} = \mathbf{A}\)</span>.</p>
+</div>
+<div id="prop.-10" class="section level4 unnumbered">
+<h4>Prop. 10</h4>
+<p>If a symmetric matrix <span class="math inline">\(\mathbf{A}^{-1}\)</span> can be written as the product <span class="math inline">\(\mathbf{A}^{-1} = \mathbf{V \Lambda}^{-1} \mathbf{V^\mathsf{T}}\)</span>, where <span class="math inline">\(\mathbf{\Lambda}^{-1}\)</span> is diagonal with all entries nonnegative and <span class="math inline">\(\mathbf{V}\)</span> is an orthogonal matrix of eigenvectors, then:</p>
+<p><span class="math display">\[
+\mathbf{A}^{-1/2} = \mathbf{V \Lambda}^{-1/2} \mathbf{V}
+\]</span></p>
+<p>and it is the case that <span class="math inline">\(\mathbf{A}^{-1/2} \mathbf{A}^{-1/2} = \mathbf{A}^{-1}\)</span>.</p>
+</div>
+<div id="symmetric-matrices" class="section level3">
+<h3><span class="header-section-number">12.2.1</span> Symmetric Matrices</h3>
+<p>The following table lists characteristics of eigenvalues depending on the type
+of symmetric matrices.</p>
+<table>
+<colgroup>
+<col width="58%" />
+<col width="41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symmetric matrix</th>
+<th>Eigenvalues</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>All elements of <span class="math inline">\(\mathbf{A}\)</span> are real</td>
+<td>All eigenvalues are real</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathbf{A}\)</span> is positive definite</td>
+<td>All eigenvalues are positive</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathbf{A}\)</span> is positive semidefinite and of rank <span class="math inline">\(r\)</span></td>
+<td>There are <span class="math inline">\(r\)</span> positive and <span class="math inline">\(p-r\)</span> null eigenvalues</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathbf{A}\)</span> is negative semidefinite and of rank <span class="math inline">\(r\)</span></td>
+<td>There are <span class="math inline">\(r\)</span> negative and <span class="math inline">\(p-r\)</span> null eigenvalues</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathbf{A}\)</span> is indefinite and of rank <span class="math inline">\(r\)</span></td>
+<td>There are <span class="math inline">\(r\)</span> non-null and <span class="math inline">\(n-r\)</span> null eigenvalues</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathbf{A}\)</span> is diagonal</td>
+<td>The diagonal elements are the eigenvalues</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="eigenvectors-and-eigenvalues.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="power-method.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

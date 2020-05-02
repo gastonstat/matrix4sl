@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>10.1 Common Data Matrices | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="10.1 Common Data Matrices | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="10.1 Common Data Matrices | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="crossprods.html"/>
+<link rel="next" href="cross-products.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,111 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="common-data-matrices" class="section level2">
+<h2><span class="header-section-number">10.1</span> Common Data Matrices</h2>
+<p>To begin our discussion we need to consider a data matrix <span class="math inline">\(\mathbf{X}\)</span> formed by <span class="math inline">\(p\)</span> variables measured on <span class="math inline">\(n\)</span> individuals. For convenience, we will also assume that the variables are quantitative. In other words, we assume that the data matrix contains columns with (roughly) continuous values. If the raw data matrix has categorical variables with string values or coded in a non-numerical way, you would have to transform and codify such variables to end up with a numeric data matrix.</p>
+<p>One general way to depict <span class="math inline">\(\mathbf{X}\)</span> is as:</p>
+<p><span class="math display">\[ \underset{n \times p}{\mathbf{X}} = 
+\left[\begin{array}{cccc}
+x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1p} \\
+x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np} \\
+\end{array}\right]
+\]</span></p>
+<div id="centered-matrix" class="section level4 unnumbered">
+<h4>Centered Matrix</h4>
+<p>If the variables are <strong>mean-centered</strong>, then <span class="math inline">\(\mathbf{X}\)</span> become <span class="math inline">\(\mathbf{X_C}\)</span> with elements:</p>
+<p><span class="math display">\[ \underset{n \times p}{\mathbf{X_C}} = 
+\left[\begin{array}{cccc}
+x_{11} - \bar{x}_1 &amp; x_{12} - \bar{x}_2 &amp; \cdots &amp; x_{1p} - \bar{x}_p \\
+x_{21} - \bar{x}_1 &amp; x_{22} - \bar{x}_2 &amp; \cdots &amp; x_{2p} - \bar{x}_p \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{n1} - \bar{x}_1 &amp; x_{n2} - \bar{x}_2 &amp; \cdots &amp; x_{np} - \bar{x}_p \\
+\end{array}\right]
+\]</span></p>
+<p>where <span class="math inline">\(\bar{x}_j\)</span> is the mean of the <span class="math inline">\(j\)</span>-th variable (<span class="math inline">\(j = 1, \dots, p\)</span>).</p>
+<p>Using matrix notation, the centering operation is expressed as:</p>
+<p><span class="math display">\[
+\mathbf{X_C} = (\mathbf{I} - \frac{1}{n} \mathbf{11^\mathsf{T}}) \mathbf{X} 
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(\mathbf{I}\)</span> is the <span class="math inline">\(n \times n\)</span> identity matrix</li>
+<li><span class="math inline">\(\mathbf{1}\)</span> is an <span class="math inline">\(n \times 1\)</span> vector of ones</li>
+<li><span class="math inline">\(\mathbf{I} - \frac{1}{n} \mathbf{11^\mathsf{T}}\)</span> is sometimes called the
+<strong>centering operator</strong></li>
+</ul>
+</div>
+<div id="normalized-matrix" class="section level4 unnumbered">
+<h4>Normalized Matrix</h4>
+<p>Another special matrix is the scaled or <em>normalized</em> matrix <span class="math inline">\(\mathbf{X_N}\)</span>:</p>
+<p><span class="math display">\[ \underset{n \times p}{\mathbf{X_N}} = 
+\left[\begin{array}{cccc}
+a_1 x_{11} &amp; a_2 x_{12} &amp; \cdots &amp; a_p x_{1p} \\
+a_1 x_{21} &amp; a_2 x_{22} &amp; \cdots &amp; a_p x_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_1 x_{n1} &amp; a_2 x_{n2} &amp; \cdots &amp; a_p x_{np} \\
+\end{array}\right]
+\]</span></p>
+<p>where <span class="math inline">\(a_j\)</span> is a scaling factor for the <span class="math inline">\(j\)</span>-th column</p>
+<p>Probably the most common scaling option is to divide by the standard deviation:</p>
+<p><span class="math display">\[
+a_j = \frac{1}{sd_j} = \frac{1}{\sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_{ij} - \bar{x}_j)^2}}
+\]</span></p>
+<p>The scaling factors <span class="math inline">\(a_j\)</span> can be put in a diagonal matrix <span class="math inline">\(\mathbf{D_a}\)</span></p>
+<p><span class="math display">\[ \underset{p \times p}{\mathbf{D_a}} = 
+\left[\begin{array}{cccc}
+a_1 &amp; 0   &amp; \cdots &amp; 0 \\
+0   &amp; a_2 &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0   &amp; 0   &amp; \cdots &amp; a_p \\
+\end{array}\right]
+\]</span></p>
+<p>then the scaled or normalized data matrix is given by:</p>
+<p><span class="math display">\[
+\mathbf{X_N} = \mathbf{X D_a}
+\]</span></p>
+</div>
+<div id="standardized-matrix" class="section level4 unnumbered">
+<h4>Standardized Matrix</h4>
+<p>The standardized matrix <span class="math inline">\(\mathbf{X_S}\)</span> is the mean-centered and scaled
+(by the standard deviation) matrix:</p>
+<p><span class="math display">\[ \underset{n \times p}{\mathbf{X_S}} = 
+\left[\begin{array}{cccc}
+\frac{x_{11} - \bar{x}_1}{sd_1} &amp; \frac{x_{12} - \bar{x}_2}{sd_2} &amp; \cdots &amp; \frac{x_{1p} - \bar{x}_p}{sd_p} \\
+\frac{x_{21} - \bar{x}_1}{sd_1} &amp; \frac{x_{22} - \bar{x}_2}{sd_2} &amp; \cdots &amp; \frac{x_{2p} - \bar{x}_p}{sd_p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\frac{x_{n1} - \bar{x}_1}{sd_1} &amp; \frac{x_{n2} - \bar{x}_2}{sd_2} &amp; \cdots &amp; \frac{x_{np} - \bar{x}_p}{sd_p} \\
+\end{array}\right]
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\bar{x}_j\)</span> is the mean of the <span class="math inline">\(j\)</span>-th variable</li>
+<li><span class="math inline">\(sd_j\)</span> is the standard deviation of the <span class="math inline">\(j\)</span>-th variable</li>
+</ul>
+<p>When the scaling factors <span class="math inline">\(a_j\)</span> are the standard deviations <span class="math inline">\(sd_j\)</span>,
+the scaling matrix <span class="math inline">\(\mathbf{D}_{\frac{1}{sd}}\)</span> is:</p>
+<p><span class="math display">\[ \underset{p \times p}{\mathbf{D}_{\frac{1}{sd}}} = 
+\left[\begin{array}{cccc}
+\frac{1}{sd_1} &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; \frac{1}{sd_2} &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; \frac{1}{sd_p} \\
+\end{array}\right]
+\]</span></p>
+<p>then the standardized data matrix <span class="math inline">\(\mathbf{X_S}\)</span>
+<span class="math display">\[
+\mathbf{X_S} = \mathbf{X_C} \mathbf{D}_{\frac{1}{sd}} = (\mathbf{I} - \frac{1}{n} \mathbf{11^\mathsf{T}}) \mathbf{X} \mathbf{D}_{\frac{1}{sd}}
+\]</span></p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="crossprods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cross-products.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

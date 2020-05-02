@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>7.3 Mean with Vector Notation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="7.3 Mean with Vector Notation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="7.3 Mean with Vector Notation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="mean-as-a-balancing-point.html"/>
+<link rel="next" href="mean-as-a-projection.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="mean-with-vector-notation" class="section level2">
+<h2><span class="header-section-number">7.3</span> Mean with Vector Notation</h2>
+<p>It is very useful to be able to compute a mean using vector-matrix notation. First, notice that the formula of the mean consists of computing a (weighted) sum. Second, recall that a sum of numbers can be expressed with an inner product by using the unit vector (or summation operator). If we denote <span class="math inline">\(\mathbf{1}_{n}\)</span> a vector of ones of size <span class="math inline">\(n\)</span>, then the mean value of a vector <span class="math inline">\(\mathbf{x}\)</span> can be obtained with an inner product:</p>
+<p><span class="math display">\[
+\bar{x} = \left(\frac{1}{n}\right) \mathbf{1}_{n}^\mathsf{T} \mathbf{x}
+\]</span></p>
+<p>As you can tell, <span class="math inline">\(\bar{x}\)</span> is calculated by multiplying the scalar <span class="math inline">\(1/n\)</span> with the inner product <span class="math inline">\(\mathbf{1}_{n}^\mathsf{T} \mathbf{x}\)</span>, which is equivalent to:</p>
+<p><span class="math display">\[
+\bar{x} = \left(\frac{1}{n}\right) &lt;\mathbf{1}_{n}, \mathbf{x}&gt; = \left(\frac{1}{n}\right) &lt;\mathbf{x}, \mathbf{1}_{n}&gt;
+\]</span></p>
+<p>This way of using an inner product can also be genelarized with the notation <span class="math inline">\(&lt;\mathbf{a}, \mathbf{b}&gt;_{M}\)</span> which is simply an inner product in a vector space endowed with a metric matrix <span class="math inline">\(\mathbf{M}\)</span></p>
+<p><span class="math display">\[
+&lt;\mathbf{a}, \mathbf{b}&gt;_{M} = \mathbf{a}^\mathsf{T} \mathbf{M b}
+\]</span></p>
+<p>If we use a metric matrix <span class="math inline">\(\mathbf{D} = diag(1/n)\)</span> then we have that the mean is given by:</p>
+<p><span class="math display">\[
+\bar{x} = &lt;\mathbf{x}, \mathbf{1}&gt;_{D} = \mathbf{x}^\mathsf{T} \mathbf{D 1}
+\]</span></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mean-as-a-balancing-point.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mean-as-a-projection.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

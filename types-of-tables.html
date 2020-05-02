@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>1.2 Types of Tables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="1.2 Types of Tables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="1.2 Types of Tables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="data-individuals-and-variables.html"/>
+<link rel="next" href="datamatrix.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,127 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="types-of-tables" class="section level2">
+<h2><span class="header-section-number">1.2</span> Types of Tables</h2>
+<p>The most typical table format is that of individuals (rows) and variables (columns). However, the individuals-variables layout is not the only type of setting; there are other types of tables like contingency tables, crosstabulations, distance tables, as well as similarity and proximity tables. So let’s review some examples of various kinds of rectangular formats.</p>
+<div id="heterogeneous-table" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Heterogeneous Table</h3>
+<p>Perhaps the most ubiquitous type of table is that of inidividuals and variables in which the variables represent mixed or heterogeneous information. The toy data introduced so far is an example of a heterogeneous table involving distinct flavors of variables such as Name, Sex, Hieght and Weight. In other words, Name and Sex have strings values or categories, while Height and Weight have numeric values (representing quantities).</p>
+<!--
+| Name   |  Sex    | Height   | Weight  |
+|:-------|:--------|:---------|:--------|
+| Leia   | female  | 150      | 49      |
+| Luke   | male    | 172      | 77      |
+| Han    | male    | 180      | 80      |
+-->
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="images/tables/table-mixed.png" alt="Mixed or heterogeneous variables" width="55%" />
+<p class="caption">
+Figure 1.6: Mixed or heterogeneous variables
+</p>
 </div>
+<p>As you can tell, Height and Weight are already expressed in numeric values, and you can actually do some math on them (i.e. apply arithmetic and algebraic operations). In contrast, Name and Sex are not codified numerically, so the type of mathematical operations that you can perform on them is very limited. In or der to exploit their information in a deeper sense, you would have to transform the categories <em>male</em> and <em>female</em> with some numeric coding.</p>
+</div>
+<div id="binary-table" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Binary table</h3>
+<p>Another common type of table is a binary table. As its name indicates, this type of table contains variables that can only take two values. For example presence-absence, female-male, yes-no, success-failure, case-control, etc. In the table below, the variables represent drinks consumed: Beer, Wine, Juice, Coffee, and Tea. Each variable takes two possible values, <em>yes</em> and <em>no</em>, indicating whether an individual consumes a specific type of drink.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
+<img src="images/tables/table-binary-raw.png" alt="Binary table (raw values)" width="58%" />
+<p class="caption">
+Figure 1.7: Binary table (raw values)
+</p>
+</div>
+<p>Although the values <em>yes</em> and <em>no</em> are very descriptive, you will need to codify them numerically to be able to perform statitical or algebraic operations with them. Perhaps the most natural way to codify binary values is with zeros and ones: “yes” = 1, and “no” = 0.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="images/tables/table-binary.png" alt="Binary table (numeric values)" width="58%" />
+<p class="caption">
+Figure 1.8: Binary table (numeric values)
+</p>
+</div>
+<p>Another possible codification could be “yes” = 1, and “no” = -1. Or also with logical values: “yes” = TRUE, and “no” = FALSE.</p>
+</div>
+<div id="modalities-table" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Modalities table</h3>
+<p>Another type of table consists of so-called <em>modalities</em>. These can come from variables or questions in a survey about how frequent you use/consume a specific product.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
+<img src="images/tables/table-modalities-raw.png" alt="Table of modalities (raw values)" width="58%" />
+<p class="caption">
+Figure 1.9: Table of modalities (raw values)
+</p>
+</div>
+<p>In order to statistically treat a modalities table, you will very likely have to transform the values of the categories (i.e. the modalities) to some numeric coding. For instance, you can assign values 1 = “never”, 2 = “sometimes”, and 3 = “always.”</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-14"></span>
+<img src="images/tables/table-modalities.png" alt="Table of modalities (numeric values)" width="58%" />
+<p class="caption">
+Figure 1.10: Table of modalities (numeric values)
+</p>
+</div>
+</div>
+<div id="preference-table" class="section level3">
+<h3><span class="header-section-number">1.2.4</span> Preference table</h3>
+<p>A preference table is a special case of individuals-variables table in which the variables are measured in some kind of preference scale. For example, we can measure the preference level for various types of fruit juices on an ordinal scale ranging from 1 = “don’t like at all” to 5 = “like it very much.”</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="images/tables/table-preference.png" alt="Table of frequencies" width="55%" />
+<p class="caption">
+Figure 1.11: Table of frequencies
+</p>
+</div>
+</div>
+<div id="frequency-table" class="section level3">
+<h3><span class="header-section-number">1.2.5</span> Frequency table</h3>
+<p>As its name suggests, this type of table contains the frequencies (i.e. counts) resulting from <em>crossing</em> two categorical variables. This is the reason why you also find the name cross-tables for this type of tabular data. Another common name for this type of tables is <em>contingency table</em>.</p>
+<p>The example below shows a frequency table of the number of dialogues of each character, per episode (in the original trilogy of Star Wars). The rows correspond to the categories of the variable Name, while the columns corresponds to the categories of the variable Episode.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
+<img src="images/tables/table-frequency.png" alt="Table of frequencies" width="50%" />
+<p class="caption">
+Figure 1.12: Table of frequencies
+</p>
+</div>
+<p>The value in the <em>ij</em>-th cell (<em>i</em>-th row, <em>j</em>-th column) tells you the number of occurrences that share Name’s category <em>i</em> and Episode’s category <em>j</em>. If you add all the entries, you get the total number of individuals in each variable.</p>
+<p>This tabular format is not really an individuals-variables table. Even though the example above has rows with names of the three individuals, the way you get a table like this is with two categorical variables.</p>
+</div>
+<div id="distance-table" class="section level3">
+<h3><span class="header-section-number">1.2.6</span> Distance table</h3>
+<p>Another interesting type of table is a distance table. Depending on who you talk to, the term “distance” may be used with slightly different meanings. Some authors refer to the word distance conveying a metric distance meaning. Other authors instead use the word distance to convey a general idea of dissimilarity.</p>
+<p>In general, you can find <em>distance</em> tables under two opposite perspectives: similarities and disimilarities. The table below is an example of a similarity table.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-17"></span>
+<img src="images/tables/table-distance.png" alt="Table of proximities" width="45%" />
+<p class="caption">
+Figure 1.13: Table of proximities
+</p>
+</div>
+</div>
+<div id="summary" class="section level3">
+<h3><span class="header-section-number">1.2.7</span> Summary</h3>
+<ul>
+<li><p>Most statistical learning methods require data in a table format with multiple columns and rows.</p></li>
+<li><p>It’s important to be aware of the difference between a <em>raw</em> data table, and a <em>clean</em> table numerically codified.</p></li>
+<li><p>Unless otherwise specified, in this book we’ll assume that all the variables in a data matrix have numerical variables.</p></li>
+<li><p>For most of this book, we’ll consider a data set to be integrated by a group of <em>individuals</em> or objects on which we observe or measure one or more characteristics called <em>variables</em>.</p></li>
+</ul>
+<hr />
+<div id="make-a-donation-1" class="section level4 unnumbered">
+<h4><em>Make a donation</em></h4>
+<p><em>If you find this resource useful, please consider making a one-time donation in any amount. Your support really matters.</em></p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_donations" />
+<input type="hidden" name="business" value="ZF6U7K5MW25W2" />
+<input type="hidden" name="currency_code" value="USD" />
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+</form>
+
+</div>
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-individuals-and-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="datamatrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

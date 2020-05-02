@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>7.1 Mean of a variable | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="7.1 Mean of a variable | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="7.1 Mean of a variable | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="mean.html"/>
+<link rel="next" href="mean-as-a-balancing-point.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="mean-of-a-variable" class="section level2">
+<h2><span class="header-section-number">7.1</span> Mean of a variable</h2>
+<p>To measure variation, we usually begin by calculating a “typical” value. The idea is to summarize the values of a variable with one or two representative values. You will find this notion under several terms like measures of center, location, central tendency, or centrality.</p>
+<p>The prototypical summary value of center is the <strong>mean</strong>, sometimes referred to as average. The mean of an <span class="math inline">\(n-\)</span>element variable <span class="math inline">\(X = (x_1, x_2, \dots, x_n)\)</span>, represented by <span class="math inline">\(\bar{x}\)</span>, is obtained by adding all the <span class="math inline">\(x_i\)</span> values and then dividing by their total number <span class="math inline">\(n\)</span>:</p>
+<p><span class="math display">\[
+\bar{x} = \frac{x_1 + x_2 + \dots + x_n}{n}
+\]</span></p>
+<p>Using summation notation we can express <span class="math inline">\(\bar{x}\)</span> in a very compact way as:</p>
+<p><span class="math display">\[
+\bar{x} = \frac{1}{n} \sum_{i = 1}^{n} x_i
+\]</span></p>
+<p>If we want to compute the mean value of <code>weight</code></p>
+<p><span class="math display">\[
+\overline{\texttt{weight}} = \frac{1}{5} (22 + 15 + 23 + 19 + 14) = 18.6
+\]</span></p>
+<p>If you associate a constant weight of <span class="math inline">\(1/n\)</span> to each observation <span class="math inline">\(x_i\)</span>, you can look at the formula of the mean as a weighted sum:</p>
+<p><span class="math display">\[
+\bar{x} = \frac{1}{n} x_1 + \frac{1}{n} x_2 + \dots + \frac{1}{n} x_n
+\]</span></p>
+<p>This is a slightly different way of looking at the mean that will allow you to generalize the concept of an “average” as a <em>weighted aggregation of information</em>. For example, if we denote the weight of the <span class="math inline">\(i\)</span>-th individual as <span class="math inline">\(w_i\)</span>, then the average can be expressed as:</p>
+<p><span class="math display">\[
+\bar{x} = w_1 x_1 + w_2 x_2 + \dots + w_n x_n = \sum_{i=1}^{n} w_i x_i
+\]</span></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mean.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mean-as-a-balancing-point.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

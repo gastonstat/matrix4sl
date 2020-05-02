@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>13.1 SVD Basics | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="13.1 SVD Basics | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="13.1 SVD Basics | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="svd.html"/>
+<link rel="next" href="svd-rank-reduction-theorem.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,262 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="svd-basics" class="section level2">
+<h2><span class="header-section-number">13.1</span> SVD Basics</h2>
+<p>The Singular Value Decomposition expresses any matrix, such as an <span class="math inline">\(n \times p\)</span> matrix <span class="math inline">\(\mathbf{X}\)</span>, as the product of three other matrices:</p>
+<p><span class="math display">\[
+\mathbf{X = U D V^\mathsf{T}}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><p><span class="math inline">\(\mathbf{U}\)</span> is a <span class="math inline">\(n \times p\)</span> column <em>orthonormal</em> matrix containing the
+<strong>left singular vectors</strong>.</p></li>
+<li><p><span class="math inline">\(\mathbf{D}\)</span> is a <span class="math inline">\(p \times p\)</span> <em>diagonal</em> matrix containing the <strong>singular
+values</strong> of <span class="math inline">\(\mathbf{X}\)</span>.</p></li>
+<li><p><span class="math inline">\(\mathbf{V}\)</span> is a <span class="math inline">\(p \times p\)</span> column <em>orthonormal</em> matrix containing the
+<strong>right singular vectors</strong>.</p></li>
+</ul>
+<p>In terms of the shapes of the matrices, the SVD decomposition has this form:</p>
+<p><span class="math display">\[
+\begin{bmatrix} 
+ &amp;   &amp; \\
+ &amp;   &amp; \\
+ &amp; \mathbf{X} &amp; \\
+ &amp;   &amp; \\
+ &amp;   &amp; \\
+\end{bmatrix}
+= 
+\
+\begin{bmatrix} 
+ &amp;   &amp; \\
+ &amp;   &amp; \\
+ &amp; \mathbf{U} &amp; \\
+ &amp;   &amp; \\
+ &amp;   &amp; \\
+\end{bmatrix}
+\
+\begin{bmatrix} 
+ &amp;   &amp; \\
+ &amp; \mathbf{D} &amp; \\
+ &amp;   &amp; \\
+\end{bmatrix}
+\
+\begin{bmatrix} 
+ &amp;   &amp; \\
+ &amp; \mathbf{V}^\mathsf{T} &amp; \\
+ &amp;   &amp; \\
+\end{bmatrix}
+\]</span></p>
+<p>The SVD says that we can factorize <span class="math inline">\(\mathbf{X}\)</span> with the product of an orthonormal matrix <span class="math inline">\(\mathbf{U}\)</span>, a diagonal matrix <span class="math inline">\(\mathbf{D}\)</span>, and an orthonormal matrix <span class="math inline">\(\mathbf{V}\)</span>.</p>
+<p><span class="math display">\[
+\mathbf{X} = 
+\
+\begin{bmatrix} 
+u_{11} &amp; \cdots &amp; u_{1p} \\
+u_{21} &amp; \cdots &amp; u_{2p} \\
+\vdots &amp; \ddots &amp; \vdots \\
+u_{n1} &amp; \cdots &amp; u_{np} \\
+\end{bmatrix}
+\
+\begin{bmatrix} 
+l_{1} &amp; \cdots &amp; 0 \\ 
+\vdots &amp; \ddots &amp; \vdots \\
+0 &amp; \cdots &amp; l_{p} \\
+\end{bmatrix}
+\
+\begin{bmatrix} 
+v_{11} &amp; \cdots &amp; v_{p1} \\
+\vdots &amp; \ddots &amp; \vdots \\
+v_{1p} &amp; \cdots &amp; v_{pp} \\
+\end{bmatrix}
+\]</span></p>
+<div id="svd-properties" class="section level3">
+<h3><span class="header-section-number">13.1.1</span> SVD Properties</h3>
+<p>You can think of the SVD structure as <em>the basic structure of a matrix</em>. What does this mean? Well, to understand the meaning of <em>basic</em> structure, we need to say more things about what each of the matrices <span class="math inline">\(\mathbf{U}\)</span>, <span class="math inline">\(\mathbf{D}\)</span>, and <span class="math inline">\(\mathbf{V}\)</span> represent. To be more precise:</p>
+<p><strong>About <span class="math inline">\(\mathbf{U}\)</span></strong></p>
+<p>The matrix <span class="math inline">\(\mathbf{U}\)</span> is the orthonormalized matrix which is the most basic component. It’s like the skeleton of the matrix.</p>
+<ul>
+<li><span class="math inline">\(\mathbf{U}\)</span> is unitary, and its columns form a basis for the space spanned by the columns of <span class="math inline">\(\mathbf{X}\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{U^\mathsf{T} U} = \mathbf{I}_{p}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\mathbf{U}\)</span> cannot be orthogonal (<span class="math inline">\(\mathbf{U U^\mathsf{T} = I_n}\)</span>) unless <span class="math inline">\(r = p\)</span></li>
+</ul>
+<p><strong>About <span class="math inline">\(\mathbf{V}\)</span></strong></p>
+<p>The matrix <span class="math inline">\(\mathbf{V}\)</span> is the orientation or correlational component.</p>
+<ul>
+<li><span class="math inline">\(\mathbf{V}\)</span> is unitary, and its columns form a basis for the space spanned by the rows of <span class="math inline">\(\mathbf{X}\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{V^\mathsf{T} V} = \mathbf{I}_{p}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\mathbf{V}\)</span> cannot be orthogonal (<span class="math inline">\(\mathbf{V V^\mathsf{T} = I_p}\)</span>) unless <span class="math inline">\(r = p = m\)</span></li>
+</ul>
+<p><strong>About <span class="math inline">\(\mathbf{D}\)</span></strong></p>
+<ul>
+<li><p>The matrix <span class="math inline">\(\mathbf{D}\)</span> is referred to as the <em>spectrum</em> and it is a scale component. Note that all the values in the diagonal of <span class="math inline">\(\mathbf{D}\)</span> are non-negative numbers.</p></li>
+<li><p>This matrix is also unique. It is a like a fingerprint of a matrix. It is assumed that the singular values are ordered from largest to smallest.</p></li>
+<li><p>All elements of <span class="math inline">\(\mathbf{D}\)</span> can be taken to be positive, ordered from large to small (with ties allowed).</p></li>
+<li><p><span class="math inline">\(\mathbf{D}\)</span> has non-negative real numbers on the diagonal (assuming <span class="math inline">\(\mathbf{X}\)</span> is real).</p></li>
+<li><p>The rank of <span class="math inline">\(\mathbf{X}\)</span> is given by <span class="math inline">\(r\)</span>, the number of such positive values (which are called singular values). Furthermore, <span class="math inline">\(r(\mathbf{X}) \leq min(n,p)\)</span>.</p></li>
+</ul>
+</div>
+<div id="diagrams-of-svd" class="section level3">
+<h3><span class="header-section-number">13.1.2</span> Diagrams of SVD</h3>
+<p>Under the standard convention that <span class="math inline">\(n &gt; p\)</span>, if we assume that <span class="math inline">\(\mathbf{X}\)</span> is of full-column rank <span class="math inline">\(r(\mathbf{X}) = p\)</span>, then we can display the decomposition with the following diagram:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-72"></span>
+<img src="images/decomps/svd-decomposition1.png" alt="SVD Decomposition Diagram" width="70%" />
+<p class="caption">
+Figure 13.1: SVD Decomposition Diagram
+</p>
+</div>
+<p>In general, when the decomposed matrix <span class="math inline">\(\mathbf{X}\)</span> is not of full column-rank, that is <span class="math inline">\(rank(\mathbf{X}) = r &lt; p\)</span>, then the diagram of SVD could be depicted as follows</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-73"></span>
+<img src="images/decomps/svd-decomposition2.png" alt="SVD Decomposition Diagram" width="70%" />
+<p class="caption">
+Figure 13.2: SVD Decomposition Diagram
+</p>
+</div>
+</div>
+<div id="example" class="section level3">
+<h3><span class="header-section-number">13.1.3</span> Example</h3>
+<p>Here’s an example of SVD in R, via the function <code>svd()</code>. First let’s create a matrix <span class="math inline">\(\mathbf{X}\)</span> with random numbers:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="svd-basics.html#cb23-1"></a><span class="co"># X matrix</span></span>
+<span id="cb23-2"><a href="svd-basics.html#cb23-2"></a><span class="kw">set.seed</span>(<span class="dv">22</span>)</span>
+<span id="cb23-3"><a href="svd-basics.html#cb23-3"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">20</span>), <span class="dv">5</span>, <span class="dv">4</span>)</span>
+<span id="cb23-4"><a href="svd-basics.html#cb23-4"></a>X</span>
+<span id="cb23-5"><a href="svd-basics.html#cb23-5"></a>       [,<span class="dv">1</span>]   [,<span class="dv">2</span>]   [,<span class="dv">3</span>]   [,<span class="dv">4</span>]</span>
+<span id="cb23-6"><a href="svd-basics.html#cb23-6"></a>[<span class="dv">1</span>,] <span class="fl">-0.512</span>  <span class="fl">1.858</span> <span class="fl">-0.764</span> <span class="fl">-0.922</span></span>
+<span id="cb23-7"><a href="svd-basics.html#cb23-7"></a>[<span class="dv">2</span>,]  <span class="fl">2.485</span> <span class="fl">-0.066</span>  <span class="fl">0.082</span>  <span class="fl">0.862</span></span>
+<span id="cb23-8"><a href="svd-basics.html#cb23-8"></a>[<span class="dv">3</span>,]  <span class="fl">1.008</span> <span class="fl">-0.163</span>  <span class="fl">0.743</span>  <span class="fl">2.003</span></span>
+<span id="cb23-9"><a href="svd-basics.html#cb23-9"></a>[<span class="dv">4</span>,]  <span class="fl">0.293</span> <span class="fl">-0.200</span> <span class="fl">-0.084</span>  <span class="fl">0.937</span></span>
+<span id="cb23-10"><a href="svd-basics.html#cb23-10"></a>[<span class="dv">5</span>,] <span class="fl">-0.209</span>  <span class="fl">0.301</span> <span class="fl">-0.793</span> <span class="fl">-1.616</span></span></code></pre></div>
+<p>R comes with the function <code>svd()</code>; it’s output is a list with three elements:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="svd-basics.html#cb24-1"></a><span class="co"># singular value decomposition</span></span>
+<span id="cb24-2"><a href="svd-basics.html#cb24-2"></a>SVD &lt;-<span class="st"> </span><span class="kw">svd</span>(X)</span>
+<span id="cb24-3"><a href="svd-basics.html#cb24-3"></a></span>
+<span id="cb24-4"><a href="svd-basics.html#cb24-4"></a><span class="co"># elements returned by svd()</span></span>
+<span id="cb24-5"><a href="svd-basics.html#cb24-5"></a><span class="kw">names</span>(SVD)</span>
+<span id="cb24-6"><a href="svd-basics.html#cb24-6"></a>[<span class="dv">1</span>] <span class="st">&quot;d&quot;</span> <span class="st">&quot;u&quot;</span> <span class="st">&quot;v&quot;</span></span></code></pre></div>
+<ul>
+<li><p><code>d</code> is a vector containing the singular values (i.e. values in the diagonal of <span class="math inline">\(\mathbf{D}\)</span>)</p></li>
+<li><p><code>u</code> is the matrix of left singular values.</p></li>
+<li><p><code>v</code> is the matrix of right singular values.</p></li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="svd-basics.html#cb25-1"></a><span class="co"># vector of singular values</span></span>
+<span id="cb25-2"><a href="svd-basics.html#cb25-2"></a>(d &lt;-<span class="st"> </span>SVD<span class="op">$</span>d)</span>
+<span id="cb25-3"><a href="svd-basics.html#cb25-3"></a>[<span class="dv">1</span>] <span class="fl">3.952</span> <span class="fl">2.022</span> <span class="fl">1.475</span> <span class="fl">0.432</span></span>
+<span id="cb25-4"><a href="svd-basics.html#cb25-4"></a></span>
+<span id="cb25-5"><a href="svd-basics.html#cb25-5"></a><span class="co"># matrix of left singular vectors</span></span>
+<span id="cb25-6"><a href="svd-basics.html#cb25-6"></a>(<span class="dt">U =</span> SVD<span class="op">$</span>u)</span>
+<span id="cb25-7"><a href="svd-basics.html#cb25-7"></a>       [,<span class="dv">1</span>]    [,<span class="dv">2</span>]   [,<span class="dv">3</span>]     [,<span class="dv">4</span>]</span>
+<span id="cb25-8"><a href="svd-basics.html#cb25-8"></a>[<span class="dv">1</span>,] <span class="fl">-0.425</span> <span class="fl">-0.5391</span> <span class="fl">-0.723</span>  <span class="fl">0.00979</span></span>
+<span id="cb25-9"><a href="svd-basics.html#cb25-9"></a>[<span class="dv">2</span>,]  <span class="fl">0.527</span> <span class="fl">-0.7686</span>  <span class="fl">0.286</span>  <span class="fl">0.05610</span></span>
+<span id="cb25-10"><a href="svd-basics.html#cb25-10"></a>[<span class="dv">3</span>,]  <span class="fl">0.575</span>  <span class="fl">0.0500</span> <span class="fl">-0.442</span>  <span class="fl">0.13107</span></span>
+<span id="cb25-11"><a href="svd-basics.html#cb25-11"></a>[<span class="dv">4</span>,]  <span class="fl">0.222</span>  <span class="fl">0.0527</span> <span class="fl">-0.170</span> <span class="fl">-0.95123</span></span>
+<span id="cb25-12"><a href="svd-basics.html#cb25-12"></a>[<span class="dv">5</span>,] <span class="fl">-0.402</span> <span class="fl">-0.3366</span>  <span class="fl">0.413</span> <span class="fl">-0.27337</span></span>
+<span id="cb25-13"><a href="svd-basics.html#cb25-13"></a></span>
+<span id="cb25-14"><a href="svd-basics.html#cb25-14"></a><span class="co"># matrix of right singular vectors</span></span>
+<span id="cb25-15"><a href="svd-basics.html#cb25-15"></a>(<span class="dt">V =</span> SVD<span class="op">$</span>v)</span>
+<span id="cb25-16"><a href="svd-basics.html#cb25-16"></a>       [,<span class="dv">1</span>]   [,<span class="dv">2</span>]    [,<span class="dv">3</span>]   [,<span class="dv">4</span>]</span>
+<span id="cb25-17"><a href="svd-basics.html#cb25-17"></a>[<span class="dv">1</span>,]  <span class="fl">0.571</span> <span class="fl">-0.741</span>  <span class="fl">0.3386</span>  <span class="fl">0.104</span></span>
+<span id="cb25-18"><a href="svd-basics.html#cb25-18"></a>[<span class="dv">2</span>,] <span class="fl">-0.274</span> <span class="fl">-0.530</span> <span class="fl">-0.7680</span>  <span class="fl">0.234</span></span>
+<span id="cb25-19"><a href="svd-basics.html#cb25-19"></a>[<span class="dv">3</span>,]  <span class="fl">0.277</span>  <span class="fl">0.321</span> <span class="fl">-0.0446</span>  <span class="fl">0.905</span></span>
+<span id="cb25-20"><a href="svd-basics.html#cb25-20"></a>[<span class="dv">4</span>,]  <span class="fl">0.723</span>  <span class="fl">0.261</span> <span class="fl">-0.5418</span> <span class="fl">-0.341</span></span></code></pre></div>
+<p>Let’s check that <span class="math inline">\(\mathbf{X} = \mathbf{U D V^\mathsf{T}}\)</span></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="svd-basics.html#cb26-1"></a><span class="co"># X equals U D V&#39;</span></span>
+<span id="cb26-2"><a href="svd-basics.html#cb26-2"></a>U <span class="op">%*%</span><span class="st"> </span><span class="kw">diag</span>(d) <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(V)</span>
+<span id="cb26-3"><a href="svd-basics.html#cb26-3"></a>       [,<span class="dv">1</span>]   [,<span class="dv">2</span>]   [,<span class="dv">3</span>]   [,<span class="dv">4</span>]</span>
+<span id="cb26-4"><a href="svd-basics.html#cb26-4"></a>[<span class="dv">1</span>,] <span class="fl">-0.512</span>  <span class="fl">1.858</span> <span class="fl">-0.764</span> <span class="fl">-0.922</span></span>
+<span id="cb26-5"><a href="svd-basics.html#cb26-5"></a>[<span class="dv">2</span>,]  <span class="fl">2.485</span> <span class="fl">-0.066</span>  <span class="fl">0.082</span>  <span class="fl">0.862</span></span>
+<span id="cb26-6"><a href="svd-basics.html#cb26-6"></a>[<span class="dv">3</span>,]  <span class="fl">1.008</span> <span class="fl">-0.163</span>  <span class="fl">0.743</span>  <span class="fl">2.003</span></span>
+<span id="cb26-7"><a href="svd-basics.html#cb26-7"></a>[<span class="dv">4</span>,]  <span class="fl">0.293</span> <span class="fl">-0.200</span> <span class="fl">-0.084</span>  <span class="fl">0.937</span></span>
+<span id="cb26-8"><a href="svd-basics.html#cb26-8"></a>[<span class="dv">5</span>,] <span class="fl">-0.209</span>  <span class="fl">0.301</span> <span class="fl">-0.793</span> <span class="fl">-1.616</span></span>
+<span id="cb26-9"><a href="svd-basics.html#cb26-9"></a></span>
+<span id="cb26-10"><a href="svd-basics.html#cb26-10"></a><span class="co"># compare to X</span></span>
+<span id="cb26-11"><a href="svd-basics.html#cb26-11"></a>X</span>
+<span id="cb26-12"><a href="svd-basics.html#cb26-12"></a>       [,<span class="dv">1</span>]   [,<span class="dv">2</span>]   [,<span class="dv">3</span>]   [,<span class="dv">4</span>]</span>
+<span id="cb26-13"><a href="svd-basics.html#cb26-13"></a>[<span class="dv">1</span>,] <span class="fl">-0.512</span>  <span class="fl">1.858</span> <span class="fl">-0.764</span> <span class="fl">-0.922</span></span>
+<span id="cb26-14"><a href="svd-basics.html#cb26-14"></a>[<span class="dv">2</span>,]  <span class="fl">2.485</span> <span class="fl">-0.066</span>  <span class="fl">0.082</span>  <span class="fl">0.862</span></span>
+<span id="cb26-15"><a href="svd-basics.html#cb26-15"></a>[<span class="dv">3</span>,]  <span class="fl">1.008</span> <span class="fl">-0.163</span>  <span class="fl">0.743</span>  <span class="fl">2.003</span></span>
+<span id="cb26-16"><a href="svd-basics.html#cb26-16"></a>[<span class="dv">4</span>,]  <span class="fl">0.293</span> <span class="fl">-0.200</span> <span class="fl">-0.084</span>  <span class="fl">0.937</span></span>
+<span id="cb26-17"><a href="svd-basics.html#cb26-17"></a>[<span class="dv">5</span>,] <span class="fl">-0.209</span>  <span class="fl">0.301</span> <span class="fl">-0.793</span> <span class="fl">-1.616</span></span></code></pre></div>
+<p>Let’s also confirm that <span class="math inline">\(\mathbf{U}\)</span> and <span class="math inline">\(\mathbf{V}\)</span> are orthonormal:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="svd-basics.html#cb27-1"></a><span class="co"># U orthonormal  (U&#39;U = I)</span></span>
+<span id="cb27-2"><a href="svd-basics.html#cb27-2"></a><span class="kw">t</span>(U) <span class="op">%*%</span><span class="st"> </span>U</span>
+<span id="cb27-3"><a href="svd-basics.html#cb27-3"></a>         [,<span class="dv">1</span>]      [,<span class="dv">2</span>]      [,<span class="dv">3</span>]      [,<span class="dv">4</span>]</span>
+<span id="cb27-4"><a href="svd-basics.html#cb27-4"></a>[<span class="dv">1</span>,] <span class="fl">1.00e+00</span>  <span class="fl">1.39e-16</span>  <span class="fl">2.78e-17</span>  <span class="fl">0.00e+00</span></span>
+<span id="cb27-5"><a href="svd-basics.html#cb27-5"></a>[<span class="dv">2</span>,] <span class="fl">1.39e-16</span>  <span class="fl">1.00e+00</span> <span class="fl">-2.78e-17</span> <span class="fl">-8.33e-17</span></span>
+<span id="cb27-6"><a href="svd-basics.html#cb27-6"></a>[<span class="dv">3</span>,] <span class="fl">2.78e-17</span> <span class="fl">-2.78e-17</span>  <span class="fl">1.00e+00</span>  <span class="fl">5.55e-17</span></span>
+<span id="cb27-7"><a href="svd-basics.html#cb27-7"></a>[<span class="dv">4</span>,] <span class="fl">0.00e+00</span> <span class="fl">-8.33e-17</span>  <span class="fl">5.55e-17</span>  <span class="fl">1.00e+00</span></span>
+<span id="cb27-8"><a href="svd-basics.html#cb27-8"></a></span>
+<span id="cb27-9"><a href="svd-basics.html#cb27-9"></a><span class="co"># V orthonormal  (V&#39;V = I)</span></span>
+<span id="cb27-10"><a href="svd-basics.html#cb27-10"></a><span class="kw">t</span>(V) <span class="op">%*%</span><span class="st"> </span>V</span>
+<span id="cb27-11"><a href="svd-basics.html#cb27-11"></a>          [,<span class="dv">1</span>]      [,<span class="dv">2</span>]      [,<span class="dv">3</span>]      [,<span class="dv">4</span>]</span>
+<span id="cb27-12"><a href="svd-basics.html#cb27-12"></a>[<span class="dv">1</span>,]  <span class="fl">1.00e+00</span> <span class="fl">-1.11e-16</span> <span class="fl">-5.55e-17</span>  <span class="fl">1.11e-16</span></span>
+<span id="cb27-13"><a href="svd-basics.html#cb27-13"></a>[<span class="dv">2</span>,] <span class="fl">-1.11e-16</span>  <span class="fl">1.00e+00</span>  <span class="fl">8.33e-17</span>  <span class="fl">1.94e-16</span></span>
+<span id="cb27-14"><a href="svd-basics.html#cb27-14"></a>[<span class="dv">3</span>,] <span class="fl">-5.55e-17</span>  <span class="fl">8.33e-17</span>  <span class="fl">1.00e+00</span> <span class="fl">-8.33e-17</span></span>
+<span id="cb27-15"><a href="svd-basics.html#cb27-15"></a>[<span class="dv">4</span>,]  <span class="fl">1.11e-16</span>  <span class="fl">1.94e-16</span> <span class="fl">-8.33e-17</span>  <span class="fl">1.00e+00</span></span></code></pre></div>
+</div>
+<div id="relation-of-svd-and-cross-product-matrices" class="section level3">
+<h3><span class="header-section-number">13.1.4</span> Relation of SVD and Cross-Product Matrices</h3>
+<p>If you consider <span class="math inline">\(\mathbf{X}\)</span> to be a data matrix of <span class="math inline">\(n\)</span> individuals and <span class="math inline">\(p\)</span> variables, you should be able to recall that we can obtain two cross-products: <span class="math inline">\(\mathbf{X^\mathsf{T}X}\)</span> and <span class="math inline">\(\mathbf{X X^\mathsf{T}}\)</span>. It turns out that we can use the singular value decomposition of <span class="math inline">\(\mathbf{X}\)</span> to find the corresponding factorization of each of these products.</p>
+<p>The cross-product matrix of columns can be expressed as:</p>
+<p><span class="math display">\[\begin{align*}
+\mathbf{X^\mathsf{T} X} &amp;= (\mathbf{U D V^\mathsf{T}})^\mathsf{T} (\mathbf{U D V^\mathsf{T}}) \\
+&amp;= (\mathbf{V D U^\mathsf{T}}) (\mathbf{U D V^\mathsf{T}}) \\
+&amp;= \mathbf{V D} (\mathbf{U^\mathsf{T}} \mathbf{U}) \mathbf{D V^\mathsf{T}} \\
+&amp;= \mathbf{V D^2 V^\mathsf{T}}
+\end{align*}\]</span></p>
+<p>The cross-product matrix of rows can be expressed as:</p>
+<p><span class="math display">\[\begin{align*}
+\mathbf{X X^\mathsf{T}} &amp;= (\mathbf{U D V^\mathsf{T}}) (\mathbf{U D V^\mathsf{T}})^\mathsf{T} \\
+&amp;= (\mathbf{U D V^\mathsf{T}}) (\mathbf{V D U^\mathsf{T}}) \\
+&amp;= \mathbf{U D} (\mathbf{V^\mathsf{T}} \mathbf{V}) \mathbf{D U^\mathsf{T}} \\
+&amp;= \mathbf{U D^2 U^\mathsf{T}}
+\end{align*}\]</span></p>
+<p>One of the interesting things about SVD is that <span class="math inline">\(\mathbf{U}\)</span> and <span class="math inline">\(\mathbf{V}\)</span> are
+matrices whose columns are eigenvectors of product moment matrices that are
+<em>derived</em> from <span class="math inline">\(\mathbf{X}\)</span>. Specifically,</p>
+<ul>
+<li><p><span class="math inline">\(\mathbf{U}\)</span> is the matrix of eigenvectors of (symmetric)
+<span class="math inline">\(\mathbf{XX^\mathsf{T}}\)</span> of order <span class="math inline">\(n \times n\)</span></p></li>
+<li><p><span class="math inline">\(\mathbf{V}\)</span> is the matrix of eigenvectors of (symmetric) <span class="math inline">\(\mathbf{X^\mathsf{T}X}\)</span>
+of order <span class="math inline">\(p \times p\)</span></p></li>
+</ul>
+<p>Of additional interest is the fact that <span class="math inline">\(\mathbf{D}\)</span> is a diagonal matrix whose
+main diagonal entries are the square roots of <span class="math inline">\(\mathbf{U}^2\)</span>, the <em>common</em>
+matrix of eigenvalues of <span class="math inline">\(\mathbf{XX^\mathsf{T}}\)</span> and <span class="math inline">\(\mathbf{X^\mathsf{T}X}\)</span>.</p>
+<p>The EVD of the cross-product matrix of columns (or minor product moment)
+<span class="math inline">\(\mathbf{X^\mathsf{T} X}\)</span> can be expressed as:</p>
+<p><span class="math display">\[
+\mathbf{X^\mathsf{T} X} = \mathbf{V \Lambda V^\mathsf{T}}
+\]</span></p>
+<p>in terms of the SVD factorization of <span class="math inline">\(\mathbf{X}\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{X^\mathsf{T} X} = \mathbf{V D^2 V^\mathsf{T}}
+\]</span></p>
+<p>The EVD of the cross-product matrix of rows (or major product moment)
+<span class="math inline">\(\mathbf{X X^\mathsf{T}}\)</span> can be expressed as:</p>
+<p><span class="math display">\[
+\mathbf{X X^\mathsf{T}} = \mathbf{U \Lambda U^\mathsf{T}}
+\]</span></p>
+<p>in terms of the SVD factorization of <span class="math inline">\(\mathbf{X}\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{X X^\mathsf{T}} = \mathbf{U D^2 U^\mathsf{T}}
+\]</span></p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="svd.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="svd-rank-reduction-theorem.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

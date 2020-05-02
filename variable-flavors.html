@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>3.2 Variable Flavors | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="3.2 Variable Flavors | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="3.2 Variable Flavors | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="types-of-variables.html"/>
+<link rel="next" href="encoding-values.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -154,8 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.4" data-path="types-of-tables.html"><a href="types-of-tables.html#preference-table"><i class="fa fa-check"></i><b>1.2.4</b> Preference table</a></li>
 <li class="chapter" data-level="1.2.5" data-path="types-of-tables.html"><a href="types-of-tables.html#frequency-table"><i class="fa fa-check"></i><b>1.2.5</b> Frequency table</a></li>
 <li class="chapter" data-level="1.2.6" data-path="types-of-tables.html"><a href="types-of-tables.html#distance-table"><i class="fa fa-check"></i><b>1.2.6</b> Distance table</a></li>
-<li class="chapter" data-level="1.2.7" data-path="types-of-tables.html"><a href="types-of-tables.html#summary"><i class="fa fa-check"></i><b>1.2.7</b> Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="1.3" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>1.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="datamatrix.html"><a href="datamatrix.html"><i class="fa fa-check"></i><b>2</b> Data Matrix</a><ul>
 <li class="chapter" data-level="2.1" data-path="about-matrices.html"><a href="about-matrices.html"><i class="fa fa-check"></i><b>2.1</b> About Matrices</a></li>
@@ -176,15 +176,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i><b>3</b> Variables</a><ul>
-<li class="chapter" data-level="3.1" data-path="types-of-variables.html"><a href="types-of-variables.html"><i class="fa fa-check"></i><b>3.1</b> Types of Variables</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="types-of-variables.html"><a href="types-of-variables.html#nominal-variable"><i class="fa fa-check"></i><b>3.1.1</b> Nominal Variable</a></li>
-<li class="chapter" data-level="3.1.2" data-path="types-of-variables.html"><a href="types-of-variables.html#ordinal-variable"><i class="fa fa-check"></i><b>3.1.2</b> Ordinal Variable</a></li>
-<li class="chapter" data-level="3.1.3" data-path="types-of-variables.html"><a href="types-of-variables.html#discrete-variable"><i class="fa fa-check"></i><b>3.1.3</b> Discrete Variable</a></li>
-<li class="chapter" data-level="3.1.4" data-path="types-of-variables.html"><a href="types-of-variables.html#continuous-variable"><i class="fa fa-check"></i><b>3.1.4</b> Continuous Variable</a></li>
-<li class="chapter" data-level="3.1.5" data-path="types-of-variables.html"><a href="types-of-variables.html#caveat"><i class="fa fa-check"></i><b>3.1.5</b> Caveat</a></li>
+<li class="chapter" data-level="3.1" data-path="types-of-variables.html"><a href="types-of-variables.html"><i class="fa fa-check"></i><b>3.1</b> Types of Variables</a></li>
+<li class="chapter" data-level="3.2" data-path="variable-flavors.html"><a href="variable-flavors.html"><i class="fa fa-check"></i><b>3.2</b> Variable Flavors</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="variable-flavors.html"><a href="variable-flavors.html#nominal-variable"><i class="fa fa-check"></i><b>3.2.1</b> Nominal Variable</a></li>
+<li class="chapter" data-level="3.2.2" data-path="variable-flavors.html"><a href="variable-flavors.html#ordinal-variable"><i class="fa fa-check"></i><b>3.2.2</b> Ordinal Variable</a></li>
+<li class="chapter" data-level="3.2.3" data-path="variable-flavors.html"><a href="variable-flavors.html#discrete-variable"><i class="fa fa-check"></i><b>3.2.3</b> Discrete Variable</a></li>
+<li class="chapter" data-level="3.2.4" data-path="variable-flavors.html"><a href="variable-flavors.html#continuous-variable"><i class="fa fa-check"></i><b>3.2.4</b> Continuous Variable</a></li>
+<li class="chapter" data-level="3.2.5" data-path="variable-flavors.html"><a href="variable-flavors.html#caveat"><i class="fa fa-check"></i><b>3.2.5</b> Caveat</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="encoding-values.html"><a href="encoding-values.html"><i class="fa fa-check"></i><b>3.2</b> Encoding Values</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="encoding-values.html"><a href="encoding-values.html#more-on-encoding"><i class="fa fa-check"></i><b>3.2.1</b> More on encoding</a></li>
+<li class="chapter" data-level="3.3" data-path="encoding-values.html"><a href="encoding-values.html"><i class="fa fa-check"></i><b>3.3</b> Encoding Values</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="encoding-values.html"><a href="encoding-values.html#more-on-encoding"><i class="fa fa-check"></i><b>3.3.1</b> More on encoding</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="transformations.html"><a href="transformations.html"><i class="fa fa-check"></i><b>4</b> Transformations</a><ul>
@@ -289,18 +290,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="variable-flavors" class="section level2">
+<h2><span class="header-section-number">3.2</span> Variable Flavors</h2>
+<p>The division between categorical and quantitative variables is not the only one. Often, data scientists further classifiy categorical variables as <em>nominal</em> or <em>ordinal</em>. Likewise, quantitative variables can be classified as <em>discrete</em> or <em>continuous</em>. This next level of classification is chiefly based on the notion of <em>scales of measurement</em> of the variables.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-28"></span>
+<img src="images/variables/variable-qual-quant.png" alt="Further classification of variables" width="70%" />
+<p class="caption">
+Figure 3.1: Further classification of variables
+</p>
+</div>
+<div id="nominal-variable" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Nominal Variable</h3>
+<p>A categorical variable is <strong>nominal</strong> when it results from naming or labeling values that don’t have a natural order. An example of a nominal variable is <code>weapon</code> which has the following values:</p>
+<pre><code>[1] &quot;blaster&quot;         &quot;bowcaster&quot;       &quot;force-lightning&quot; &quot;lightsaber&quot;     
+[5] &quot;slugthrower&quot;     &quot;spear&quot;           &quot;unarmed&quot;        </code></pre>
+<p>Can you order the categories in a “natural” way? Not really. The term <em>nominal</em> according the dictionary means “existing in name only”. Thus, nominal values are just that: names. There is no reason why blaster is better or greater than lightsaber. You could say that you prefer a blaster over a lightsaber but that’s a different variable: personal preference.</p>
+<p>Other typical examples of nominal variables are:</p>
+<ul>
+<li><p>the sex of a newborn child: e.g. female or male</p></li>
+<li><p>the ethnicity of an individual: e.g. Native-American, African-American, Asian, White</p></li>
+<li><p>ice cream flavors: e.g. chocolate, vanilla, strawberry</p></li>
+<li><p>the numbers on the players’ jerseys of a soccer team: numbers used as identifiers</p></li>
+</ul>
+</div>
+<div id="ordinal-variable" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Ordinal Variable</h3>
+<p>A categorical variable is <strong>ordinal</strong> when it results from ordering values into a series of categories when no appropriate numerical scale is available. For example, consider a variable “usage frequency” measured with values <em>never</em>, <em>sometimes</em>, and <em>always</em>. In this case we can order the categories from less usage to more usage, or viceversa.</p>
+<p>Some examples of ordinal variables are:</p>
+<ul>
+<li><p>size of clothes: extra-small, small, medium, large, extra-large</p></li>
+<li><p>college year: freshman, sophomore, junior, senior</p></li>
+<li><p>spiciness: none, mild, moderate, very</p></li>
+<li><p>jedis ranks: youngling, padawan, knight, master, and grand master</p></li>
+</ul>
+</div>
+<div id="discrete-variable" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Discrete Variable</h3>
+<p>A quantitative variable is <strong>discrete</strong> when it results from counting. To be more precise, a discrete variable takes on zero or a positive integer value. Some examples of discrete variables are:</p>
+<ul>
+<li><p>the number of male ewooks in a family with four children (0, 1, 2, 3, or 4).</p></li>
+<li><p>the number of robots per Imperial Star Destroyer</p></li>
+<li><p>the number of moons orbiting around a planet</p></li>
+</ul>
+</div>
+<div id="continuous-variable" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> Continuous Variable</h3>
+<p>A quantitative variable is <strong>continuous</strong> when it results from measuring. More technically, a continuous variable theoretically takes on an infinite number of possible values, however, its reported values are subject to the precision or accuracy of the measurement device. Some examples of continuous variables are:</p>
+<ul>
+<li>the height of an individual</li>
+<li>the weight of a robot</li>
+<li>the speed of a starship</li>
+</ul>
+</div>
+<div id="caveat" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> Caveat</h3>
+<p>Keep in mind that not all variables fit neatly and unambiguously into one of the previous classes. For example, the age of an individual could be considered of a discrete variable when it gets reported in (whole) number of years. However, age could also be considered to be continuous when measured in a more granular scale: e.g. days, or hours, or seconds. Moreover, sometimes age is reported into ordered categories such as 0 to 5 years, 6 to 10, 11 to 15, and so on. These values would turn age into an ordinal variable.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="types-of-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="encoding-values.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

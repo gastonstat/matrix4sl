@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>3.1 Types of Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="3.1 Types of Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="3.1 Types of Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="variables.html"/>
+<link rel="next" href="encoding-values.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,137 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="types-of-variables" class="section level2">
+<h2><span class="header-section-number">3.1</span> Types of Variables</h2>
+<p>To illustrate some of the ideas presented in this chapter I’m going to use a toy
+example with data from the characters of the Star Wars universe. You can actually
+find the corresponding CSV file in the <code>data/</code> folder of the book’s github
+repository.</p>
+<pre><code>               name gender height weight     species     jedi          weapon
+1  Anakin Skywalker   male   1.88   84.0       human yes_jedi      lightsaber
+2     Padme Amidala female   1.65   45.0       human  no_jedi         unarmed
+3    Luke Skywalker   male   1.72   77.0       human yes_jedi      lightsaber
+4       Leia Organa female   1.50   49.0       human  no_jedi         blaster
+5      Qui-Gon Jinn   male   1.93   88.5       human yes_jedi      lightsaber
+6    Obi-Wan Kenobi   male   1.82   77.0       human yes_jedi      lightsaber
+7          Han Solo   male   1.80   80.0       human  no_jedi         blaster
+8   Sheev Palpatine   male   1.73   75.0       human  no_jedi force-lightning
+9             R2-D2   male   0.96   32.0       droid  no_jedi         unarmed
+10            C-3PO   male   1.67   75.0       droid  no_jedi         unarmed
+11             Yoda   male   0.66   17.0        yoda yes_jedi      lightsaber
+12       Darth Maul   male   1.75   80.0 dathomirian  no_jedi      lightsaber
+13            Dooku   male   1.93   86.0       human yes_jedi      lightsaber
+14        Chewbacca   male   2.28  112.0     wookiee  no_jedi       bowcaster
+15            Jabba   male   3.90     NA        hutt  no_jedi         unarmed
+16 Lando Calrissian   male   1.78   79.0       human  no_jedi         blaster
+17        Boba Fett   male   1.83   78.0       human  no_jedi         blaster
+18       Jango Fett   male   1.83   79.0       human  no_jedi         blaster
+19         Grievous   male   2.16  159.0     kaleesh  no_jedi     slugthrower
+20     Chief Chirpa   male   1.00   50.0        ewok  no_jedi           spear</code></pre>
+<p>The table consists of 20 rows and 7 columns. The rows
+correspond to <em>individuals</em> and the columns correspond to <em>variables</em>. Although
+this data set is a toy example, it contains variables of different types
+commonly found in real data sets.</p>
+<p>Interestingly, we can classify variables in a couple of different ways.</p>
+<p>The most basic and usual way to classify variables is in two distinct types:
+<strong>quantitative</strong> variables and <strong>categorical</strong> (or qualitative) variables.</p>
+<p><img src="images/variables/variable-types.png" width="55%" style="display: block; margin: auto;" /></p>
+<p>The variables <code>height</code> and <code>weight</code> are examples of quantitative variables
+because their values represent quantities. That is, they can be measured
+numerically on some sort of interval scale.</p>
+<p>In turn, variables such as <code>name</code>, <code>gender</code>, <code>species</code>, <code>jedi</code>, and <code>weapon</code>
+are categorical or qualitative variables because their values represent
+categories (or qualities). More formally, they describe a quality of an
+individual, and allows you to place an individual into a category or group,
+such as male or female.</p>
+<p>The division between categorical and quantitative variables is not the only one.
+Often, data scientists further classifiy categorical variables as <em>nominal</em> or
+<em>ordinal</em>. Likewise, quantitative variables can be classified as <em>discrete</em> or
+<em>continuous</em>. This next level of classification is chiefly based on the notion
+of <em>scales of measurement</em> of the variables.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-29"></span>
+<img src="images/variables/variable-qual-quant.png" alt="Further classification of variables" width="70%" />
+<p class="caption">
+Figure 3.2: Further classification of variables
+</p>
+</div>
+<div id="nominal-variable" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Nominal Variable</h3>
+<p>A categorical variable is <strong>nominal</strong> when it results from naming or labeling
+values that don’t have a natural order. An example of a nominal variable is
+<code>weapon</code> which has the following values:</p>
+<pre><code>[1] &quot;blaster&quot;         &quot;bowcaster&quot;       &quot;force-lightning&quot; &quot;lightsaber&quot;     
+[5] &quot;slugthrower&quot;     &quot;spear&quot;           &quot;unarmed&quot;        </code></pre>
+<p>Can you order the categories in a “natural” way? Not really. The term <em>nominal</em>
+according the dictionary means “existing in name only”. Thus, nominal values are
+just that: names. There is no reason why blaster is better or greater than
+lightsaber. You could say that you prefer a blaster over a lightsaber but that’s
+a different variable: personal preference.</p>
+<p>Other typical examples of nominal variables are:</p>
+<ul>
+<li><p>the sex of a newborn child: e.g. female or male</p></li>
+<li><p>the ethnicity of an individual: e.g. Native-American, African-American,
+Asian, White</p></li>
+<li><p>ice cream flavors: e.g. chocolate, vanilla, strawberry</p></li>
+<li><p>the numbers on the players’ jerseys of a soccer team: numbers used as identifiers</p></li>
+</ul>
+</div>
+<div id="ordinal-variable" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Ordinal Variable</h3>
+<p>A categorical variable is <strong>ordinal</strong> when it results from ordering values into
+a series of categories when no appropriate numerical scale is available. For
+example, consider a variable “usage frequency” measured with values <em>never</em>,
+<em>sometimes</em>, and <em>always</em>. In this case we can order the categories from less
+usage to more usage, or viceversa.</p>
+<p>Some examples of ordinal variables are:</p>
+<ul>
+<li><p>size of clothes: extra-small, small, medium, large, extra-large</p></li>
+<li><p>college year: freshman, sophomore, junior, senior</p></li>
+<li><p>spiciness: none, mild, moderate, very</p></li>
+<li><p>jedis ranks: youngling, padawan, knight, master, and grand master</p></li>
+</ul>
+</div>
+<div id="discrete-variable" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> Discrete Variable</h3>
+<p>A quantitative variable is <strong>discrete</strong> when it results from counting. To be
+more precise, a discrete variable takes on zero or a positive integer value.
+Some examples of discrete variables are:</p>
+<ul>
+<li><p>the number of male ewooks in a family with four children (0, 1, 2, 3, or 4).</p></li>
+<li><p>the number of robots per Imperial Star Destroyer</p></li>
+<li><p>the number of moons orbiting around a planet</p></li>
+</ul>
+</div>
+<div id="continuous-variable" class="section level3">
+<h3><span class="header-section-number">3.1.4</span> Continuous Variable</h3>
+<p>A quantitative variable is <strong>continuous</strong> when it results from measuring. More
+technically, a continuous variable theoretically takes on an infinite number of
+possible values, however, its reported values are subject to the precision or
+accuracy of the measurement device. Some examples of continuous variables are:</p>
+<ul>
+<li>the height of an individual</li>
+<li>the weight of a robot</li>
+<li>the speed of a starship</li>
+</ul>
+</div>
+<div id="caveat" class="section level3">
+<h3><span class="header-section-number">3.1.5</span> Caveat</h3>
+<p>Keep in mind that not all variables fit neatly and unambiguously into one of
+the previous classes. For example, the age of an individual could be considered
+of a discrete variable when it gets reported in (whole) number of years.
+However, age could also be considered to be continuous when measured in a more
+granular scale: e.g. days, or hours, or seconds. Moreover, sometimes age is
+reported into ordered categories such as 0 to 5 years, 6 to 10, 11 to 15, and
+so on. These values would turn age into an ordinal variable.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="encoding-values.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

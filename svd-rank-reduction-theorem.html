@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>13.2 SVD Rank-Reduction Theorem | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="13.2 SVD Rank-Reduction Theorem | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="13.2 SVD Rank-Reduction Theorem | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="svd-basics.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="svd-rank-reduction-theorem" class="section level2">
+<h2><span class="header-section-number">13.2</span> SVD Rank-Reduction Theorem</h2>
+<p>A very interesting and alternative way to represent the SVD is with the
+following formula:</p>
+<p><span class="math display">\[
+\mathbf{X} = \sum_{k=1}^{p} l_k \mathbf{u_k} \mathbf{v^\mathsf{T}_k}
+\]</span></p>
+<p>This equation expresses the SVD as a sum of <span class="math inline">\(p\)</span> rank 1 matrices. This result is
+formalized in what is known as the SVD theorem described by Carl Eckart and Gale
+Young in 1936, and it is often referred to as the Eckart-Young theorem. This
+theorem applies to practically <strong>any</strong> arbitrary rectangular matrix.</p>
+<p>The SVD theorem of Eckart and Young is related to the important problem of
+approximating a matrix. The basic result says that if <span class="math inline">\(\mathbf{X}\)</span> is an
+<span class="math inline">\(n \times p\)</span> rectangular matrix, then the best <span class="math inline">\(r\)</span>-dimensional approximation
+<span class="math inline">\(\hat{\mathbf{X}}\)</span> to <span class="math inline">\(\mathbf{X}\)</span> is obtained by minimizing:</p>
+<p><span class="math display">\[
+min \| \mathbf{X - \hat{X}} \|^2
+\]</span></p>
+<p>This type of approximation is a least squares approximation and the solution is
+obtained by taking the first <span class="math inline">\(r\)</span> elements of matrices
+<span class="math inline">\(\mathbf{U}, \mathbf{D}, \mathbf{V}\)</span> so that the <span class="math inline">\(n \times r\)</span> matrix</p>
+<p><span class="math display">\[
+\mathbf{\hat{X} = U_r D_r V^\mathsf{T}_r}
+\]</span></p>
+<p>The SVD theorem says that <em>any</em> rectangular matrix <span class="math inline">\(\mathbf{X}\)</span> can be broken
+down into the product of three matrices—an orthogonal matrix <span class="math inline">\(\mathbf{U}\)</span>,
+a diagonal matrix <span class="math inline">\(\mathbf{D}\)</span>, and the transpose of an orthogonal matrix
+<span class="math inline">\(\mathbf{V}\)</span>.</p>
+<p>In terms of the diagonal elements <span class="math inline">\(l_1, l_2, \dots, l_r\)</span> of <span class="math inline">\(\mathbf{D}\)</span>, the
+columns <span class="math inline">\(\mathbf{u_1}, \dots, \mathbf{u_r}\)</span> of <span class="math inline">\(\mathbf{U}\)</span>, and the columns
+<span class="math inline">\(\mathbf{v_1}, \dots, \mathbf{v_r}\)</span> of <span class="math inline">\(\mathbf{V}\)</span>, the basic structure of
+<span class="math inline">\(\mathbf{X}\)</span> may be written as</p>
+<p><span class="math display">\[
+\mathbf{X} =  l_1 \mathbf{u_1 v^\mathsf{T}_1} + l_2 \mathbf{u_2 v^\mathsf{T}_2} + \dots + l_r \mathbf{u_r v^\mathsf{T}_r}
+\]</span></p>
+<p>which shows that the matrix <span class="math inline">\(\mathbf{X}\)</span> of rank <span class="math inline">\(r\)</span> is a linear combination
+of <span class="math inline">\(r\)</span> matrices of rank 1.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-79"></span>
+<img src="images/decomps/svd-rank-one.png" alt="SVD as a sum of rank-one matrices" width="70%" />
+<p class="caption">
+Figure 13.3: SVD as a sum of rank-one matrices
+</p>
 </div>
+<p>For eample, if you take only the first two singular vectors and values, you can obtain a two-rank approximation <span class="math inline">\(\mathbf{\hat{X}}\)</span> of <span class="math inline">\(\mathbf{X}\)</span>.</p>
+<p><span class="math display">\[
+\mathbf{X} \approx \mathbf{\hat{X}_{2}} = l_1 \mathbf{u_1} \mathbf{v^\mathsf{T}_1} + l_2 \mathbf{u_2} \mathbf{v^\mathsf{T}_2}
+\]</span></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-80"></span>
+<img src="images/decomps/svd-rank-two.png" alt="SVD rank-two approximation" width="70%" />
+<p class="caption">
+Figure 13.4: SVD rank-two approximation
+</p>
+</div>
+<p>If you think about it, the SVD is of great utility because it tells us that the
+best 1-rank approximation, in the least squares sense, of any matrix
+<span class="math inline">\(\mathbf{X}\)</span> is <span class="math inline">\(l_1 \mathbf{u_1} \mathbf{v^\mathsf{T}_1}\)</span>.</p>
+<p><span class="math display">\[
+\mathbf{X} \approx \mathbf{\hat{X}_1} = l_1 \mathbf{u_1} \mathbf{v^\mathsf{T}_1}
+\]</span></p>
+<p>This implies that, from a conceptual standpoint, we can approximate the
+<span class="math inline">\(n \times p\)</span> numbers in <span class="math inline">\(\mathbf{X}\)</span> with just <span class="math inline">\(n + p + 1\)</span> values: <span class="math inline">\(n\)</span> numbers
+in <span class="math inline">\(\mathbf{u_1}\)</span>, <span class="math inline">\(p\)</span> numbers in <span class="math inline">\(\mathbf{v_1}\)</span>, and one scalar <span class="math inline">\(l_1\)</span>.</p>
+
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="svd-basics.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

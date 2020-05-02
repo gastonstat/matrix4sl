@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>6.1 Inner Product | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="6.1 Inner Product | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="6.1 Inner Product | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="vector.html"/>
+<link rel="next" href="length.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="inner-product" class="section level2">
+<h2><span class="header-section-number">6.1</span> Inner Product</h2>
+<p>The concept of an inner product is one of the most important matrix algebra concepts, also commonly referred to as the <em>dot product</em>. The inner product is a special operation defined on two vectors <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> that, as its name indicates, allows us to multiply <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> in a certain way.</p>
+<p>The inner product of two vectors <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span>—of the same size— is defined as:</p>
+<p><span class="math display">\[
+\mathbf{x \cdot y} = \sum_{i = 1}^{n} x_i y_i 
+\]</span></p>
+<p>basically the inner product consists of the element-by-element product of <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span>, and then adding everything up. The result is not another vector but a single number, a scalar. We can also write the inner product <span class="math inline">\(\mathbf{x \cdot y}\)</span> in vector notation as <span class="math inline">\(\mathbf{x^\mathsf{T} y}\)</span> since</p>
+<p><span class="math display">\[
+\mathbf{x^\mathsf{T} y} = (x_1 \dots x_n) 
+\begin{pmatrix} 
+y_1 \\
+\vdots \\
+y_n
+\end{pmatrix}
+= \sum_{i = 1}^{n} x_i y_i
+\]</span></p>
+<p>Consider the data about Leia and Luke used in the last chapter:</p>
+<pre><code>     weight height
+Leia    150     49
+Luke    172     77</code></pre>
+<p>For example, the inner product of <code>weight</code> and <code>height</code> in <span class="math inline">\(\mathbf{X}\)</span> is</p>
+<p><span class="math display">\[
+\texttt{weight}^\mathsf{T} \hspace{1mm} \texttt{height} = (150 \times 49) + (172 \times 77) = 20594
+\]</span></p>
+<p>What does this value mean? To answer this question we need to discuss three other concepts that are directly derived from having an inner product:</p>
+<ol style="list-style-type: decimal">
+<li><p>Length of a vector</p></li>
+<li><p>Angle between vectors</p></li>
+<li><p>Projection of vectors</p></li>
+</ol>
+<p>All these aspects play a very important role for multivariate methods. But not only that, we’ll see in a moment how many statistical summaries can be obtained through inner products.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="vector.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="length.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

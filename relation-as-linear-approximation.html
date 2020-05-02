@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>9.4 Relation as Linear Approximation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="9.4 Relation as Linear Approximation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="9.4 Relation as Linear Approximation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="correlation.html"/>
+<link rel="next" href="crossprods.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="relation-as-linear-approximation" class="section level2">
+<h2><span class="header-section-number">9.4</span> Relation as Linear Approximation</h2>
+<p>A linked but different way to examine relations between the variables is when
+we ask: Can we approximate one of the variables in terms of the other? This is
+an asymmetric type of association since we seek to say something about the
+variability of one variable, say <span class="math inline">\(\mathbf{y}\)</span>, in terms of the variability of
+<span class="math inline">\(\mathbf{x}\)</span>.</p>
+<p>We can think of several ways to approximate <span class="math inline">\(\mathbf{y}\)</span> in terms of
+<span class="math inline">\(\mathbf{x}\)</span>. The approximation of <span class="math inline">\(\mathbf{y}\)</span>, denoted by <span class="math inline">\(\hat{\mathbf{y}}\)</span>,
+means finding a coefficient <span class="math inline">\(b\)</span> such that:</p>
+<p><span class="math display">\[
+\hat{\mathbf{y}} = b \mathbf{x}
+\]</span></p>
+<p>The common approach to get <span class="math inline">\(\hat{\mathbf{y}}\)</span> in some optimal way is by
+minimizing the square difference between <span class="math inline">\(\mathbf{y}\)</span> and <span class="math inline">\(\hat{\mathbf{y}}\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-65"></span>
+<img src="images/covar/vectors-approximation.png" alt="Linear approximation" width="70%" />
+<p class="caption">
+Figure 9.3: Linear approximation
+</p>
 </div>
+<p>The answer to this question comes in the form of a projection. More precisely,
+we orthogonally project <span class="math inline">\(\mathbf{y}\)</span> onto <span class="math inline">\(\mathbf{x}\)</span>:</p>
+<p><span class="math display">\[
+\hat{\mathbf{y}} = \mathbf{x} \left( \frac{\mathbf{y^\mathsf{T} x}}{\mathbf{x^\mathsf{T} x}} \right)
+\]</span></p>
+<p>or equivalently:</p>
+<p><span class="math display">\[
+\hat{\mathbf{y}} = \mathbf{x} \left( \frac{\mathbf{y^\mathsf{T} x}}{\| \mathbf{x} \|^2} \right)
+\]</span></p>
+<p>Note that the term in parenthesis is just a scalar, so we can actually express
+<span class="math inline">\(\hat{\mathbf{y}}\)</span> as <span class="math inline">\(b \mathbf{x}\)</span>. This means that a projection implies
+multiplying <span class="math inline">\(\mathbf{x}\)</span> by some number <span class="math inline">\(b\)</span>, such that
+<span class="math inline">\(\hat{\mathbf{y}} = b \mathbf{x}\)</span> is a stretched or shrinked version of
+<span class="math inline">\(\mathbf{x}\)</span>. This is nothing else than the least squares regression of
+<span class="math inline">\(\mathbf{y}\)</span> on <span class="math inline">\(\mathbf{x}\)</span>. This is better appreciated in the following
+figure.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-66"></span>
+<img src="images/covar/orthogonal-projection.png" alt="Orthogonal projection" width="70%" />
+<p class="caption">
+Figure 9.4: Orthogonal projection
+</p>
+</div>
+<p>Note that the correlation between <span class="math inline">\(\mathbf{y}\)</span> and <span class="math inline">\(\hat{\mathbf{y}}\)</span> is:</p>
+<p><span class="math display">\[
+cor(\mathbf{y}, \hat{\mathbf{y}}) = \frac{\mathbf{y^\mathsf{T} x}}{\| \mathbf{y} \|}
+\]</span></p>
+<p>or alternatively:</p>
+<p><span class="math display">\[
+cor^{2}(\mathbf{y}, \hat{\mathbf{y}}) = \frac{\mathbf{y^\mathsf{T} x}}{\mathbf{y^\mathsf{T}}y}
+\]</span></p>
+
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="correlation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="crossprods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

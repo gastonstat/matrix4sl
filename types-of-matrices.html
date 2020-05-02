@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>2.3 Types of Matrices | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="2.3 Types of Matrices | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="2.3 Types of Matrices | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="data-matrix.html"/>
+<link rel="next" href="variables.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,168 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="types-of-matrices" class="section level2">
+<h2><span class="header-section-number">2.3</span> Types of Matrices</h2>
+<p>There are various kinds of matrices which are commonly used in statistical learning methods. Let’s briefly revisit some of them.</p>
+<div id="general-rectangular-matrix" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> General Rectangular Matrix</h3>
+<p>The most general type of matrix is a rectangular matrix. This means that there is an arbitrary number of <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns.</p>
+<p><span class="math display">\[ 
+\left[\begin{array}{ccc}
+1 &amp; 2 &amp; 3  \\
+4 &amp; 5 &amp; 6  \\
+7 &amp; 8 &amp; 9  \\
+10 &amp; 11 &amp; 12  \\
+\end{array}\right]
+\]</span></p>
+<p>If a matrix has more rows than columns <span class="math inline">\(n &gt; p\)</span>, sometimes we call this a vertical or <em>tall</em> matrix:</p>
+<p><span class="math display">\[ 
+\left[\begin{array}{ccc}
+1 &amp; 2 &amp; 3  \\
+4 &amp; 5 &amp; 6  \\
+7 &amp; 8 &amp; 9  \\
+10 &amp; 11 &amp; 12  \\
+13 &amp; 14 &amp; 15  \\
+\end{array}\right]
+\]</span></p>
+<p>In contrast, if a matrix has more columns than rows, <span class="math inline">\(p &gt; n\)</span>, sometimes we call this a horizontal, <em>flat</em> or <em>wide</em> matrix:</p>
+<p><span class="math display">\[ 
+\left[\begin{array}{cccc}
+1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \\
+6 &amp; 7 &amp; 8 &amp; 9 &amp; 10 \\
+11 &amp; 12 &amp; 13 &amp; 14 &amp; 15 \\
+\end{array}\right]
+\]</span></p>
 </div>
+<div id="square-matrix" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Square Matrix</h3>
+<p>A square matrix is one with same number of rows and columns, <span class="math inline">\(n = p\)</span>. In statiscal learning, various matrices derived from a data matrix are typically square, this typically happens when working with derived cross-products such as <span class="math inline">\(\mathbf{X^\mathsf{T} X}\)</span> or <span class="math inline">\(\mathbf{X X^\mathsf{T}}\)</span>.</p>
+<p><span class="math display">\[ 
+\left[\begin{array}{ccc}
+1 &amp; 2 &amp; 3  \\
+4 &amp; 5 &amp; 6  \\
+7 &amp; 8 &amp; 9  \\
+\end{array}\right]
+\]</span></p>
+</div>
+<div id="symmetric-matrix" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Symmetric Matrix</h3>
+<p>A symmetric matrix is a special case of a square matrix: the corresponding elements of corresponding rows and columns are equal. In other words, in a symmetric matrix we have that the element <span class="math inline">\(x_{ij}\)</span> is equal to <span class="math inline">\(x_{ji}\)</span>.</p>
+<p><span class="math display">\[ 
+\left[\begin{array}{ccc}
+1 &amp; 2 &amp; 3  \\
+2 &amp; 4 &amp; 5  \\
+3 &amp; 5 &amp; 6  \\
+\end{array}\right]
+\]</span></p>
+</div>
+<div id="diagonal-matrix" class="section level3">
+<h3><span class="header-section-number">2.3.4</span> Diagonal Matrix</h3>
+<p>A diagonal matrix is a special case of symmetric matrix in which all nondiagonal elements are 0.</p>
+<p><span class="math display">\[ 
+\left[\begin{array}{ccc}
+1 &amp; 0 &amp; 0  \\
+0 &amp; 2 &amp; 0  \\
+0 &amp; 0 &amp; 3  \\
+\end{array}\right]
+\]</span></p>
+<p>In other words, in a symmetric matrix, <span class="math inline">\(x_{ij} = 0\)</span> for <span class="math inline">\(i \neq j\)</span>. The only elements that may not necessarily be qual to zero are those in the diagonal.</p>
+<p><span class="math display">\[ 
+\left[\begin{array}{ccc}
+x_{11} &amp; 0 &amp; 0  \\
+0 &amp; x_{22} &amp; 0  \\
+0 &amp; 0 &amp; x_{33}  \\
+\end{array}\right]
+\]</span></p>
+</div>
+<div id="scalar-matrix" class="section level3">
+<h3><span class="header-section-number">2.3.5</span> Scalar Matrix</h3>
+<p>The scalar matrix is a special type of diagonal matrix in which all the diagonal elements are equal scalars.</p>
+<p><span class="math display">\[ 
+\left[\begin{array}{ccc}
+5 &amp; 0 &amp; 0  \\
+0 &amp; 5 &amp; 0  \\
+0 &amp; 0 &amp; 5  \\
+\end{array}\right]
+\]</span></p>
+</div>
+<div id="identity-matrix" class="section level3">
+<h3><span class="header-section-number">2.3.6</span> Identity Matrix</h3>
+<p>The identity matrix is a special case of the scalar matrix in which the diagonal elements are all equal to one. This matrix is typically represented with the letter <span class="math inline">\(\mathbf{I}\)</span>. To indicate the dimensions of this matrix, we typically write it with a subscript for the number of rows (or columns). For example, <span class="math inline">\(\mathbf{I}_{n}\)</span> represents the identity matrix of dimension <span class="math inline">\(n \times n\)</span>.</p>
+<p><span class="math display">\[ 
+\mathbf{I}_{3} = 
+\left[\begin{array}{ccc}
+1 &amp; 0 &amp; 0  \\
+0 &amp; 1 &amp; 0  \\
+0 &amp; 0 &amp; 1  \\
+\end{array}\right]
+\]</span></p>
+<p>In matrix algebra, the identity matrix plays the same role as the number 1 in ordinary or scalar algebra.</p>
+</div>
+<div id="triangular-matrix" class="section level3">
+<h3><span class="header-section-number">2.3.7</span> Triangular Matrix</h3>
+<p>A square matrix with only 0’s above or below the diagonal is called a <em>triangular</em> matrix. There are two flavors of this type of matrix: upper triangular and lower triangular.</p>
+<p>An upper triangular matrix has zeros below the diagonal.</p>
+<p><span class="math display">\[ 
+\left[\begin{array}{ccc}
+1 &amp; 2 &amp; 3  \\
+0 &amp; 5 &amp; 6  \\
+0 &amp; 0 &amp; 9  \\
+\end{array}\right]
+\quad \textsf{or} \quad 
+\left[\begin{array}{ccc}
+1 &amp; 2 &amp; 3  \\
+ &amp; 5 &amp; 6  \\
+ &amp;  &amp; 9  \\
+\end{array}\right]
+\]</span></p>
+<p>Conversely, a lower triangular matrix has zeros above the diagonal.</p>
+<p><span class="math display">\[ 
+\left[\begin{array}{ccc}
+1 &amp; 0 &amp; 0  \\
+4 &amp; 5 &amp; 0  \\
+7 &amp; 8 &amp; 9  \\
+\end{array}\right]
+\quad \textsf{or} \quad 
+\left[\begin{array}{ccc}
+1 &amp;  &amp;   \\
+4 &amp; 5 &amp;  \\
+7 &amp; 8 &amp; 9  \\
+\end{array}\right]
+\]</span></p>
+</div>
+<div id="shapes-of-matrices" class="section level3">
+<h3><span class="header-section-number">2.3.8</span> Shapes of Matrices</h3>
+<p>To summarize the various types of matrices described so far, here’s a diagram depicting their shapes. The general type of matrix is a rectangular matrix which can be divided in three types: vertical or tall (<span class="math inline">\(n &gt; p\)</span>), square (<span class="math inline">\(n = p\)</span>), and horizontal or wide (<span class="math inline">\(n &lt; p\)</span>). Among square matrices, the notion of symmetry plays a special role, and among symmetric matrices, we can say that diagonal ones have the most basic structure.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-24"></span>
+<img src="images/matrix/matrix-shapes.png" alt="Various shapes of matrices" width="60%" />
+<p class="caption">
+Figure 2.2: Various shapes of matrices
+</p>
+</div>
+<hr />
+<div id="make-a-donation-2" class="section level4 unnumbered">
+<h4><em>Make a donation</em></h4>
+<p><em>If you find this resource useful, please consider making a one-time donation in any amount. Your support really matters.</em></p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_donations" />
+<input type="hidden" name="business" value="ZF6U7K5MW25W2" />
+<input type="hidden" name="currency_code" value="USD" />
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+</form>
+
+</div>
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-matrix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

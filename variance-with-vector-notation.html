@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>8.2 Variance with Vector Notation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="8.2 Variance with Vector Notation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="8.2 Variance with Vector Notation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="about-the-variance.html"/>
+<link rel="next" href="standard-deviation-as-a-norm.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="variance-with-vector-notation" class="section level2">
+<h2><span class="header-section-number">8.2</span> Variance with Vector Notation</h2>
+<p>In a similar way to expressing the mean with vector notation, you can also formulate the variance in terms of vector-matrix notation. First, notice that the formula of the variance consists of the addition of squared terms. Second, recall that a sum of numbers can be expressed with an inner product by using the unit vector (or summation operator). If we denote a vector of ones of size <span class="math inline">\(n\)</span> as <span class="math inline">\(\mathbf{1}_{n}\)</span>, then the variance of a vector <span class="math inline">\(\mathbf{x}\)</span> can be obtained with the following inner product:</p>
+<p><span class="math display">\[
+var(\mathbf{x}) = \frac{1}{n} (\mathbf{x} - \mathbf{\bar{x}})^\mathsf{T} (\mathbf{x} - \mathbf{\bar{x}})
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{\bar{x}}\)</span> is an <span class="math inline">\(n\)</span>-element vector of mean values <span class="math inline">\(\bar{x}\)</span>.</p>
+<p>Assuming that <span class="math inline">\(\mathbf{x}\)</span> is already mean-centered, then the variance is proportional to the squared norm of <span class="math inline">\(\mathbf{x}\)</span></p>
+<p><span class="math display">\[
+var(\mathbf{x}) = \frac{1}{n} \hspace{1mm} \mathbf{x}^\mathsf{T} \mathbf{x} = \frac{1}{n} \| \mathbf{x} \|^2
+\]</span></p>
+<p>This means that we can formulate the variance with the general notion of an inner product:</p>
+<p><span class="math display">\[
+var(\mathbf{x}) = \frac{1}{n} &lt;\mathbf{x}, \mathbf{x}&gt;
+\]</span></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="about-the-variance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="standard-deviation-as-a-norm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

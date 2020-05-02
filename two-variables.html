@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>9.1 Two Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="9.1 Two Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="9.1 Two Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="covar.html"/>
+<link rel="next" href="covariance.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="two-variables" class="section level2">
+<h2><span class="header-section-number">9.1</span> Two Variables</h2>
+<p>Let us start by considering the most simple scenario when we have two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, represented by vectors <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span>, respectively.</p>
+<p>Different types of relations between <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> are possible,
+as shown in the figure below containing several scatter-plots. There are linear
+relations of both type positive and negative. There are also two types of
+nonlinear relations, one monotone and the other one non-montone. In addition,
+the last two plots show absence of relations.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-63"></span>
+<img src="images/covar/bivariate-relations.png" alt="Different relations between two variables" width="70%" />
+<p class="caption">
+Figure 9.1: Different relations between two variables
+</p>
+</div>
+<p><br></p>
+<ul>
+<li><p><strong>Positive linear relation</strong>: <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> vary
+simultaneously in the same direction; an increase in <span class="math inline">\(\mathbf{x}\)</span> is
+accompanied by an increase in <span class="math inline">\(\mathbf{y}\)</span> in constant proportion.</p></li>
+<li><p><strong>Negative linear relation</strong>: <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> vary in opposite
+directions; an increase in <span class="math inline">\(\mathbf{x}\)</span> is accompanied by a decrease in
+<span class="math inline">\(\mathbf{y}\)</span>.</p></li>
+<li><p><strong>Nonlinear monotone relation</strong>: <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> vary in the
+same direction but the slope is not constant; changes in <span class="math inline">\(\mathbf{y}\)</span> are
+different dependening on the values of <span class="math inline">\(\mathbf{x}\)</span>.</p></li>
+<li><p><strong>Nonlinear non-monotone relation</strong>: although there is a functional relation
+between <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span>, the relation is not monotone;
+<span class="math inline">\(\mathbf{y}\)</span> increases and decrases accordingly to <span class="math inline">\(\mathbf{x}\)</span>.</p></li>
+<li><p><strong>No relation</strong>: regardless of the values of <span class="math inline">\(\mathbf{x}\)</span>, two things may
+happen. One is that knowing <span class="math inline">\(\mathbf{x}\)</span>, nothing can be said about <span class="math inline">\(\mathbf{y}\)</span>; the other is that <span class="math inline">\(\mathbf{y}\)</span> remains constant.</p></li>
+</ul>
+<p>For convenience sake most multivariate techniques focus on linear relations.
+Even though two variables <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> may show a nonlinear
+relation, it is often possible to apply some transformation to one of the them
+in order to have a more linear association.</p>
+<p>The general approach to determine if <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> are related
+is to assess whether there is <em>simultaneous variation</em> between them. The idea
+is to define a measure for <em>quantifying</em> the strength of the relation. When
+<span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> are in a quantitative scale, the most common way
+to quantify and assess the relationship between them is with the covariance and
+correlation.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="covar.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="covariance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

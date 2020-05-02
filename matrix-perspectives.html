@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>5.1 Matrix Perspectives | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="5.1 Matrix Perspectives | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="5.1 Matrix Perspectives | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="duality.html"/>
+<link rel="next" href="vector.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="matrix-perspectives" class="section level2">
+<h2><span class="header-section-number">5.1</span> Matrix Perspectives</h2>
+<p>It’s very enlightening to think of a data matrix as viewed from the glass of Geometry. The key idea is to think of the data in a matrix as elements living in a multidimensional space. Actually, we can regard a data matrix from two apparently different perspectives that, in reality, are intimately connected: the <strong>rows perspective</strong> and the <strong>columns perspective</strong>. In order to explain these perspectives, let me use the following diagram of a data matrix <span class="math inline">\(\mathbf{X}\)</span> with <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns, with <span class="math inline">\(x_{ij}\)</span> representing the element in the <span class="math inline">\(i\)</span>-th row and <span class="math inline">\(j\)</span>-th column.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-43"></span>
+<img src="images/duality/data-perspectives.png" alt="Duality of a data matrix" width="70%" />
+<p class="caption">
+Figure 5.1: Duality of a data matrix
+</p>
 </div>
+<p>When we look at a data matrix from the <em>columns</em> perpective what we are doing is focusing on the <span class="math inline">\(p\)</span> variables. In a similar way, when looking at a data matrix from its <em>rows</em> perspective, we are focusing on the <span class="math inline">\(n\)</span> individuals. This double perspective or <strong>duality</strong> for short, is like the two sides of the same coin.</p>
+<div id="rows-space" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Rows Space</h3>
+<p>We know that human vision is limited to three-dimensions, but pretend that you had superpowers that let you visualize a space with any number of dimensions.</p>
+<p>Because each row of the data matrix has <span class="math inline">\(p\)</span> elements, we can regard individuals as objects that live in a <span class="math inline">\(p\)</span>-dimensional space. For visualization purposes, think of each variable as playing the role of a dimension associated to a given axis in this space; likewise, consider each of the <span class="math inline">\(n\)</span> individuals as being depicted as a point (or particle) in such space, like in the following diagram:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-44"></span>
+<img src="images/duality/rows-space.png" alt="Rows space" width="70%" />
+<p class="caption">
+Figure 5.2: Rows space
+</p>
+</div>
+<p>In the figure above, even though I’m showing only three axes, you should pretend that you are visualizing a <span class="math inline">\(p\)</span>-dimensional space (imaging that there are <span class="math inline">\(p\)</span> axes). Each point in this space corresponds to a single individual, and they all form what you can call a <em>cloud of points</em>.</p>
+</div>
+<div id="columns-space" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Columns Space</h3>
+<p>We can do the same visual exercise with the columns of a data matrix. Since each variable has <span class="math inline">\(n\)</span> elements, we can regard the set of <span class="math inline">\(p\)</span> variables as objects that live in an <span class="math inline">\(n\)</span>-dimensional space. For convenient purposes, and in order to distinguish them from the individuals, we use an arrow (or vector) to graphically represent each variable:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-45"></span>
+<img src="images/duality/columns-space.png" alt="Columns space" width="70%" />
+<p class="caption">
+Figure 5.3: Columns space
+</p>
+</div>
+<p>Analogously to the rows space and its cloud of individuals, you should also pretend that the image above is displaying an <span class="math inline">\(n\)</span>-dimensional space with a bunch of blue arrows pointing in various directions.</p>
+</div>
+<div id="toy-example" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> Toy Example</h3>
+<p>To make things less abstract, let’s consider a toy <span class="math inline">\(2 \times 2\)</span> data matrix of <em>weight</em> and <em>height</em> values measured on two individuals: Leia and Luke. Here’s the code in R to create a matrix <code>X</code> for this example:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="matrix-perspectives.html#cb17-1"></a><span class="co"># toy matrix</span></span>
+<span id="cb17-2"><a href="matrix-perspectives.html#cb17-2"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">150</span>, <span class="dv">172</span>, <span class="dv">49</span>, <span class="dv">77</span>), <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb17-3"><a href="matrix-perspectives.html#cb17-3"></a><span class="kw">rownames</span>(X) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Leia&quot;</span>, <span class="st">&quot;Luke&quot;</span>)</span>
+<span id="cb17-4"><a href="matrix-perspectives.html#cb17-4"></a><span class="kw">colnames</span>(X) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;weight&quot;</span>, <span class="st">&quot;height&quot;</span>)</span>
+<span id="cb17-5"><a href="matrix-perspectives.html#cb17-5"></a></span>
+<span id="cb17-6"><a href="matrix-perspectives.html#cb17-6"></a>X</span>
+<span id="cb17-7"><a href="matrix-perspectives.html#cb17-7"></a>     weight height</span>
+<span id="cb17-8"><a href="matrix-perspectives.html#cb17-8"></a>Leia    <span class="dv">150</span>     <span class="dv">49</span></span>
+<span id="cb17-9"><a href="matrix-perspectives.html#cb17-9"></a>Luke    <span class="dv">172</span>     <span class="dv">77</span></span></code></pre></div>
+<p><strong>Space of individuals</strong>: If you look at the data in <code>X</code> from the individuals standpoint, each of them can be depicted as a dot in the 2-dimensional space spanned by variables <code>weight</code> and <code>height</code>:</p>
+<p><img src="matrix4sl_files/figure-html/unnamed-chunk-47-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><strong>Space of variables</strong>: If you look at the data in <code>X</code> from the variables standpoint, each of them can be depicted as a vector in the 2-dimensional space spanned by <code>Leia</code> and <code>Luke</code>:</p>
+<p><img src="matrix4sl_files/figure-html/unnamed-chunk-48-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="dual-space" class="section level3">
+<h3><span class="header-section-number">5.1.4</span> Dual Space</h3>
+<p>The following figure illustrates the dual perspective of a data matrix. The standard convention is to represent <strong>individuals as points</strong> in a <span class="math inline">\(p\)</span>-dimensional space; and in turn represent <strong>variables as vectors</strong> in an <span class="math inline">\(n\)</span>-dimensional space.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-49"></span>
+<img src="images/duality/duality-diagram.png" alt="Rows and columns perspectives" width="80%" />
+<p class="caption">
+Figure 5.4: Rows and columns perspectives
+</p>
+</div>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="duality.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vector.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

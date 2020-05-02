@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>10.2 Cross-Products | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="10.2 Cross-Products | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="10.2 Cross-Products | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="common-data-matrices.html"/>
+<link rel="next" href="decomps.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="cross-products" class="section level2">
+<h2><span class="header-section-number">10.2</span> Cross-Products</h2>
+<p>There are two fundamental matrix products that play a crucial role when the data is in an <span class="math inline">\(n \times p\)</span> matrix <span class="math inline">\(X\)</span> with objects in rows, and variables in columns
+(assume <span class="math inline">\(n &gt; p\)</span>):</p>
+<p><span class="math display">\[
+\mathbf{X^\mathsf{T} X} \quad \&amp; \quad \mathbf{X X^\mathsf{T}}
+\]</span></p>
+<p><span class="math inline">\(\mathbf{X^\mathsf{T} X}\)</span> is also known as the <strong>minor product moment</strong> because it is of size <span class="math inline">\(p \times p\)</span> (assuming <span class="math inline">\(n &gt; p\)</span>).</p>
+<ul>
+<li>sum-of-squares and cross-products (SSCP) of columns</li>
+<li>made of inner products of the columns of <span class="math inline">\(\mathbf{X}\)</span></li>
+<li><em>association</em> matrix for the variables</li>
+</ul>
+<p><span class="math inline">\(\mathbf{X X^\mathsf{T}}\)</span> is also known as the <strong>major product moment</strong> because is of size <span class="math inline">\(n \times n\)</span> (assuming <span class="math inline">\(n &gt; p\)</span>).</p>
+<ul>
+<li>sum-of-squares and cross-products of rows</li>
+<li>made of inner products of the rows of <span class="math inline">\(\mathbf{X}\)</span></li>
+<li>association matrix for the objects</li>
+</ul>
+<div id="covariance-matrix" class="section level4 unnumbered">
+<h4>Covariance Matrix</h4>
+<p>If <span class="math inline">\(\mathbf{X}\)</span> is mean-centered, i.e. <span class="math inline">\(\mathbf{X} = \mathbf{X_C}\)</span>, then</p>
+<p><span class="math display">\[
+\frac{1}{n} \mathbf{X^\mathsf{T} X}  \qquad \text{and} \qquad \frac{1}{n-1} \mathbf{X^\mathsf{T} X}
+\]</span></p>
+<p>are the covariance matrices (population and sample flavors).</p>
 </div>
+<div id="correlation-matrix" class="section level4 unnumbered">
+<h4>Correlation Matrix</h4>
+<p>If <span class="math inline">\(\mathbf{X}\)</span> is standardized, i.e. <span class="math inline">\(\mathbf{X} = \mathbf{X_S}\)</span>, then</p>
+<p><span class="math display">\[
+\frac{1}{n} \mathbf{X^\mathsf{T} X}  \qquad \text{and} \qquad \frac{1}{n-1} \mathbf{X^\mathsf{T} X}
+\]</span></p>
+<p>are the correlation matrices (population and sample flavors).</p>
+
+</div>
+</div>
+<!-- </div> -->
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="common-data-matrices.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="decomps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

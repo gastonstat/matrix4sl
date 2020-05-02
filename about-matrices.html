@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>2.1 About Matrices | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="2.1 About Matrices | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="2.1 About Matrices | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="datamatrix.html"/>
+<link rel="next" href="data-matrix.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="about-matrices" class="section level2">
+<h2><span class="header-section-number">2.1</span> About Matrices</h2>
+<p>First let’s talk about matrices in the mathematical sense of the word. A matrix is a rectangular array of elements. More formally, a matrix is a mathematical object whose structure is a rectangular array of entries.</p>
+<p>Typically, we consider the elements of a matrix to be numbers. Although you can certainly generalize the contents of a matrix and think about them as any type of symbols, not necessarily numbers. This is perhaps a common way to conceive a generic matrix from a more computational-oriented perspective.</p>
+<p>From example, an R matrix may be numeric, but you can also have matrices containing logical values (<code>TRUE</code> or <code>FALSE</code>), or even a matrix made up of characters.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="about-matrices.html#cb2-1"></a><span class="co"># numeric matrix</span></span>
+<span id="cb2-2"><a href="about-matrices.html#cb2-2"></a>A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb2-3"><a href="about-matrices.html#cb2-3"></a>A</span>
+<span id="cb2-4"><a href="about-matrices.html#cb2-4"></a>     [,<span class="dv">1</span>] [,<span class="dv">2</span>] [,<span class="dv">3</span>]</span>
+<span id="cb2-5"><a href="about-matrices.html#cb2-5"></a>[<span class="dv">1</span>,]    <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">9</span></span>
+<span id="cb2-6"><a href="about-matrices.html#cb2-6"></a>[<span class="dv">2</span>,]    <span class="dv">2</span>    <span class="dv">6</span>   <span class="dv">10</span></span>
+<span id="cb2-7"><a href="about-matrices.html#cb2-7"></a>[<span class="dv">3</span>,]    <span class="dv">3</span>    <span class="dv">7</span>   <span class="dv">11</span></span>
+<span id="cb2-8"><a href="about-matrices.html#cb2-8"></a>[<span class="dv">4</span>,]    <span class="dv">4</span>    <span class="dv">8</span>   <span class="dv">12</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="about-matrices.html#cb3-1"></a><span class="co"># logical matrix</span></span>
+<span id="cb3-2"><a href="about-matrices.html#cb3-2"></a>L &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb3-3"><a href="about-matrices.html#cb3-3"></a>L</span>
+<span id="cb3-4"><a href="about-matrices.html#cb3-4"></a>      [,<span class="dv">1</span>]  [,<span class="dv">2</span>]  [,<span class="dv">3</span>]</span>
+<span id="cb3-5"><a href="about-matrices.html#cb3-5"></a>[<span class="dv">1</span>,]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span></span>
+<span id="cb3-6"><a href="about-matrices.html#cb3-6"></a>[<span class="dv">2</span>,] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span>
+<span id="cb3-7"><a href="about-matrices.html#cb3-7"></a>[<span class="dv">3</span>,]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span></span>
+<span id="cb3-8"><a href="about-matrices.html#cb3-8"></a>[<span class="dv">4</span>,] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="about-matrices.html#cb4-1"></a><span class="co"># character matrix</span></span>
+<span id="cb4-2"><a href="about-matrices.html#cb4-2"></a>S &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(letters, <span class="dv">12</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb4-3"><a href="about-matrices.html#cb4-3"></a>S</span>
+<span id="cb4-4"><a href="about-matrices.html#cb4-4"></a>     [,<span class="dv">1</span>] [,<span class="dv">2</span>] [,<span class="dv">3</span>]</span>
+<span id="cb4-5"><a href="about-matrices.html#cb4-5"></a>[<span class="dv">1</span>,] <span class="st">&quot;c&quot;</span>  <span class="st">&quot;e&quot;</span>  <span class="st">&quot;o&quot;</span> </span>
+<span id="cb4-6"><a href="about-matrices.html#cb4-6"></a>[<span class="dv">2</span>,] <span class="st">&quot;v&quot;</span>  <span class="st">&quot;k&quot;</span>  <span class="st">&quot;q&quot;</span> </span>
+<span id="cb4-7"><a href="about-matrices.html#cb4-7"></a>[<span class="dv">3</span>,] <span class="st">&quot;w&quot;</span>  <span class="st">&quot;z&quot;</span>  <span class="st">&quot;u&quot;</span> </span>
+<span id="cb4-8"><a href="about-matrices.html#cb4-8"></a>[<span class="dv">4</span>,] <span class="st">&quot;b&quot;</span>  <span class="st">&quot;h&quot;</span>  <span class="st">&quot;i&quot;</span> </span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="datamatrix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-matrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

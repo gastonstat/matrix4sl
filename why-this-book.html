@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>Why this book? | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="Why this book? | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="Why this book? | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="prerequisites.html"/>
+<link rel="next" href="acknowledgements.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -136,10 +136,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#give-now"><i class="fa fa-check"></i>Give Now</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#how-this-book-is-organized"><i class="fa fa-check"></i>How this book is organized?</a></li>
-<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
-<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#why-this-book"><i class="fa fa-check"></i>Why this book?</a></li>
-<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="how-this-book-is-organized.html"><a href="how-this-book-is-organized.html"><i class="fa fa-check"></i>How this book is organized?</a></li>
+<li class="chapter" data-level="" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="why-this-book.html"><a href="why-this-book.html"><i class="fa fa-check"></i>Why this book?</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
 <li class="part"><span><b>I Data Essentials</b></span></li>
 <li class="chapter" data-level="1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>1</b> Data Tables</a><ul>
@@ -154,8 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.4" data-path="types-of-tables.html"><a href="types-of-tables.html#preference-table"><i class="fa fa-check"></i><b>1.2.4</b> Preference table</a></li>
 <li class="chapter" data-level="1.2.5" data-path="types-of-tables.html"><a href="types-of-tables.html#frequency-table"><i class="fa fa-check"></i><b>1.2.5</b> Frequency table</a></li>
 <li class="chapter" data-level="1.2.6" data-path="types-of-tables.html"><a href="types-of-tables.html#distance-table"><i class="fa fa-check"></i><b>1.2.6</b> Distance table</a></li>
-<li class="chapter" data-level="1.2.7" data-path="types-of-tables.html"><a href="types-of-tables.html#summary"><i class="fa fa-check"></i><b>1.2.7</b> Summary</a></li>
 </ul></li>
+<li class="chapter" data-level="1.3" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>1.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="datamatrix.html"><a href="datamatrix.html"><i class="fa fa-check"></i><b>2</b> Data Matrix</a><ul>
 <li class="chapter" data-level="2.1" data-path="about-matrices.html"><a href="about-matrices.html"><i class="fa fa-check"></i><b>2.1</b> About Matrices</a></li>
@@ -176,15 +176,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i><b>3</b> Variables</a><ul>
-<li class="chapter" data-level="3.1" data-path="types-of-variables.html"><a href="types-of-variables.html"><i class="fa fa-check"></i><b>3.1</b> Types of Variables</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="types-of-variables.html"><a href="types-of-variables.html#nominal-variable"><i class="fa fa-check"></i><b>3.1.1</b> Nominal Variable</a></li>
-<li class="chapter" data-level="3.1.2" data-path="types-of-variables.html"><a href="types-of-variables.html#ordinal-variable"><i class="fa fa-check"></i><b>3.1.2</b> Ordinal Variable</a></li>
-<li class="chapter" data-level="3.1.3" data-path="types-of-variables.html"><a href="types-of-variables.html#discrete-variable"><i class="fa fa-check"></i><b>3.1.3</b> Discrete Variable</a></li>
-<li class="chapter" data-level="3.1.4" data-path="types-of-variables.html"><a href="types-of-variables.html#continuous-variable"><i class="fa fa-check"></i><b>3.1.4</b> Continuous Variable</a></li>
-<li class="chapter" data-level="3.1.5" data-path="types-of-variables.html"><a href="types-of-variables.html#caveat"><i class="fa fa-check"></i><b>3.1.5</b> Caveat</a></li>
+<li class="chapter" data-level="3.1" data-path="types-of-variables.html"><a href="types-of-variables.html"><i class="fa fa-check"></i><b>3.1</b> Types of Variables</a></li>
+<li class="chapter" data-level="3.2" data-path="variable-flavors.html"><a href="variable-flavors.html"><i class="fa fa-check"></i><b>3.2</b> Variable Flavors</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="variable-flavors.html"><a href="variable-flavors.html#nominal-variable"><i class="fa fa-check"></i><b>3.2.1</b> Nominal Variable</a></li>
+<li class="chapter" data-level="3.2.2" data-path="variable-flavors.html"><a href="variable-flavors.html#ordinal-variable"><i class="fa fa-check"></i><b>3.2.2</b> Ordinal Variable</a></li>
+<li class="chapter" data-level="3.2.3" data-path="variable-flavors.html"><a href="variable-flavors.html#discrete-variable"><i class="fa fa-check"></i><b>3.2.3</b> Discrete Variable</a></li>
+<li class="chapter" data-level="3.2.4" data-path="variable-flavors.html"><a href="variable-flavors.html#continuous-variable"><i class="fa fa-check"></i><b>3.2.4</b> Continuous Variable</a></li>
+<li class="chapter" data-level="3.2.5" data-path="variable-flavors.html"><a href="variable-flavors.html#caveat"><i class="fa fa-check"></i><b>3.2.5</b> Caveat</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="encoding-values.html"><a href="encoding-values.html"><i class="fa fa-check"></i><b>3.2</b> Encoding Values</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="encoding-values.html"><a href="encoding-values.html#more-on-encoding"><i class="fa fa-check"></i><b>3.2.1</b> More on encoding</a></li>
+<li class="chapter" data-level="3.3" data-path="encoding-values.html"><a href="encoding-values.html"><i class="fa fa-check"></i><b>3.3</b> Encoding Values</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="encoding-values.html"><a href="encoding-values.html#more-on-encoding"><i class="fa fa-check"></i><b>3.3.1</b> More on encoding</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="transformations.html"><a href="transformations.html"><i class="fa fa-check"></i><b>4</b> Transformations</a><ul>
@@ -289,18 +290,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="why-this-book" class="section level2 unnumbered">
+<h2>Why this book?</h2>
+<p>As with most of the books that I have written, this book is the result of my professional experience and personal frustration of not having resources like these out there. More specifically, this book was motiviated by the lack of a text that I could refer my students to so they could learn about how various matrix algebra concepts are connected with statistical ideas.</p>
+<p>Likewise, throughout my teaching activities to different user profiles, I’ve seen time and again that we are not trained to see the connections between many analytical notions, and their matrix-geometric interpretation.</p>
+<p>This book is my attempt to provide a resource for future (and current) data scientists that may have the software know-how, and a strong understanding of the working principles of the techniques they use, yet they have gaps at the matrix algebra level that prevents them to fully grasp the “under the hood” principles of their daily tools.</p>
+<p>My hope is that the concepts and notions described in this text will allow you to get a good grasp of the methods discussed in any textbook about Statistical Learning, and how they work. I’m sure this book will be a great resource and consulting text for undergraduate and graduate students, as well as data scientists in the more general sense of this term.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="prerequisites.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="acknowledgements.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

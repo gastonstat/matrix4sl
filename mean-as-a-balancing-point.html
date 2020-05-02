@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>7.2 Mean as a Balancing Point | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="7.2 Mean as a Balancing Point | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="7.2 Mean as a Balancing Point | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="mean-of-a-variable.html"/>
+<link rel="next" href="mean-with-vector-notation.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="mean-as-a-balancing-point" class="section level2">
+<h2><span class="header-section-number">7.2</span> Mean as a Balancing Point</h2>
+<p>What does the mean do? In what sense the mean is a “typical” value? How do you
+make sense of a mean value?</p>
+<p>To understand what the mean is doing, I find it helpful to visualize the values
+of a variable as points in a number-line, or with a dot-plot. Consider a variable
+having five numbers: <span class="math inline">\(X = (1, 2, 6, 7, 9)\)</span>, that can be visualized on a number
+line (see image below). Imagine that the number line is like a weighting scale
+or a teeter-totter (or see-saw).</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-54"></span>
+<img src="images/mean/mean-number-line.png" alt="Values on a number-line" width="35%" />
+<p class="caption">
+Figure 7.1: Values on a number-line
+</p>
+</div>
+<p>The mean plays the role of the <strong>balancing point</strong>. In other words, <span class="math inline">\(\bar{x}\)</span> is the value that balances out the scale and keeps things on equilibrium.</p>
+<p>In this example, the value of 5 is the balancing point:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-55"></span>
+<img src="images/mean/mean-balancing.png" alt="Mean as a balancing point" width="75%" />
+<p class="caption">
+Figure 7.2: Mean as a balancing point
+</p>
+</div>
+<p>Saying that 5 is the balancing point has a specific meaning. It means that the
+signed distances of all the values with respect to the mean cancel out. If you
+calculate the <em>deviations</em> from the mean: <span class="math inline">\((x_i - \bar{x})\)</span>, and add them all up,
+the sum is zero:</p>
+<p><span class="math display">\[
+(1 - 5) + (2 - 5) + (6 - 5) + (7 - 5) + (9 - 5) = 0
+\]</span></p>
+<p>This is a very special property of the mean, indicating that this value is optimal in the sense that it is the only number for which the sum of deviations with itself is zero. In a more algebraic way, say you are looking for a number <span class="math inline">\(a\)</span> that makes the sum of deviations zero:</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} (x_i - a) = 0
+\]</span></p>
+<p>What would <span class="math inline">\(a\)</span> be? Then mean <span class="math inline">\(\bar{x}\)</span>! No other value would be able to cancel out the sum of deviations around itself.</p>
+<p>Keep in mind that the mean is just a summary. In fact, it is just one possible kind of “typical” value (other common measures of center are the median or the mode). As any summary statistic, it involves compressing the information of a variable into a single representative number. But remember: this number does not tell you the whole story about the variability in a variable.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mean-of-a-variable.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mean-with-vector-notation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

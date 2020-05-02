@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>1.1 Data: Individuals and Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="1.1 Data: Individuals and Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="1.1 Data: Individuals and Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="data.html"/>
+<link rel="next" href="types-of-tables.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="data-individuals-and-variables" class="section level2">
+<h2><span class="header-section-number">1.1</span> Data: Individuals and Variables</h2>
+<p>To illustrate some of the ideas presented in this chapter I’m going to use a toy example with data of three individuals from a galaxy far, far away: Leia Organa, Luke Skywalker, and Han Solo.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="images/tables/sw-leia-luke-han.png" alt="Three individuals" width="60%" />
+<p class="caption">
+Figure 1.1: Three individuals
+</p>
+</div>
+<p>In particular, let’s consider the following information about these subjects:</p>
+<ul>
+<li>Leia is a woman, 150 centimeters tall, and weighs 49 kilograms.</li>
+<li>Luke is a man, 172 centimeters tall, and weighs 77 kilograms.</li>
+<li>Han is a man, 180 centimeters tall, and weighs 80 kilograms.</li>
+</ul>
+<p>We can say that the above information lists characteristics of three individuals. Or put in an equivalent way, that three subjects are described based on some of their characteristics: Name, Sex, Height, and Weight. Using statistical terminology, we formally say that we have data consisting of three <em>individuals</em> described by some <em>variables</em>.</p>
+<p>Statistical terminology is abundant and you’ll find that individuals are also known as observations, cases, objects, samples or items. Example of individuals can be people, animals, plants, planets, spaceships, countries, or any other kind of object.</p>
+<p>A variable is any characteristic of an individual. Sometimes we refer to variables as features, aspects, indicators, descriptors, or properties that we measure or observe on individuals.</p>
+<p>This combo of <strong>individuals and variables</strong> is perhaps the most common conceptualization of the term “data” within Statistical Learning methods. But it’s not the only one. Bear in mind that there are other ways in which analysts and researchers think about data.</p>
+<div id="representing-data" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Representing Data</h3>
+<p>Assuming that our data consists of Name, Sex, Height and Weight for three individuals, we can present this information in various forms. One option is to organize the information in some sort of rectangular or tabular layout, like the one below:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="images/tables/table-conceptual.png" alt="Conceptual table" width="40%" />
+<p class="caption">
+Figure 1.2: Conceptual table
+</p>
+</div>
+<p>We can say that this data set is in tabular form, with four columns and three rows (four if you include the row of column names).</p>
+<p>The same data could be represented in a non-tabular form. An example of a non-tabular format is XML (eXtensible Markup Language). In this case, we can organize the information in a hierarchical way with embeded elements also known as <em>nodes</em>, like in the following example:</p>
+<pre><code>&lt;character&gt;
+  &lt;name&gt;Leia&lt;/name&gt;
+  &lt;sex&gt;female&lt;/sex&gt;
+  &lt;weight&gt;150 cm&lt;/weight&gt;
+  &lt;height&gt;49 kg&lt;/height&gt;
+&lt;/character&gt;
+&lt;character&gt;
+  &lt;name&gt;Luke&lt;/name&gt;
+  &lt;sex&gt;male&lt;/sex&gt;
+  &lt;weight&gt;172 cm&lt;/weight&gt;
+  &lt;height&gt;77 kg&lt;/height&gt;
+&lt;/character&gt;
+&lt;character&gt;
+  &lt;name&gt;Han&lt;/name&gt;
+  &lt;sex&gt;male&lt;/sex&gt;
+  &lt;weight&gt;180 cm&lt;/weight&gt;
+  &lt;height&gt;80 kg&lt;/height&gt;
+&lt;/character&gt;</code></pre>
+<p>In the above example there are three <code>&lt;character&gt;</code> nodes, each one containing four nodes: <code>&lt;name&gt;</code>, <code>&lt;sex&gt;</code>, <code>&lt;weight&gt;</code>, and <code>&lt;height&gt;</code>. This is an example of what I call <strong>raw data</strong>. Don’t worry if you are not familiar with XML. I just want to give you an example of the various ways in which data can be organized.</p>
+<p>From a computational point of view, you could actually find a plethora of formats and conventions used to store information, and data sets in particular. Some formats have been designed to store data in a way that mimics the structure of a rectangular table. But you can find other formats that use a non-tabular structure, like XML.</p>
+<p>When data is stored in a format that is supposed to represent a table, it is common to find visual displays with some grid of rows and columns.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="images/tables/table-tabular.png" alt="Data in tabular format" width="40%" />
+<p class="caption">
+Figure 1.3: Data in tabular format
+</p>
+</div>
+<p>This is another example of raw data, in particular a <em>raw data table</em>. The data is visually organized and displayed in a rectangular grid of cells. However, this table is not ready yet to be manipulated statistically, much less algebraically. Obviously, this table needs some processing and reshaping in order to obtain a table with numerical information that becomes useful for matrix algebra operations.</p>
+<p>More often than not, raw data will be far from being in tabular format, or at least it will require extra reshaping steps so that it can be ready for the analysis. Although this is a very common issue in practice, in this book I will assume that you’ve already struggled to get the data in the <em>right</em> rectangular shape.</p>
+</div>
+<div id="tabular-data" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Tabular Data</h3>
+<p>Eventually, to be analyzed with statistical learning tools and other multivariate techniques, your data will typically be required to have a certain specific structure, usually in the form of some sort of table or spreadsheet format (e.g. rows and columns).</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="images/tables/table-abstract.png" alt="Data Table Format" width="50%" />
+<p class="caption">
+Figure 1.4: Data Table Format
+</p>
+</div>
+<p>Depending on the nature of the data, and the way it is organized, rows and columns will have a particular meaning. The most common data table setting is the one of individuals-and-variables. Although somewhat arbitrary, the standard convention is that we use the columns to represent <strong>variables</strong>, and the rows to represent <strong>individuals</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="images/tables/table-inds-vars.png" alt="Conceptual table of individuals and variables" width="50%" />
+<p class="caption">
+Figure 1.5: Conceptual table of individuals and variables
+</p>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="types-of-tables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

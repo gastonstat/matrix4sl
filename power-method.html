@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>12.3 Power Method | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="12.3 Power Method | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="12.3 Power Method | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="properties-of-eigenstructures.html"/>
+<link rel="next" href="svd.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,128 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="power-method" class="section level2">
+<h2><span class="header-section-number">12.3</span> Power Method</h2>
+<p>Among all the set of methods which can be used to find eigenvalues and
+eigenvectors, one of the basic procedures following a successive approximation
+approach is the so-called <em>Power Method</em>.</p>
+<p>In its simplest form, the Power Method (PM) allows us to find <em>the largest</em>
+eigenvector and its corresponding eigenvalue. To be more precise, the PM
+allows us to find an approximation for the first eigenvalue of a symmetric
+matrix <span class="math inline">\(\mathbf{S}\)</span>. The basic idea of the power method is to choose an
+arbitrary vector <span class="math inline">\(\mathbf{w_0}\)</span> to which we will apply the symmetric matrix
+<span class="math inline">\(\mathbf{S}\)</span> repeatedly to form the following sequence:</p>
+<p><span class="math display">\[\begin{align*}
+ \mathbf{w_1} &amp;= \mathbf{S w_0} \\
+ \mathbf{w_2} &amp;= \mathbf{S w_1 = S^2 w_0} \\
+ \mathbf{w_3} &amp;= \mathbf{S w_2 = S^3 w_0} \\
+ \vdots \\
+ \mathbf{w_k} &amp;= \mathbf{S w_{k-1} = S^k w_0}
+\end{align*}\]</span></p>
+<p>As you can see, the PM reduces to simply calculate the powers of <span class="math inline">\(\mathbf{S}\)</span> multiplied to the initial vector <span class="math inline">\(\mathbf{w_0}\)</span>. Hence the name of <em>power method</em>.</p>
+<div class="figure" style="text-align: center"><span id="fig:power-method-example"></span>
+<img src="matrix4sl_files/figure-html/power-method-example-1.png" alt="Illustration of the sequence of vectors in the Power Method" width="70%" />
+<p class="caption">
+Figure 12.1: Illustration of the sequence of vectors in the Power Method
+</p>
 </div>
+<p>In practice, we must rescale the obtained vector <span class="math inline">\(\mathbf{w_k}\)</span> at each step in
+order to avoid an eventual overflow or underflow. Also, the rescaling will
+allows us to judge whether the sequence is converging. Assuming a reasonable
+scaling strategy, the sequence of iterates will usually converge to the
+dominant eigenvector of <span class="math inline">\(\mathbf{S}\)</span>. In other words, after some iterations,
+the vector <span class="math inline">\(\mathbf{w_{k-1}}\)</span> and <span class="math inline">\(\mathbf{w_k}\)</span> will be very similar, if not
+identical. The obtained vector is the dominant eigenvector. To get the
+corresponding eigenvalue we calculate the so-called <em>Rayleigh quotient</em>
+given by:</p>
+<p><span class="math display">\[
+\lambda = \frac{\mathbf{w_{k}^{\mathsf{T}} S^\mathsf{T} w_k}}{\| \mathbf{w_k} \|^2}
+\]</span></p>
+<div class="figure" style="text-align: center"><span id="fig:power-method-rescale"></span>
+<img src="matrix4sl_files/figure-html/power-method-rescale-1.png" alt="Sequence of vectors before and after scaling to unit norm" width="70%" />
+<p class="caption">
+Figure 12.2: Sequence of vectors before and after scaling to unit norm
+</p>
+</div>
+<div id="power-method-algorithm" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> Power Method Algorithm</h3>
+<p>There are some conditions for the power method to be succesfully used. One of
+them is that the matrix must have a <em>dominant</em> eigenvalue. The starting vector
+<span class="math inline">\(\mathbf{w_0}\)</span> must be nonzero. Very important, we need to scale each of the
+vectors <span class="math inline">\(\mathbf{w_k}\)</span>, otherwise the algorithm will “explode”.</p>
+<p>The Power Method is of a striking simplicity. The only thing we need,
+computationally speaking, is the operation of matrix multiplication. Let’s
+consider a more detailed version of the PM algorithm walking through it step by
+step:</p>
+<ol style="list-style-type: decimal">
+<li>Start with an arbitraty initial vector <span class="math inline">\(\mathbf{w}\)</span></li>
+<li>obtain product <span class="math inline">\(\mathbf{\tilde{w} = S w}\)</span></li>
+<li>normalize <span class="math inline">\(\mathbf{\tilde{w}}\)</span>
+<span class="math display">\[\mathbf{w} = \frac{\mathbf{\tilde{w}}}{\| \mathbf{\tilde{w}} \|}\]</span></li>
+<li>compare <span class="math inline">\(\mathbf{w}\)</span> with its previous version</li>
+<li>repeat steps 2 till 4 until convergence</li>
+</ol>
+</div>
+<div id="convergence-of-the-power-method" class="section level3">
+<h3><span class="header-section-number">12.3.2</span> Convergence of the Power Method</h3>
+<p>To see why and how the power method converges to the dominant eigenvalue, we
+need an important assumption. Let’s say the matrix <span class="math inline">\(\mathbf{S}\)</span> has <span class="math inline">\(p\)</span>
+eigenvalues <span class="math inline">\(\lambda_1, \lambda_2, \dots, \lambda_p\)</span>, and that they are ordered
+in decreasing way <span class="math inline">\(|\lambda_1| &gt; |\lambda_2| \geq \dots \geq |\lambda_p|\)</span>.
+Note that the first eigenvalue is strictly greater than the second one. This is
+a very important assumption. In the same way, we’ll assume that the matrix
+<span class="math inline">\(\mathbf{S}\)</span> has <span class="math inline">\(p\)</span> linearly independent vectors
+<span class="math inline">\(\mathbf{v_1}, \dots, \mathbf{v_p}\)</span> ordered in such a way that <span class="math inline">\(\mathbf{v_j}\)</span>
+corresponds to <span class="math inline">\(\lambda_j\)</span>.</p>
+<p>The initial vector <span class="math inline">\(\mathbf{w_0}\)</span> may be expressed as a linear combination of
+<span class="math inline">\(\mathbf{v_1}, \dots, \mathbf{v_p}\)</span></p>
+<p><span class="math display">\[
+\mathbf{w_0} = a_1 \mathbf{v_1} + \dots + a_p \mathbf{v_p}
+\]</span>
+At every step of the iterative process the vector <span class="math inline">\(\mathbf{w_m}\)</span> is given by:</p>
+<p><span class="math display">\[
+\mathbf{S}^m = a_1 \lambda_{1}^m \mathbf{v_1} + \dots + a_p \lambda_{p}^m \mathbf{v_p}
+\]</span></p>
+<p>Since <span class="math inline">\(\lambda_1\)</span> is the dominant eigenvalue, the component in the direction of
+<span class="math inline">\(\mathbf{u_1}\)</span> becomes relatively greater than the other components as <span class="math inline">\(m\)</span>
+increases. If we knew <span class="math inline">\(\lambda_1\)</span> in advance, we could rescale at each step by
+dividing by it to get:</p>
+<p><span class="math display">\[
+\left(\frac{1}{\lambda_{1}^m}\right) \mathbf{S}^m = a_1 \mathbf{v_1} + \dots + a_p \left(\frac{\lambda_{p}^m}{\lambda_{1}^m}\right) \mathbf{v_p}
+\]</span></p>
+<p>which converges to the eigenvector <span class="math inline">\(a_1 \mathbf{v_1}\)</span>, provided that <span class="math inline">\(a_1\)</span> is nonzero. Of course, in real life this scaling strategy is not possible—we
+don’t know <span class="math inline">\(\lambda_1\)</span>. Consequenlty, the eigenvector is determined only up to
+a constant multiple, which is not a concern since the really important thing is
+the <em>direction</em> not the length of the vector.</p>
+<p>The speed of the convergence depends on how bigger <span class="math inline">\(\lambda_1\)</span> is respect with
+to <span class="math inline">\(\lambda_2\)</span>, and on the choice of the initial vector <span class="math inline">\(\mathbf{w_0}\)</span>. If
+<span class="math inline">\(\lambda_1\)</span> is not much larger than <span class="math inline">\(\lambda_2\)</span>, then the convergence will be
+slow.</p>
+<p>One of the advantages of the power method is that it is a sequential method;
+this means that we can obtain <span class="math inline">\(\mathbf{w_1, w_2}\)</span>, and so on, so that if we
+only need the first <span class="math inline">\(k\)</span> vectors, we can stop the procedure at the desired stage.
+Once we’ve obtained the first eigenvector <span class="math inline">\(\mathbf{w_1}\)</span>, we can compute the
+second vector by reducing the matrix <span class="math inline">\(\mathbf{S}\)</span> by the amount explained by the
+first principal component. This operation of reduction is called <strong>deflation</strong>
+and the residual matrix is obtained as:</p>
+<p><span class="math display">\[
+\mathbf{E = S - z_{1}^{\mathsf{T}} z_1}
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{z_1} = \mathbf{S v_1}\)</span>.</p>
+<p>In order to calculate the second eigenvalue and its corresponding eigenvector,
+we operate on <span class="math inline">\(\mathbf{E}\)</span> in the same way as the operations on <span class="math inline">\(\mathbf{S}\)</span> to
+obtain <span class="math inline">\(\mathbf{w_2}\)</span>.</p>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="properties-of-eigenstructures.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="svd.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>4.1 Dummy Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="4.1 Dummy Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="4.1 Dummy Variables | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="transformations.html"/>
+<link rel="next" href="standardization.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="dummy-variables" class="section level2">
+<h2><span class="header-section-number">4.1</span> Dummy Variables</h2>
+<p>As we saw in the previous chapter, categorical variables are characteristics or qualities observed on individuals. An example of a categorical variable is Sex with possible values <em>male</em> and <em>female</em>. Most of the time, categorical variables will be codified in a non-numeric way, usually as strings or character values. However, it is not unusual to find numeric codes such as “female” = 1, and “male” = 2.</p>
+<p>More often than not, it is convenient to code categorical variables as <strong>dummy variables</strong>, that is, decompose a categorical variable into one or more indicator variables that take on the values 0 or 1. For example, suppose that Sex has two values <em>male</em> and <em>female</em>. This variable can be coded as two dummy variables which have values [1 0 0] for <em>female</em>, [0 1 1] for <em>male</em>:</p>
+<p><span class="math display">\[ 
+\left[\begin{array}{c}
+female \\
+male \\
+male \\
+\end{array}\right]
+= 
+\left[\begin{array}{cc}
+1 &amp; 0 \\
+0 &amp; 1 \\
+0 &amp; 1 \\
+\end{array}\right]
+\]</span></p>
+<p>For some statistical learning methods such as regression analysis—due to a technical reason—only one of these two dummies can be used. This means that you would drop one of the dummy columns:</p>
+<p><span class="math display">\[ 
+\left[\begin{array}{c}
+female \\
+male \\
+male \\
+\end{array}\right]
+= 
+\left[\begin{array}{c}
+1 \\
+0 \\
+0 \\
+\end{array}\right]
+\]</span></p>
+<p>The resulting one dummy variable is interpreted as the difference of <em>female</em> and <em>male</em>, keeping <em>female</em> as the reference value.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="transformations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="standardization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>8.1 About the variance | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="8.1 About the variance | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="8.1 About the variance | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="variance.html"/>
+<link rel="next" href="variance-with-vector-notation.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="about-the-variance" class="section level2">
+<h2><span class="header-section-number">8.1</span> About the variance</h2>
+<p>Simply put, the variance is a measure of spread around the mean. The main idea behind the calculation of the variance is to quantify the typical concentration of values around the mean. The way this is done is by averaging the squared deviations from the mean.</p>
+<p><span class="math display">\[
+var(X) = \frac{(x_1 - \bar{x})^2 + \dots + (x_n - \bar{x})^2}{n} = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^2
+\]</span></p>
+<p>Let’s disect the terms and operations involved in the formula of the variance.</p>
+<ul>
+<li><p>the main terms are the <em>deviations from the mean</em> <span class="math inline">\((x_i - \bar{x})\)</span>, that is, the difference between each observation <span class="math inline">\(x_i\)</span> and the mean <span class="math inline">\(\bar{x}\)</span>.</p></li>
+<li><p>conceptually speaking, we want to know what is the average size of the deviations around the mean.</p></li>
+<li><p>simply averaging the deviations won’t work because their sum is zero (i.e. the sum of deviations around the mean will cancel out because the mean is the balancing point).</p></li>
+<li><p>this is why we square each deviation: <span class="math inline">\((x_i - \bar{x})^2\)</span>, which literally means getting the squared distance from <span class="math inline">\(x_i\)</span> to <span class="math inline">\(\bar{x}\)</span>.</p></li>
+<li><p>having squared all the deviations, then we average them to get the variance.</p></li>
+</ul>
+<p>Because the variance has squared units, we need to take the square root to “recover” the original units in which <span class="math inline">\(X\)</span> is expressed. This gives us the <strong>standard deviation</strong></p>
+<p><span class="math display">\[
+sd(X) = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^2}
+\]</span></p>
+<p>In this sense, you can say that the standard deviation is roughly the average distance that the data points vary from the mean.</p>
+<div id="sample-variance" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> Sample Variance</h3>
+<p>In practice, you will often find two versions of the formula for the variance: one in which the sum of squared deviations is divided by <span class="math inline">\(n\)</span>, and another one in which the division is done by <span class="math inline">\(n-1\)</span>. Each version is associated to the statistical inference view of variance in terms of whether the data comes from the <em>population</em> or from a <em>sample</em> of the population.</p>
+<p>The <em>population variance</em> is obtained dividing by <span class="math inline">\(n\)</span>:</p>
+<p><span class="math display">\[
+\textsf{population variance:} \quad \frac{1}{(n)} \sum_{i=1}^{n} (x_i - \bar{x})^2
+\]</span></p>
+<p>The <em>sample variance</em> is obtained dividing by <span class="math inline">\(n - 1\)</span> instead of dividing by <span class="math inline">\(n\)</span>. The reason for doing this is to get an unbiased estimor of the population variance:</p>
+<p><span class="math display">\[
+\textsf{sample variance:} \quad \frac{1}{(n-1)} \sum_{i=1}^{n} (x_i - \bar{x})^2
+\]</span></p>
+<p>It is important to note that most statistical software compute the variance with the unbiased version. This is also the case in R with the function <code>var()</code>. For instance, consider the toy data set in the following matrix <code>X</code></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="about-the-variance.html#cb20-1"></a><span class="co"># data matrix</span></span>
+<span id="cb20-2"><a href="about-the-variance.html#cb20-2"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">150</span>, <span class="dv">172</span>, <span class="dv">180</span>, <span class="dv">49</span>, <span class="dv">77</span>, <span class="dv">80</span>), <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb20-3"><a href="about-the-variance.html#cb20-3"></a><span class="kw">rownames</span>(X) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Leia&quot;</span>, <span class="st">&quot;Luke&quot;</span>, <span class="st">&quot;Han&quot;</span>)</span>
+<span id="cb20-4"><a href="about-the-variance.html#cb20-4"></a><span class="kw">colnames</span>(X) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;weight&quot;</span>, <span class="st">&quot;height&quot;</span>)</span>
+<span id="cb20-5"><a href="about-the-variance.html#cb20-5"></a>X</span>
+<span id="cb20-6"><a href="about-the-variance.html#cb20-6"></a>     weight height</span>
+<span id="cb20-7"><a href="about-the-variance.html#cb20-7"></a>Leia    <span class="dv">150</span>     <span class="dv">49</span></span>
+<span id="cb20-8"><a href="about-the-variance.html#cb20-8"></a>Luke    <span class="dv">172</span>     <span class="dv">77</span></span>
+<span id="cb20-9"><a href="about-the-variance.html#cb20-9"></a>Han     <span class="dv">180</span>     <span class="dv">80</span></span></code></pre></div>
+<p>The unbiased variance (i.e. <em>sample</em> variance) of <code>weight</code> is:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="about-the-variance.html#cb21-1"></a><span class="co"># variance of shots</span></span>
+<span id="cb21-2"><a href="about-the-variance.html#cb21-2"></a><span class="kw">var</span>(X[,<span class="dv">1</span>])</span>
+<span id="cb21-3"><a href="about-the-variance.html#cb21-3"></a>[<span class="dv">1</span>] <span class="dv">241</span></span></code></pre></div>
+<p>Compare it to the biased variance:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="about-the-variance.html#cb22-1"></a><span class="co"># biased variance of shots</span></span>
+<span id="cb22-2"><a href="about-the-variance.html#cb22-2"></a>(<span class="kw">nrow</span>(X) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">nrow</span>(X)) <span class="op">*</span><span class="st"> </span><span class="kw">var</span>(X[,<span class="dv">1</span>])</span>
+<span id="cb22-3"><a href="about-the-variance.html#cb22-3"></a>[<span class="dv">1</span>] <span class="dv">161</span></span></code></pre></div>
+<p>As you can tell from the two types of variances, there seems to be an important difference. This is because the number of observations <span class="math inline">\(n = 5\)</span> in this case is small. However, as the sample size increases, the difference between <span class="math inline">\(n-1\)</span> and <span class="math inline">\(n\)</span> will be negligible.</p>
+<p>If you implement your own functions and are planning to compare them against other software, then it is crucial to known what other programmers are using for computing the variance. Otherwise, your results might be a bit different from the ones with other people’s code.</p>
+<p>In this book, to keep notation as simpler as possible, we will use the factor <span class="math inline">\(\frac{1}{n}\)</span> for the rest of the formulas. However, keep in mind that most variance-based computations in R use <span class="math inline">\(\frac{1}{n-1}\)</span>.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="variance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="variance-with-vector-notation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

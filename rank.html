@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>11.2 Rank | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="11.2 Rank | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="11.2 Rank | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="decompositions.html"/>
+<link rel="next" href="evd.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="rank" class="section level2">
+<h2><span class="header-section-number">11.2</span> Rank</h2>
+<p>There is one general concept which plays a fundamental role in many
+decompositions: the <strong>rank</strong>. If <span class="math inline">\(\mathbf{X}\)</span> is a <span class="math inline">\(n \times p\)</span> matrix, then
+<span class="math inline">\(\mathbf{X}\)</span> is of <strong>full column rank</strong> if <span class="math inline">\(\mathbf{Xb} = \mathbf{0}\)</span> only if
+<span class="math inline">\(\mathbf{b} = \mathbf{0}\)</span>. We also say that the columns of <span class="math inline">\(\mathbf{X}\)</span> are
+linearly independent. Full row rank is defined in a similar way.</p>
+<p>If <span class="math inline">\(\mathbf{X}\)</span> can be written as the product <span class="math inline">\(\mathbf{AB}\)</span>, with <span class="math inline">\(\mathbf{A}\)</span>
+an <span class="math inline">\(n \times k\)</span> matrix of full column rank and <span class="math inline">\(\mathbf{B}\)</span> an <span class="math inline">\(k \times p\)</span>
+matrix of full row rank, then <span class="math inline">\(\mathbf{X}\)</span> is said to have rank <span class="math inline">\(k\)</span>. The
+decomposition <span class="math inline">\(\mathbf{X} = \mathbf{AB}\)</span> is a <em>full rank decomposition</em>.</p>
+<p>The <em>rank</em> of a matrix is the minimum number of row or column vectors needed
+to generate the rows or columns of the matrix exactly through linear
+combinations. Geometrically, this algebraic concept is equivalent to the
+<em>dimensionality</em> of the matrix. In practice, however, no large matrix is of
+low rank, but we can approximate it “optimally” by a matrix of low rank and
+then view this approximate matrix in a low-dimensional space.</p>
+<p>Suppose that <span class="math inline">\(\mathbf{X}\)</span> is an <span class="math inline">\(n \times p\)</span> matrix with rank <span class="math inline">\(r\)</span>. Then the
+idea of matrix approximation is to find another <span class="math inline">\(n \times p\)</span> matrix
+<span class="math inline">\(\mathbf{\hat{X}}\)</span> of lower rank <span class="math inline">\(k &lt; r\)</span> that resembles <span class="math inline">\(\mathbf{X}\)</span> “as
+closely as” possible. Closeness can be measured in any reasonable way, but
+least-squares approximation makes the solution of the problem particularly
+simple. Hence we want to find a matrix <span class="math inline">\(\mathbf{\hat{X}}\)</span> that minimizes the
+following objective function over all possible rank <span class="math inline">\(k\)</span> matrices:</p>
+<p><span class="math display">\[
+trace [ (\mathbf{X} - \mathbf{\hat{X}} ) (\mathbf{X} - \mathbf{\hat{X}} )^\mathsf{T} ]
+\]</span></p>
+
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="decompositions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="evd.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

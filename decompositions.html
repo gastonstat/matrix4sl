@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>11.1 Decompositions | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="11.1 Decompositions | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="11.1 Decompositions | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="decomps.html"/>
+<link rel="next" href="rank.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,122 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="decompositions" class="section level2">
+<h2><span class="header-section-number">11.1</span> Decompositions</h2>
+<p>Simply put, decompositions are like factorizations of numbers. For example,
+consider the number 6; we can <em>decompose</em> 6 as the product of 3 and 2:</p>
+<p><span class="math display">\[
+6 = 3 \times 2
+\]</span></p>
+<p>that is, we factorize 6 in terms of “simpler” numbers.</p>
+<p>If the idea of factorizing numbers seems too simplistic to you, then consider
+the factorization of polynomials. Here’s one toy example with the following
+polynomial:</p>
+<p><span class="math display">\[
+p(x) = x^2 + 5x + 6
+\]</span></p>
+<p>The above quadratic polynomial can be decomposed as the product of two
+linear—and therefore more basic—polynomials:</p>
+<p><span class="math display">\[
+x^2 + 5x + 6 = (x + 3) (x + 2)
+\]</span></p>
+<p>This factorization allows us to dismantle the quadratic polynomial into a
+product of polynomials of smaller degree. In particular, we observe that the
+two resulting terms contain the roots of the original polynomial: 3 and 2.</p>
+<p>The same idea applies to matrix decompositions: they allow us to break down a
+matrix and decompose it in its main parts. They make it easier to study the
+properties of matrices, and they tend to make matrix computations easier.</p>
+<div id="general-idea" class="section level3">
+<h3><span class="header-section-number">11.1.1</span> General Idea</h3>
+<p>More formally, a matrix decomposition is a way of expressing a matrix
+<span class="math inline">\(\mathbf{M}\)</span> as the product of a set of new—typically two or three—matrices,
+usually simpler in some sense, that gives us an idea of the inherent structures
+or relationships in <span class="math inline">\(\mathbf{M}\)</span>. By “simpler” we mean a series of ideas such as
+more compact matrices, or with less dimensions, or with less number of rows,
+or less number of columns; perhaps triangular matrices, or even matrices almost
+full of zeros, except in their diagonal.</p>
+<p>Roughly speaking, the decomposition of an <span class="math inline">\(n \times p\)</span> matrix <span class="math inline">\(\mathbf{M}\)</span> can
+be described by a generic equation of the form:</p>
+<p><span class="math display">\[
+\mathbf{M} = \mathbf{A B C}
+\]</span></p>
+<p>where the dimensions of the matrices are as follows:</p>
+<ul>
+<li><span class="math inline">\(\mathbf{M}\)</span> is <span class="math inline">\(n \times p\)</span> (we assume for simplicity that <span class="math inline">\(n &gt; p\)</span>)</li>
+<li><span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(n \times k\)</span> (usually <span class="math inline">\(k &lt; p\)</span>)</li>
+<li><span class="math inline">\(\mathbf{B}\)</span> is <span class="math inline">\(k \times k\)</span> (usually diagonal)</li>
+<li><span class="math inline">\(\mathbf{C}\)</span> is <span class="math inline">\(k \times p\)</span></li>
+</ul>
+<p>The following figure illustrates a matrix decomposition from the point of view
+of matrix shapes:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-69"></span>
+<img src="images/decomps/matrix-decomposition.png" alt="Matrix Decomposition Diagram" width="70%" />
+<p class="caption">
+Figure 11.1: Matrix Decomposition Diagram
+</p>
+</div>
+<p>As you can tell, the matrix <span class="math inline">\(\mathbf{A}\)</span> has the same number of rows as <span class="math inline">\(\mathbf{M}\)</span>. This is not a coincidence. In fact, each of the rows in
+<span class="math inline">\(\mathbf{A}\)</span> provides information about the object described by the
+corresponding row of <span class="math inline">\(\mathbf{M}\)</span>. In this sense, the <span class="math inline">\(i\)</span>-th row of
+<span class="math inline">\(\mathbf{A}\)</span> involves <span class="math inline">\(k\)</span> bits of information that shed light on the data
+of the <span class="math inline">\(i\)</span>-th object.</p>
+<p>The matrix <span class="math inline">\(\mathbf{C}\)</span> has the same number of columns as <span class="math inline">\(\mathbf{M}\)</span>.
+In the same way that <span class="math inline">\(\mathbf{A}\)</span> has to do with the rows of <span class="math inline">\(\mathbf{M}\)</span>,
+the matrix <span class="math inline">\(\mathbf{C}\)</span> has to do with the columns of <span class="math inline">\(\mathbf{M}\)</span>. Each column
+of <span class="math inline">\(\mathbf{C}\)</span> gives a different perspective of the variable described by the
+corresponding column of <span class="math inline">\(\mathbf{M}\)</span>, in terms of <span class="math inline">\(k\)</span> bits of information.</p>
+<p>Observe that the common element in matrices <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{C}\)</span> is
+previsely the constant <span class="math inline">\(k\)</span>. The role of <span class="math inline">\(k\)</span> is to coerce a more comptact representation for the data as compared to its original form. While <span class="math inline">\(k = p\)</span>
+might give a reasonable factorization, often <span class="math inline">\(k\)</span> is chosen to be smaller
+than <span class="math inline">\(p\)</span>. We do this under the assumption that using less dimensions will still
+capture the intrinsic patterns in the data that might not be evident by
+direct inspection of <span class="math inline">\(\mathbf{M}\)</span>.</p>
+<p>What about the middle matrix <span class="math inline">\(\mathbf{B}\)</span>? This matrix cements the connections
+between the pieces of information i<span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{C}\)</span>. Unless stated
+otherwise, we will assume that <span class="math inline">\(\mathbf{B}\)</span> is diagonal. Now, keep in mind that
+some decompositions do not explicitly include this middle matrix. When that’s
+the case, we can always suppose the existance of a <span class="math inline">\(k \times k\)</span> identity matrix
+<span class="math inline">\(\mathbf{I}\)</span> such that we still get the general decomposition given by three
+matrices:</p>
+<p><span class="math display">\[
+\mathbf{M} = \mathbf{AC} = \mathbf{A I C}
+\]</span></p>
+</div>
+<div id="some-comments" class="section level3">
+<h3><span class="header-section-number">11.1.2</span> Some Comments</h3>
+<p>The equation that describes a decomposition:</p>
+<p><span class="math display">\[
+\mathbf{M} = \mathbf{A B C}
+\]</span></p>
+<p>does not explain how to compute one, or how such decomposition can reveal the
+structures implicit in a data matrix. Nowadays, the computation of a matrix
+decomposition is straightforward; software to compute each one is readily
+available, and understanding how the algorithms work is not necessary to be
+able to interpret the results.</p>
+<p>Seeing how a matrix decomposition reveals structure in a dataset is more
+complicated. Each decomposition reveals a different kind of implicit structure
+and, for each decomposition, there are various ways to interpret the results.</p>
+<p>There are many different types of matrix decompositions, and each of them reveal
+different kinds of underlying structure. We are going to focus our discussion on
+two of them:</p>
+<ol style="list-style-type: decimal">
+<li><p>the Singular Value Decomposition (SVD), and</p></li>
+<li><p>the Eigen Value Decomposition (EVD).</p></li>
+</ol>
+<p>Why these two decompositions? Because we concentrate on the
+two types of matrices more important in statistics:
+<em>general rectangular matrices</em> used to represent data tables,
+and <em>positive semi-definite matrices</em> used to represent covariance matrices,
+correlation matrices, and any matrix that results from a crossproduct.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="decomps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rank.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

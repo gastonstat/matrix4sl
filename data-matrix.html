@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>2.2 Data Matrix | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="2.2 Data Matrix | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="2.2 Data Matrix | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="about-matrices.html"/>
+<link rel="next" href="types-of-matrices.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="data-matrix" class="section level2">
+<h2><span class="header-section-number">2.2</span> Data Matrix</h2>
+<p>While the raw ingredient for any statistical learning endevour is a data set, typically reshaped and organized in a tabular form, the core input of any statistical learning method consists of the data matrix, or in some cases, matrices.</p>
+<p>To make things less abstract I’m going to use the following toy data table with four variables measured on six individuals:</p>
+<pre><code>                  gender  height  weight      jedi
+Anakin Skywalker    male    1.88    84.0  yes_jedi
+Padme Amidala     female    1.65    45.0   no_jedi
+Luke Skywalker      male    1.72    77.0  yes_jedi
+Leia Organa       female    1.50    49.0   no_jedi
+Qui-Gon Jinn        male    1.93    88.5  yes_jedi
+Obi-Wan Kenobi      male    1.82    77.0  yes_jedi</code></pre>
+<p>You can actually find the corresponding CSV file in the <code>data/</code> folder of the book’s github repository.</p>
+<p><a href="https://github.com/gastonstat/matrix4sl/blob/master/data/starwars.csv" class="uri">https://github.com/gastonstat/matrix4sl/blob/master/data/starwars.csv</a></p>
+<div id="why-a-data-matrix" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Why a data matrix?</h3>
+<p>The reason to use matrices is simple: the typical structure in which the data can be mathematically manipulated from a multivariate standpoint is a <strong>data matrix</strong>.
+No other mathematical object adapts so well to the rectangular structure of a data table.</p>
+<p>Since we are getting into more formal mathematical territory, we need to define some terminology and notation that we’ll use in the rest of the book.</p>
+<p>We are going to represent matrices with bold upper-case letters like <span class="math inline">\(\mathbf{A}\)</span> or <span class="math inline">\(\mathbf{B}\)</span>.</p>
+<p>In general, a matrix <span class="math inline">\(\mathbf{X}\)</span> has <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns, and we say that <span class="math inline">\(\mathbf{X}\)</span> is an <span class="math inline">\(n \times p\)</span> matrix. In addition, we are going to assume that all the matrices are real matrices, that is, matrices containing elements in the set of Real numbers.</p>
+<p><span class="math display">\[ 
+\underset{n \times p}{\mathbf{X}} = 
+\left[\begin{array}{ccccc}
+x_{11} &amp; \cdots &amp; x_{1j} &amp; \cdots &amp; x_{1p} \\
+\vdots &amp;        &amp; \vdots &amp;        &amp; \vdots \\
+x_{i1} &amp; \cdots &amp; x_{ij} &amp; \cdots &amp; x_{ip} \\
+\vdots &amp;        &amp; \vdots &amp;        &amp; \vdots \\
+x_{n1} &amp; \cdots &amp; x_{nj} &amp; \cdots &amp; x_{np} \\
+\end{array}\right]
+\]</span></p>
+<p>An element of a matrix <span class="math inline">\(\mathbf{X}\)</span> is denoted by <span class="math inline">\(x_{ij}\)</span> which represents the element in the <span class="math inline">\(i\)</span>-th row and the <span class="math inline">\(j\)</span>-th column. For instance, the element <span class="math inline">\(x_{23}\)</span> in our toy <span class="math inline">\(6 \times 4\)</span> data matrix has the value 45 and it represents the weight of Padme Amidala.</p>
+<p>Together with matrices we also have variables, and vectors. We are going to represent variables with italized capital letters such as <span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span>. Also, variables in a matrix <span class="math inline">\(\mathbf{X}\)</span> can be represented with subscripts such as <span class="math inline">\(X_j\)</span> to indicate the column-index position. The first three variables in our matrix <span class="math inline">\(\mathbf{X}\)</span> would be represented as <span class="math inline">\(X_1\)</span> (gender), <span class="math inline">\(X_2\)</span> (height), and <span class="math inline">\(X_3\)</span> (weight).</p>
+<p>Vectors will be represented by bold lower case letters such as <span class="math inline">\(\mathbf{w}\)</span> or <span class="math inline">\(\mathbf{u}\)</span>. A vector <span class="math inline">\(\mathbf{w}\)</span> with <span class="math inline">\(m\)</span> elements can be expressed as <span class="math inline">\(\mathbf{w} = (w_1, w_2, \dots, w_m)\)</span>. Since variables can be expressed as vectors, we can use the vector notation <span class="math inline">\(\mathbf{x}\)</span> to represent a variable <span class="math inline">\(X\)</span>. However, keep in mind that not all vectors are variables: a vector may well refer to an object or to any row of a matrix.</p>
+</div>
+<div id="matrix-representations" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Matrix Representations</h3>
+<p>You will that find people represent matrices in multiple ways, using various notations, symbols, and diagrams.</p>
+<p>We can represent a data matrix <span class="math inline">\(\mathbf{X}\)</span> by simply regarding the table from its columns (i.e. variables) perspective:</p>
+<p><span class="math display">\[
+\mathbf{X} =
+\left[\begin{array}{c|c|c|c|c|c}
+  &amp;   &amp;   &amp;   &amp;  &amp; \\
+  \mathbf{x}_{1} &amp; \mathbf{x}_{2} &amp; \cdots &amp; \mathbf{x}_{j} &amp; \cdots &amp; \mathbf{x}_{p} \\
+  &amp;   &amp;   &amp;   &amp;  &amp; \\
+\end{array}\right]
+\]</span></p>
+<p>Note that each variable <span class="math inline">\(X_j\)</span> is represented with a column vector <span class="math inline">\(\mathbf{x}_{j}\)</span>. In turn, the vertical lines are just a visual cue indicating separation between columns. Taking our toy data data matrix, we could represent it as:</p>
+<p><span class="math display">\[
+\mathbf{Data} =
+\left[\begin{array}{c|c|c|c}
+  &amp;   &amp;   &amp;  \\
+  \texttt{gender} &amp; \texttt{height} &amp; \texttt{weight} &amp; \texttt{jedi} \\
+  &amp;   &amp;   &amp;  \\
+\end{array}\right]
+\]</span></p>
+<p>Being more minimalists, we can even get a more compact representation by just expressing a matrix <span class="math inline">\(\mathbf{X}\)</span> as a list or sequence of its variables:</p>
+<p><span class="math display">\[
+\mathbf{X} = 
+\left[\begin{array}{cccccc}
+\mathbf{x}_{1} &amp; \mathbf{x}_{2} &amp; \cdots &amp; \mathbf{x}_{j} &amp; \cdots &amp; \mathbf{x}_{p} \\
+\end{array}\right]
+\]</span></p>
+</div>
+<div id="a-block-of-variables" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> A Block of Variables</h3>
+<p>While most of us are used to think of multivariate data in terms of a table or matrix, there can be other interesting representation options. If you are a visual person like me, we can also use an alternative way to display the variables using a standard convention of drawing them in rectangular shape. In this way, we can depict a set of variables in a data matrix as a series of rectangles, like those below inside the dashed box:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-23"></span>
+<img src="images/matrix/matrix-with-rectangle-variables.png" alt="Variables in a matrix depicted as a set of rectangles" width="50%" />
+<p class="caption">
+Figure 2.1: Variables in a matrix depicted as a set of rectangles
+</p>
+</div>
+<p>The rectangular-box shape perfectly illustrates the idea of a <strong>block</strong> of variables. I will use the term <strong>block</strong> to convey the idea of a group or set of variables measured on a set of objects. If you prefer, you can also think of a block as a data table.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="about-matrices.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="types-of-matrices.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

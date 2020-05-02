@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>Chapter 6 Vector Basics | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="Chapter 6 Vector Basics | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="Chapter 6 Vector Basics | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="matrix-perspectives.html"/>
+<link rel="next" href="inner-product.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="vector" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Vector Basics</h1>
+<p>Because variables can be treated as vectors in a geometric sense, I would like to briefly revisit a couple of key concepts for operating with vectors: <strong>the inner product</strong> and derived operations.</p>
+<p>We’ll keep using the toy <span class="math inline">\(2 \times 2\)</span> data matrix of <em>weight</em> and <em>height</em> discussed in the previous chapter. Here’s the code in R for such matrix:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="vector.html#cb18-1"></a><span class="co"># data matrix</span></span>
+<span id="cb18-2"><a href="vector.html#cb18-2"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">150</span>, <span class="dv">172</span>, <span class="dv">180</span>, <span class="dv">49</span>, <span class="dv">77</span>, <span class="dv">80</span>), <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb18-3"><a href="vector.html#cb18-3"></a><span class="kw">rownames</span>(X) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Leia&quot;</span>, <span class="st">&quot;Luke&quot;</span>, <span class="st">&quot;Han&quot;</span>)</span>
+<span id="cb18-4"><a href="vector.html#cb18-4"></a><span class="kw">colnames</span>(X) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;weight&quot;</span>, <span class="st">&quot;height&quot;</span>)</span>
+<span id="cb18-5"><a href="vector.html#cb18-5"></a></span>
+<span id="cb18-6"><a href="vector.html#cb18-6"></a>X</span>
+<span id="cb18-7"><a href="vector.html#cb18-7"></a>     weight height</span>
+<span id="cb18-8"><a href="vector.html#cb18-8"></a>Leia    <span class="dv">150</span>     <span class="dv">49</span></span>
+<span id="cb18-9"><a href="vector.html#cb18-9"></a>Luke    <span class="dv">172</span>     <span class="dv">77</span></span>
+<span id="cb18-10"><a href="vector.html#cb18-10"></a>Han     <span class="dv">180</span>     <span class="dv">80</span></span></code></pre></div> 
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="matrix-perspectives.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="inner-product.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

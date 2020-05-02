@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
+  <title>3.2 Encoding Values | A Matrix Algebra Companion for Statistical Learning (matrix4sl)</title>
   <meta name="description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta property="og:title" content="3.2 Encoding Values | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.gastonsanchez.com/matrix4sl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gastonstat/matrix4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Covariance and Correlation | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
+  <meta name="twitter:title" content="3.2 Encoding Values | A Matrix Algebra Companion for Statistical Learning (matrix4sl)" />
   
   <meta name="twitter:description" content="This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="standard-deviation-as-a-norm.html"/>
-<link rel="next" href="two-variables.html"/>
+<link rel="prev" href="types-of-variables.html"/>
+<link rel="next" href="transformations.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -289,18 +289,98 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="covar" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Covariance and Correlation</h1>
-<p>One of the most common tasks in statistics and data analysis that we have to deal with is answering the ever-present question: Given two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, what is the relationship between them? The answer to this question largely depends on two major factors.</p>
-<p>One factor is the way in which the notion of “relationship” is defined in mathematical terms. The other factor has to do with the nature of the variables (e.g. continuous, discrete, ordinal, nominal, binary, etc).</p> 
+<div id="encoding-values" class="section level2">
+<h2><span class="header-section-number">3.2</span> Encoding Values</h2>
+<p>Another important aspect intimately connected with the various types of
+variables is that of how variable values are encoded. To better understand what
+this is about, let me discuss a simple example.</p>
+<p>Notice that the quantitative variables in the star wars data set have numeric
+values, while the categorical variables have non-numeric values. Does that mean
+that all numeric variables can be considered to be quantitative? And that all
+non-numeric variables can be considered to be categorical? The answer is: Not
+necessarily.</p>
+<p>Often, analysts assign numeric values to the categories of a qualitative
+variable. Sooner or later you will find variables with numeric values that are
+not quantitative. An example could be ice-cream flavors in which the categories
+are codified with numbers. For example, consider three ice-cream flavors:
+vanilla, chocolate, and lemon. And imagine that we assign a numeric code to
+each flavor: 1 = vanilla, 2 = chocolate, 3 = lemon. This numeric labeling is
+just for convenience purposes.</p>
+<p>Assume that you get the preferred ice-cream flavor of 10 subjects with the
+following values:</p>
+<pre><code>3 2 3 2 1 3 3 3 3 3</code></pre>
+<p>The above numbers, which are hypothetical values of a variable <code>icecream</code>, do
+not represent quantities; they represent flavors. Just because there are numbers,
+it does not mean that we can use those numbers to carry out arithmetic operations.
+What is the result of: 3 - 1, that is, <em>lemon</em> minus <em>vanilla</em>? It is
+meaningless to attempt this type of operation.</p>
+<p>Likewise, we could assign numbers to sizes: 1=small, 2=medium, 3=large. In this
+case, the numbers are again used for convenient purposes. And we can even take
+one further step and say that we can use the numbers to rank the categories.
+But it will be impossible to add 1+2, since <em>small</em> + <em>medium</em> does not equal
+<em>large</em>.</p>
+<p>The point is that just because a variable contains numbers, that doesn’t
+automatically make it quantitative. You should always ask yourself if the
+numbers represent some sort of quantity. If the answer is a sounded yes, then
+you have a quantitative variable. Otherwise, you have a categorical one.</p>
+<div id="more-on-encoding" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> More on encoding</h3>
+<p>We can find categorical data under a wide range of formats. I’ve seen
+categorical data codified in different ways, and sometimes people are very
+creative in the way they do this.</p>
+<p>The main types of formats can be classified in three main groups:</p>
+<ul>
+<li>text or characters</li>
+<li>numbers (ideally integers)</li>
+<li>logical (TRUE / FALSE), typically for binary variables</li>
+</ul>
+<p>Here’s an example with a <code>gender</code> variable:</p>
+<ul>
+<li>as text: <code>"F"</code> (female), <code>"M"</code> (male)</li>
+<li>as numbers: 1 (female), 0 (male)</li>
+<li>as logical: <code>TRUE</code> (female), <code>FALSE</code> (male)</li>
+</ul>
+<p>When talking about the way data is stored and encoded, I don’t think there’s
+an ideal/universal way to store categorical data effectively and efficiently.
+It all depends on the field of application, the size of the data, the legibility,
+the usage purposes, etc. What I do believe in is that, when categorical data is
+being analyzed, we should consider a couple of issues:</p>
+<ul>
+<li><p><strong>understandability</strong>: the analyst should be able to read, interpret and
+understand what the available values represent. Whenever possible, you should
+aim to reduce friction, and avoid having to struggle with decodifying numbers.</p></li>
+<li><p><strong>compatibility</strong>: this has to do with functions and commands in data analysis
+and statistical software. Some functions are programmed in a way that they accept
+a specific type of input (either a vector, a factor, a data frame, etc). Often,
+you will need to manipulate some kind of object in order to convert it into
+another type of object better suited for a certain functions or command.</p></li>
+<li><p><strong>visibility</strong>: this aspect is related to visual displays in graphics. Maybe
+long labels look fine in a table, but for plotting purposes they could cluttered
+the screen.</p></li>
+</ul>
+<hr />
+<div id="make-a-donation-3" class="section level4 unnumbered">
+<h4><em>Make a donation</em></h4>
+<p><em>If you find this resource useful, please consider making a one-time donation in any amount. Your support really matters.</em></p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_donations" />
+<input type="hidden" name="business" value="ZF6U7K5MW25W2" />
+<input type="hidden" name="currency_code" value="USD" />
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+</form>
+
 </div>
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="standard-deviation-as-a-norm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="types-of-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transformations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
