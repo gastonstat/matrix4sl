@@ -1,10 +1,11 @@
 bookdown::gitbook:
+  split_by: section
   css: style.css
   config:
     toc:
       collapse: section
       before: |
-        <li><a href="./">matrix4sl</a></li>
+        <li><a href="./"><b>A Matrix Algebra Companion for SL</b></a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Thanks to bookdown</a></li>
     download: ["pdf", "epub"]
