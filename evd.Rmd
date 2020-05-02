@@ -1,13 +1,24 @@
 # Eigenvalue Decomposition  {#evd}
 
-Eigenvalue decompositions play a fundamental role in statistics. This is particularly true in the case of multivariate analysis where eigenvalues of cross-product matrices (e.g. covariance matrices, correlations matrices) allow you to obtain simplified structures of data matrices.
+Eigenvalue decompositions play a fundamental role in statistics. This is 
+particularly true in the case of multivariate analysis where eigenvalues of 
+cross-product matrices (e.g. covariance matrices, correlations matrices) allow 
+you to obtain simplified structures of data matrices.
 
 
 ## Eigenvectors and Eigenvalues
 
-Let's begin with the classic definition of eigenvectors and eigenvalues. Consider a square matrix $\mathbf{A}$ of order $p \times p$. Any vector $\mathbf{v}$ such that $\mathbf{Av} = \lambda \mathbf{v}$, with $\lambda \neq 0$ some scalar, is called an eigenvector of $\mathbf{A}$, and $\lambda$ an eigenvalue.
+Let's begin with the classic definition of eigenvectors and eigenvalues. 
+Consider a square matrix $\mathbf{A}$ of order $p \times p$. Any vector $\mathbf{v}$ such that: 
 
-For example, consider the following matrix $\mathbf{A}$ and a vector $\mathbf{v_1}$:
+$$
+\mathbf{Av} = \lambda \mathbf{v}
+$$
+
+with $\lambda \neq 0$ some scalar, is called an __eigenvector__ of $\mathbf{A}$, 
+and $\lambda$ an __eigenvalue__.
+
+For example, consider the following matrix $\mathbf{A}$ and vector $\mathbf{v_1}$:
 
 $$
 \mathbf{A} = 
@@ -54,7 +65,14 @@ $$
 \end{bmatrix}
 $$
 
-As you can tell, $\mathbf{Av_1} = 5 \mathbf{v_1}$. Therefore, $\mathbf{v_1}$ and $\lambda_1 = 5$ are an eigenvector and eigenvalue, respectively, of $\mathbf{A}$.
+As you can tell, 
+
+$$
+\mathbf{Av_1} = 5 \mathbf{v_1}
+$$
+
+Therefore, $\mathbf{v_1}$ and $\lambda_1 = 5$ are an eigenvector and eigenvalue, 
+respectively, of $\mathbf{A}$.
 
 More formally, if we think of a square matrix $\mathbf{A}$ as a _transformation_, an eigenvector $\mathbf{v}$ of $\mathbf{A}$ is a special kind of vector: it is a vector which under the transformation $\mathbf{A}$ maps into itself or a multiple of itself. Another way to put it is by saying that eigenvectors are _invariant vectors_ under a given transformation.
 
@@ -80,6 +98,7 @@ $$
 $$
 
 Notice that $\mathbf{0}$ is not the scalar 0, but a $p$-element vector of zeros.
+Likewise, the matrix $\mathbf{I}$ is the $p \times p$ identity matrix.
 
 Next, we can factor out $\mathbf{v}$ to get:
 
@@ -87,13 +106,17 @@ $$
 \left( \mathbf{A} - \lambda \mathbf{I} \right) \mathbf{v} = \mathbf{0}
 $$
 
-This matrix equation involves a system of $p$ homogeneous equations with the elements of $\mathbf{v}$ as $p$ unknowns. The equations can be solved only if the matrix of coefficients has rank smaller than $p$; so the determinant of the $p \times p$ matrix $( \mathbf{A} - \lambda \mathbf{I} )$ must be equal to zero:
+This matrix equation involves a system of $p$ homogeneous equations with the 
+elements of $\mathbf{v}$ as $p$ unknowns. The equations can be solved only if 
+the matrix of coefficients has rank smaller than $p$; so the determinant of the 
+$p \times p$ matrix $( \mathbf{A} - \lambda \mathbf{I} )$ must be equal to zero:
 
 $$
 | \mathbf{A} - \lambda \mathbf{I} | = 0
 $$
 
-Notice that this equation turns into an equation in $\lambda$ only; so the eigenvalues can be found.
+Notice that this equation turns into an equation in $\lambda$ only; so the 
+eigenvalues can be found.
 
 In the example above, we have:
 
@@ -228,7 +251,8 @@ and it is the case that $\mathbf{A}^{-1/2} \mathbf{A}^{-1/2} = \mathbf{A}^{-1}$.
 
 ### Symmetric Matrices
 
-The following table lists characteristics of eigenvalues depending of the type of symmetric matrices.
+The following table lists characteristics of eigenvalues depending on the type 
+of symmetric matrices.
 
 | Symmetric matrix | Eigenvalues |
 |------------------|-------------|
@@ -244,7 +268,9 @@ The following table lists characteristics of eigenvalues depending of the type o
 
 ## Power Method
 
-Among all the set of methods which can be used to find eigenvalues and eigenvectors, one of the basic procedures following a successive approximation approach is the so-called _Power Method_. 
+Among all the set of methods which can be used to find eigenvalues and 
+eigenvectors, one of the basic procedures following a successive approximation 
+approach is the so-called _Power Method_. 
 
 In its simplest form, the Power Method (PM) allows us to find _the largest_ 
 eigenvector and its corresponding eigenvalue. To be more precise, the PM 
@@ -368,19 +394,19 @@ in decreasing way $|\lambda_1| > |\lambda_2| \geq \dots \geq |\lambda_p|$.
 Note that the first eigenvalue is strictly greater than the second one. This is 
 a very important assumption. In the same way, we'll assume that the matrix 
 $\mathbf{S}$ has $p$ linearly independent vectors 
-$\mathbf{u_1}, \dots, \mathbf{u_p}$ ordered in such a way that $\mathbf{u_j}$ 
+$\mathbf{v_1}, \dots, \mathbf{v_p}$ ordered in such a way that $\mathbf{v_j}$ 
 corresponds to $\lambda_j$. 
 
 The initial vector $\mathbf{w_0}$ may be expressed as a linear combination of 
-$\mathbf{u_1}, \dots, \mathbf{u_p}$
+$\mathbf{v_1}, \dots, \mathbf{v_p}$
 
 $$
-\mathbf{w_0} = a_1 \mathbf{u_1} + \dots + a_p \mathbf{u_p}
+\mathbf{w_0} = a_1 \mathbf{v_1} + \dots + a_p \mathbf{v_p}
 $$
 At every step of the iterative process the vector $\mathbf{w_m}$ is given by:
 
 $$
-\mathbf{S}^m = a_1 \lambda_{1}^m \mathbf{u_1} + \dots + a_p \lambda_{p}^m \mathbf{u_p}
+\mathbf{S}^m = a_1 \lambda_{1}^m \mathbf{v_1} + \dots + a_p \lambda_{p}^m \mathbf{v_p}
 $$
 
 Since $\lambda_1$ is the dominant eigenvalue, the component in the direction of 
@@ -389,10 +415,10 @@ increases. If we knew $\lambda_1$ in advance, we could rescale at each step by
 dividing by it to get:
 
 $$
-\left(\frac{1}{\lambda_{1}^m}\right) \mathbf{S}^m = a_1 \mathbf{u_1} + \dots + a_p \left(\frac{\lambda_{p}^m}{\lambda_{1}^m}\right) \mathbf{u_p}
+\left(\frac{1}{\lambda_{1}^m}\right) \mathbf{S}^m = a_1 \mathbf{v_1} + \dots + a_p \left(\frac{\lambda_{p}^m}{\lambda_{1}^m}\right) \mathbf{v_p}
 $$
 
-which converges to the eigenvector $a_1 \mathbf{u_1}$, provided that $a_1$ is nonzero. Of course, in real life this scaling strategy is not possible---we 
+which converges to the eigenvector $a_1 \mathbf{v_1}$, provided that $a_1$ is nonzero. Of course, in real life this scaling strategy is not possible---we 
 don't know $\lambda_1$. Consequenlty, the eigenvector is determined only up to 
 a constant multiple, which is not a concern since the really important thing is 
 the _direction_ not the length of the vector.
@@ -413,8 +439,10 @@ and the residual matrix is obtained as:
 $$
 \mathbf{E = S - z_{1}^{\mathsf{T}} z_1}
 $$
+
+where $\mathbf{z_1} = \mathbf{S v_1}$.
+
 In order to calculate the second eigenvalue and its corresponding eigenvector, 
 we operate on $\mathbf{E}$ in the same way as the operations on $\mathbf{S}$ to 
-obtain $\mathbf{w_1}$. The quantity $\mathbf{z'_2 z_2}$ will be the amount of 
-variation explained by the second PC.
+obtain $\mathbf{w_2}$.
 
