@@ -1,5 +1,5 @@
 --- 
-title: "A Matrix Algebra Companion for Statistical Learning"
+title: "A Matrix Algebra Companion for Statistical Learning (matrix4sl)"
 subtitle: "(work in progress)"
 author: "Gaston Sanchez"
 description: "This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods."
