@@ -1,8 +1,9 @@
 book_filename: "matrix4sl"
 delete_merged_file: true
+chapter_name: "Chapter "
 rmd_files: [
   "index.Rmd",
-  "introduction.Rmd",
+  "preface.Rmd",
   "data-table.Rmd",
   "data-matrix.Rmd",
   "variables.Rmd",
