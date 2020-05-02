@@ -1,9 +1,8 @@
 --- 
 title: "A Matrix Algebra Companion for Statistical Learning (matrix4sl)"
-subtitle: "(work in progress)"
 author: "Gaston Sanchez"
+date: "(work in progress)"
 description: "This book provides a review of matrix algebra concepts central to the study of Statistical Learning Methods."
-date: ""
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
@@ -17,7 +16,7 @@ documentclass: book
 
 # Welcome {-}
 
-```{r echo = FALSE, out.width = "70%"}
+```{r echo = FALSE, out.width = "80%"}
 knitr::include_graphics("images/cover-matrix4sl.png")
 ```
 
