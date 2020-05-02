@@ -14,7 +14,11 @@ rmd_files: [
   "mean.Rmd",
   "variance.Rmd",
   "covariance.Rmd",
-  "cross-products.Rmd"
+  "cross-products.Rmd",
+  
+  "decompositions.Rmd",
+  "evd.Rmd",
+  "svd.Rmd"
 ]
 
 before_chapter_script: "_common.R"
