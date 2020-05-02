@@ -43,11 +43,16 @@ $$
 
 ## Mean as a Balancing Point
 
-What does the mean do? In what sense the mean is a "typical" value? How do you make sense of a mean value?
+What does the mean do? In what sense the mean is a "typical" value? How do you 
+make sense of a mean value?
 
-To understand what the mean is doing is helpful to visualize the values of a variable as points in a number-line, or with a dot-plot. Consider a variable having five numbers: $X = (1, 2, 6, 7, 9)$, that can be visualized on a number line (see image below). Imagine that the number line is like a weighting scale or a teeter-totter (or see-saw). 
+To understand what the mean is doing, I find it helpful to visualize the values 
+of a variable as points in a number-line, or with a dot-plot. Consider a variable 
+having five numbers: $X = (1, 2, 6, 7, 9)$, that can be visualized on a number 
+line (see image below). Imagine that the number line is like a weighting scale 
+or a teeter-totter (or see-saw). 
 
-```{r fig.cap='Values on a number-line', echo = FALSE, out.width = '30%'}
+```{r fig.cap='Values on a number-line', echo = FALSE, out.width = '35%'}
 knitr::include_graphics("images/mean/mean-number-line.png")
 ```
 
@@ -57,11 +62,14 @@ The mean plays the role of the __balancing point__. In other words, $\bar{x}$ is
 In this example, the value of 5 is the balancing point:
 
 
-```{r fig.cap='Mean as a balancing point', echo = FALSE}
+```{r fig.cap='Mean as a balancing point', echo = FALSE, out.width = '75%'}
 knitr::include_graphics("images/mean/mean-balancing.png")
 ```
 
-Saying that 5 is the balancing point has a specific meaning. It means that the signed distances of all the values with respect to the mean cancel out. If you calculate the _deviations_ from the mean: $(x_i - \bar{x})$, and add them all, the sum would be zero.
+Saying that 5 is the balancing point has a specific meaning. It means that the 
+signed distances of all the values with respect to the mean cancel out. If you 
+calculate the _deviations_ from the mean: $(x_i - \bar{x})$, and add them all up, 
+the sum is zero:
 
 $$
 (1 - 5) + (2 - 5) + (6 - 5) + (7 - 5) + (9 - 5) = 0
@@ -130,9 +138,22 @@ The size of the residual vector $\mathbf{e} = \mathbf{x} - \bar{x} \mathbf{1}$ i
 
 ## Centroid
 
-If we have several variables or vectors of the same size---like in a $n \times p$ matrix $\mathbf{X}$---we can get the mean vector also known as __centroid__. The row vector of means of $\mathbf{X}$ is denoted by:
+So far we've considered the mean of a single variable $X$, which gives us one 
+measure of center or measure of a typical individual. But what about the mean 
+in a multivariate sense? If we have more than one variable, say $p$ variables 
+$X_1, \dots, X_p$, is there an extension of the notion of typical individual?
+
+If we have several variables or vectors of the same size, like in a $n \times p$ 
+matrix $\mathbf{X}$, we can get the mean vector also known as __centroid__. 
+The row vector of means of $\mathbf{X}$ is denoted by:
 
 $$ 
 \mathbf{\bar{x}} = \frac{1}{n} \mathbf{1}_{n}^\mathsf{T} \mathbf{X} 
+$$
+
+and it will be a vector containing the means of of all variables:
+
+$$
+\mathbf{\bar{x}} = (\bar{x}_1, \bar{x}_2, \dots, \bar{x}_p)
 $$
 
