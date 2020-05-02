@@ -2,6 +2,7 @@
 .Rproj.user
 .Rhistory
 .RData
+.Ruserdata
 .Rapp.history
 *knit.md
 *utf8.md
@@ -9,7 +10,7 @@
 
 .DS_Store
 _publish.R
-_book
-_bookdown_files
+_book/*
+_bookdown_files/*
 _main*
 rsconnect
