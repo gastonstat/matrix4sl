@@ -292,7 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="matrix-perspectives" class="section level2">
 <h2><span class="header-section-number">5.1</span> Matrix Perspectives</h2>
 <p>It’s very enlightening to think of a data matrix as viewed from the glass of Geometry. The key idea is to think of the data in a matrix as elements living in a multidimensional space. Actually, we can regard a data matrix from two apparently different perspectives that, in reality, are intimately connected: the <strong>rows perspective</strong> and the <strong>columns perspective</strong>. In order to explain these perspectives, let me use the following diagram of a data matrix <span class="math inline">\(\mathbf{X}\)</span> with <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns, with <span class="math inline">\(x_{ij}\)</span> representing the element in the <span class="math inline">\(i\)</span>-th row and <span class="math inline">\(j\)</span>-th column.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-43"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-44"></span>
 <img src="images/duality/data-perspectives.png" alt="Duality of a data matrix" width="70%" />
 <p class="caption">
 Figure 5.1: Duality of a data matrix
@@ -303,7 +303,7 @@ Figure 5.1: Duality of a data matrix
 <h3><span class="header-section-number">5.1.1</span> Rows Space</h3>
 <p>We know that human vision is limited to three-dimensions, but pretend that you had superpowers that let you visualize a space with any number of dimensions.</p>
 <p>Because each row of the data matrix has <span class="math inline">\(p\)</span> elements, we can regard individuals as objects that live in a <span class="math inline">\(p\)</span>-dimensional space. For visualization purposes, think of each variable as playing the role of a dimension associated to a given axis in this space; likewise, consider each of the <span class="math inline">\(n\)</span> individuals as being depicted as a point (or particle) in such space, like in the following diagram:</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-44"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-45"></span>
 <img src="images/duality/rows-space.png" alt="Rows space" width="70%" />
 <p class="caption">
 Figure 5.2: Rows space
@@ -314,7 +314,7 @@ Figure 5.2: Rows space
 <div id="columns-space" class="section level3">
 <h3><span class="header-section-number">5.1.2</span> Columns Space</h3>
 <p>We can do the same visual exercise with the columns of a data matrix. Since each variable has <span class="math inline">\(n\)</span> elements, we can regard the set of <span class="math inline">\(p\)</span> variables as objects that live in an <span class="math inline">\(n\)</span>-dimensional space. For convenient purposes, and in order to distinguish them from the individuals, we use an arrow (or vector) to graphically represent each variable:</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-45"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-46"></span>
 <img src="images/duality/columns-space.png" alt="Columns space" width="70%" />
 <p class="caption">
 Figure 5.3: Columns space
@@ -335,14 +335,14 @@ Figure 5.3: Columns space
 <span id="cb17-8"><a href="matrix-perspectives.html#cb17-8"></a>Leia    <span class="dv">150</span>     <span class="dv">49</span></span>
 <span id="cb17-9"><a href="matrix-perspectives.html#cb17-9"></a>Luke    <span class="dv">172</span>     <span class="dv">77</span></span></code></pre></div>
 <p><strong>Space of individuals</strong>: If you look at the data in <code>X</code> from the individuals standpoint, each of them can be depicted as a dot in the 2-dimensional space spanned by variables <code>weight</code> and <code>height</code>:</p>
-<p><img src="matrix4sl_files/figure-html/unnamed-chunk-47-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>Space of variables</strong>: If you look at the data in <code>X</code> from the variables standpoint, each of them can be depicted as a vector in the 2-dimensional space spanned by <code>Leia</code> and <code>Luke</code>:</p>
 <p><img src="matrix4sl_files/figure-html/unnamed-chunk-48-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><strong>Space of variables</strong>: If you look at the data in <code>X</code> from the variables standpoint, each of them can be depicted as a vector in the 2-dimensional space spanned by <code>Leia</code> and <code>Luke</code>:</p>
+<p><img src="matrix4sl_files/figure-html/unnamed-chunk-49-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="dual-space" class="section level3">
 <h3><span class="header-section-number">5.1.4</span> Dual Space</h3>
 <p>The following figure illustrates the dual perspective of a data matrix. The standard convention is to represent <strong>individuals as points</strong> in a <span class="math inline">\(p\)</span>-dimensional space; and in turn represent <strong>variables as vectors</strong> in an <span class="math inline">\(n\)</span>-dimensional space.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-49"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-50"></span>
 <img src="images/duality/duality-diagram.png" alt="Rows and columns perspectives" width="80%" />
 <p class="caption">
 Figure 5.4: Rows and columns perspectives

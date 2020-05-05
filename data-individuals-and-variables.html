@@ -292,7 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-individuals-and-variables" class="section level2">
 <h2><span class="header-section-number">1.1</span> Data: Individuals and Variables</h2>
 <p>To illustrate some of the ideas presented in this chapter I’m going to use a toy example with data of three individuals from a galaxy far, far away: Leia Organa, Luke Skywalker, and Han Solo.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
 <img src="images/tables/sw-leia-luke-han.png" alt="Three individuals" width="60%" />
 <p class="caption">
 Figure 1.1: Three individuals
@@ -311,7 +311,7 @@ Figure 1.1: Three individuals
 <div id="representing-data" class="section level3">
 <h3><span class="header-section-number">1.1.1</span> Representing Data</h3>
 <p>Assuming that our data consists of Name, Sex, Height and Weight for three individuals, we can present this information in various forms. One option is to organize the information in some sort of rectangular or tabular layout, like the one below:</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
 <img src="images/tables/table-conceptual.png" alt="Conceptual table" width="40%" />
 <p class="caption">
 Figure 1.2: Conceptual table
@@ -340,7 +340,7 @@ Figure 1.2: Conceptual table
 <p>In the above example there are three <code>&lt;character&gt;</code> nodes, each one containing four nodes: <code>&lt;name&gt;</code>, <code>&lt;sex&gt;</code>, <code>&lt;weight&gt;</code>, and <code>&lt;height&gt;</code>. This is an example of what I call <strong>raw data</strong>. Don’t worry if you are not familiar with XML. I just want to give you an example of the various ways in which data can be organized.</p>
 <p>From a computational point of view, you could actually find a plethora of formats and conventions used to store information, and data sets in particular. Some formats have been designed to store data in a way that mimics the structure of a rectangular table. But you can find other formats that use a non-tabular structure, like XML.</p>
 <p>When data is stored in a format that is supposed to represent a table, it is common to find visual displays with some grid of rows and columns.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
 <img src="images/tables/table-tabular.png" alt="Data in tabular format" width="40%" />
 <p class="caption">
 Figure 1.3: Data in tabular format
@@ -352,14 +352,14 @@ Figure 1.3: Data in tabular format
 <div id="tabular-data" class="section level3">
 <h3><span class="header-section-number">1.1.2</span> Tabular Data</h3>
 <p>Eventually, to be analyzed with statistical learning tools and other multivariate techniques, your data will typically be required to have a certain specific structure, usually in the form of some sort of table or spreadsheet format (e.g. rows and columns).</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
 <img src="images/tables/table-abstract.png" alt="Data Table Format" width="50%" />
 <p class="caption">
 Figure 1.4: Data Table Format
 </p>
 </div>
 <p>Depending on the nature of the data, and the way it is organized, rows and columns will have a particular meaning. The most common data table setting is the one of individuals-and-variables. Although somewhat arbitrary, the standard convention is that we use the columns to represent <strong>variables</strong>, and the rows to represent <strong>individuals</strong>.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
 <img src="images/tables/table-inds-vars.png" alt="Conceptual table of individuals and variables" width="50%" />
 <p class="caption">
 Figure 1.5: Conceptual table of individuals and variables
