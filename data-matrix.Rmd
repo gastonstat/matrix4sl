@@ -85,9 +85,11 @@ Vectors will be represented by bold lower case letters such as $\mathbf{w}$ or $
 
 ### Matrix Representations
 
-You will that find people represent matrices in multiple ways, using various notations, symbols, and diagrams.
+You will find that people represent matrices in multiple ways, using various 
+notations, symbols, and diagrams.
 
-We can represent a data matrix $\mathbf{X}$ by simply regarding the table from its columns (i.e. variables) perspective:
+We can represent a data matrix $\mathbf{X}$ by simply regarding the matrix from 
+its columns (i.e. variables) perspective:
 
 $$
 \mathbf{X} =
@@ -122,7 +124,9 @@ Being more minimalists, we can even get a more compact representation by just ex
 
 ### A Block of Variables
 
-While most of us are used to think of multivariate data in terms of a table or matrix, there can be other interesting representation options. If you are a visual person like me, we can also use an alternative way to display the variables using a standard convention of drawing them in rectangular shape. In this way, we can depict a set of variables in a data matrix as a series of rectangles, like those below inside the dashed box:
+While most of us are used to think of multivariate data in terms of a table or
+matrix, there can be other interesting representation options. If you are like
+me who loves to visualize concepts, we can also use an alternative way to display the variables using a standard convention of drawing them in rectangular shape. In this way, we can depict a set of variables in a data matrix as a series of rectangles, like those below inside the dashed box:
 
 ```{r out.width='50%', fig.cap='Variables in a matrix depicted as a set of rectangles', echo = FALSE}
 knitr::include_graphics("images/matrix/matrix-with-rectangle-variables.png")
@@ -175,7 +179,7 @@ In contrast, if a matrix has more columns than rows, $p > n$, sometimes we call 
 
 ### Square Matrix
 
-A square matrix is one with same number of rows and columns, $n = p$. In statiscal learning, various matrices derived from a data matrix are typically square, this typically happens when working with derived cross-products such as $\mathbf{X^\mathsf{T} X}$ or $\mathbf{X X^\mathsf{T}}$.
+A square matrix is one with same number of rows and columns, $n = p$. In statiscal learning, various matrices derived from a data matrix are typically square, this usually happens when working with derived cross-products such as $\mathbf{X^\mathsf{T} X}$ or $\mathbf{X X^\mathsf{T}}$.
 
 \[ 
 \left[\begin{array}{ccc}
