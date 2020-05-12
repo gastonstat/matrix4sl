@@ -7,8 +7,8 @@ bookdown::gitbook:
       before: |
         <li><a href="./"><b>A Matrix Algebra Companion for SL</b></a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Thanks to bookdown</a></li>
-    download: ["pdf", "epub"]
+        <li><a href="https://www.gastonsanchez.com" target="blank">Gaston Sanchez</a></li>
+    download: ["epub"]
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
