@@ -57,7 +57,7 @@ My hope is that the concepts and notions described in this text will allow you t
 
 A very special and heartfelt mention to Mohamed Hanafi, who ignited a spark in me that eventually fired up the idea of this work. Very likely I wouldn't have started writing some notes had he not invited me to be part of his one-man lab in the _Unit of Sensometrics and Chemometrics_ at Oniris-Nantes. I don't think I'll ever be able to forget our marathonian discussion sessions, the many dozens of whiteboards filled with illuminating scribbles, the corresponding quota of used markers, the constant skipped lunch breaks, the steady climbing in the volume of his voice as he got excited talking about some abstract concept, and of course, his unique skill for breaking my patience beyond my tolerable limits. Now I know there's a toll to pay when working with a genious of such astounding talent. I also know I wouldn't have been able to connect all the dots without him sharing his wisdom, secrets, and utopic dreams. _Ustadh Hanafi... Shukran Jazilan_.
 
-```{r fig.cap="Mohamed Hanafi and Gaston Sanchez (2013)", echo = FALSE, out.width = "50%"}
+```{r fig.cap="Mohamed Hanafi and Gaston Sanchez (Summer 2013)", echo = FALSE, out.width = "55%"}
 knitr::include_graphics("images/hanafi-sanchez.JPG")
 ```
 
